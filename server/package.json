@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "A shop to sell for various brands",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "server": "nodemon index.js"
   },
   "author": "Alberto",
   "license": "ISC",
@@ -13,6 +16,7 @@
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "mongoose": "^8.4.1"
+    "mongoose": "^8.4.1",
+    "nodemon": "^3.1.3"
   }
 }
