@@ -15,9 +15,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use(cookieParser());
-
+console.log(process.env.CLIENT_APP_URL)
 const corsConfig = {
-       credentials: true
+       credentials: true,
+       origin: `${process.env.CLIENT_APP_URL}`,
 }
 app.use(cors(corsConfig))
 

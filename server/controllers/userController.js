@@ -24,7 +24,8 @@ export const RegisterUser = asyncHandler(async(req, res) => {
                        message: "Account registered successfully",
                        name: result.name,
                        email: result.email,
-                       id: result._id
+                       id: result._id,
+                       username: result.username
                  })
             }
 
@@ -52,7 +53,8 @@ export const LoginUser = asyncHandler(async(req, res) => {
                        id: user._id,
                        email: user.email,
                        name: user.name,
-                       profileImage: user.profileImage
+                       profileImage: user.profileImage,
+                       username: user.username
                   })
          }else{
                res.status(401);

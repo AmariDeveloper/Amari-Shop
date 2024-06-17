@@ -11,7 +11,7 @@ function App() {
              <Route path='/auth/login' element={<Login />} />
 
              {/* Protected Routes */}
-             <Route path='/dashboard' element={<DashboardPage />} />
+             <Route path='/user/:id/dashboard' element={<DashboardPage />} />
     </Routes>
   )
 }
