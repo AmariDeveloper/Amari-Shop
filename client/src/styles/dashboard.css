@@ -1,0 +1,177 @@
+.dashboard-wrapper{
+      display: flex;;
+}
+
+.sidebar-wrapper{
+       width: 270px;
+       flex-shrink: 0;
+       position: fixed;
+       top: 0;
+       bottom: 0;
+       left: 0;
+       background: white;
+       border-right: 1px solid rgba(220, 220, 220, 0.5);
+}
+.sidebar-wrapper .logo{
+      width: 140px;
+      display: block; 
+      height: 50px;
+      margin: 25px auto;
+}
+.sidebar-wrapper .logo img{
+       object-fit: contain;
+}
+
+.sidebar-wrapper nav{
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      height: calc(90% - 80px);
+      justify-content: space-between;
+      gap: 80px;
+}
+.sidebar-wrapper nav ul li{
+     line-height: 1;
+     display: flex;
+     flex-shrink: 0;
+     width: 100%;
+     justify-content: center;
+     padding: 15px 0;
+     position: relative;
+     align-items: center;
+     margin-bottom: 5px;
+}
+.sidebar-wrapper nav ul li:has(a.active),
+.sidebar-wrapper nav ul li:has(a:hover){
+    background: rgba(214, 243, 244, 0.2);
+}
+.sidebar-wrapper nav ul li::after{
+       position: absolute;
+       content: "";
+       left: 0;
+       width: 5px;
+       height: 60%;
+       background: var(--main-color);
+       border-radius: 0px 5px 5px 0px;
+       -webkit-border-radius: 0px 5px 5px 0px;
+       -moz-border-radius: 0px 5px 5px 0px;
+       -ms-border-radius: 0px 5px 5px 0px;
+       -o-border-radius: 0px 5px 5px 0px;
+       transform: translateX(-10px);
+       -webkit-transform: translateX(-10px);
+       -moz-transform: translateX(-10px);
+       -ms-transform: translateX(-10px);
+       -o-transform: translateX(-10px);
+       transition: all 0.7s ease;
+       -webkit-transition: all 0.7s ease;
+       -moz-transition: all 0.7s ease;
+       -ms-transition: all 0.7s ease;
+       -o-transition: all 0.7s ease;
+}
+.sidebar-wrapper nav ul li:has(a.active)::after,
+.sidebar-wrapper nav ul li:has(a:hover)::after{
+      transform: translateX(0);
+      -webkit-transform: translateX(0);
+      -moz-transform: translateX(0);
+      -ms-transform: translateX(0);
+      -o-transform: translateX(0);
+}
+.sidebar-wrapper nav ul li a{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    width: 80%;
+    color: rgb(55, 55, 55);
+    transition: all 0.7s ease;
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -ms-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    font-size: 16px;
+    font-weight: 300;
+}
+.sidebar-wrapper nav ul li a:hover,
+.sidebar-wrapper nav ul li a.active{
+     color: var(--main-color);
+     font-weight: 400;
+}
+.sidebar-wrapper nav ul li a span{
+     font-size: 20px;
+     display: flex;
+}
+
+.sidebar-wrapper .extras{
+       display: flex;
+       flex-direction: column;
+       gap: 20px;
+       width: 80%;
+       margin: auto;
+}
+
+.sidebar-wrapper .extras a{
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      padding: 13px;
+      border-radius: 7px;
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      -ms-border-radius: 7px;
+      -o-border-radius: 7px;
+      font-size: 15px;
+      gap: 3px;
+      color: rgb(40, 40, 40);
+      transition: all 0.7s ease;
+      -webkit-transition: all 0.7s ease;
+      -moz-transition: all 0.7s ease;
+      -ms-transition: all 0.7s ease;
+      -o-transition: all 0.7s ease;
+}
+.sidebar-wrapper .extras a span{
+     font-size: 20px;
+     display: flex;
+}
+.sidebar-wrapper .extras a:hover{
+    background: rgba(214, 243, 244, 0.2);
+    color: var(--main-color);
+}
+
+.sidebar-wrapper button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    border: none;
+    gap: 3px;
+    transition: all 0.7s ease;
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -ms-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    cursor: pointer;
+    background-color: whitesmoke;
+}
+.sidebar-wrapper button span{
+    display: flex;
+}
+
+.sidebar-wrapper button:hover{
+    background: rgba(115, 234, 240, 0.2);
+}
+
+
+
+
+
+
+.dashboard-body{
+      width: calc(100% - 270px);
+      margin-left: 270px;
+    
+}
