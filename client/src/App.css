@@ -39,7 +39,9 @@ textarea,
 input{
     font-family: var(--regular-font);
 }
-
+h1, h2, h3, h4, h5, h6{
+     line-height: 1;
+}
 .logo{
       width: 160px;
 }
@@ -65,3 +67,49 @@ input{
         transform: rotate(360deg);
     }
 } 
+.profile{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+}
+.profile-image{
+     width: 40px;
+     height: 40px;
+     border-radius: 6px;
+     -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+     -ms-border-radius: 6px;
+     -o-border-radius: 6px;
+     overflow: hidden;
+}
+
+.profile span{
+      font-size: 15px;
+      color: #f2b201
+}
+
+.profile h3{
+      font-size: 16px;
+      font-weight: 500;
+}
+
+/* Recharts Custom Styles */
+.recharts-default-tooltip{
+      border-radius: 8px;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+      border: 1px solid rgba(233, 233, 233, 0.5) !important;
+}
+.recharts-default-tooltip p{
+       font-size: 14px;
+}
+
+.recharts-default-tooltip ul li{
+     padding: 0 !important;
+}
+.recharts-default-tooltip ul li span{
+     font-size: 15px;
+}
