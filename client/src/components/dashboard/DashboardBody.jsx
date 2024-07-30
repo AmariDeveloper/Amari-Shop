@@ -1,5 +1,7 @@
+import Footer from "../common/Footer"
 import Topbar from "../common/Topbar"
 import ExtraInfo from "./ExtraInfo"
+import PopularProducts from "./PopularProducts"
 import ShopAnalytics from "./ShopAnalytics"
 import SummaryStrip from "./SummaryStrip"
 
@@ -16,9 +18,17 @@ const DashboardBody = () => {
 
                <SummaryStrip />
                <div className="dashboard-split">
-                          <ShopAnalytics />
-                          <ExtraInfo />
+                          <div className="dashboard-split-big">
+                                 <ShopAnalytics />
+
+                                 <PopularProducts />
+                          </div>
+                          <div className="dashboard-split-small">
+                                    <ExtraInfo />
+                          </div>
                </div>
+
+               <Footer />
     </div>
   )
 }

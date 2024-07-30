@@ -1,5 +1,5 @@
 .dashboard-wrapper{
-      display: flex;;
+      display: flex;
 }
 
 .sidebar-wrapper{
@@ -165,11 +165,7 @@
     background: rgba(115, 234, 240, 0.2);
 }
 
-.dashboard-body{
-      width: calc(100% - 270px);
-      margin-left: 270px;
-     padding: 30px;
-}
+
 
 .top-wrapper{
     display: flex;
@@ -315,9 +311,10 @@
       grid-template-columns: 2.5fr 1.2fr;
       gap: 20px;
 }
-
+.dashboard-split-big{
+    border-right: 1px solid gainsboro;
+}
 .shop-analytics{
-     border-right: 1px solid gainsboro;
      padding-right: 30px;
 }
 .shop-analytics .shop-header{
@@ -357,4 +354,124 @@
 .shop-graph{
     height: 280px;
     margin-top: 20px;
+}
+
+.popular-products{
+     margin: 40px 0;
+     padding-right: 30px;
+}
+.popular-header{
+      display: flex;
+      justify-content: space-between;
+}
+.popular-header h3{
+      font-size: 22px;
+      font-weight: 500;
+      color: rgb(50,50,50);
+}
+.popular-header span{
+      display: flex;
+      width: 35px;
+      height: 35px;
+      background: rgb(241, 243, 244);
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      border-radius: 35px;
+      -webkit-border-radius: 35px;
+      -moz-border-radius: 35px;
+      -ms-border-radius: 35px;
+      -o-border-radius: 35px;
+}
+
+.popular-products table{
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+.popular-products table tr{
+      text-align: left;
+}
+
+.popular-products table tr th{
+      font-size: 15px;
+      font-weight: 400;
+      color: rgb(150, 150, 150);
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(227, 227, 227, 0.558);
+}
+
+.popular-products table tr td{
+    border-bottom: 1px solid rgba(227, 227, 227, 0.558);
+    padding: 10px 3px;
+    color: rgb(55, 55, 55);
+    font-size: 16px;
+}
+.popular-products table tr:last-child td{
+    border-bottom: 0;
+}
+.popular-products table .status{
+      padding: 0px 13px;
+      height: 30px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+      font-size: 14px;
+}
+.popular-products table .status.plus{
+      color: rgb(28, 173, 100);
+      background: rgba(220, 252, 236, 0.658);
+}
+.popular-products table .status.negative{
+      color: red;
+      background: rgba(255, 232, 232, 0.715);
+}
+
+.recent-orders{
+      margin-bottom: 30px;
+}
+
+.extra-info .recent-orders-head,
+.extra-info .top-customers-head{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(227, 227, 227, 0.558);
+      margin-bottom: 15px;
+}
+
+.recent-orders-head h3,
+.top-customers-head h3{
+       font-size: 20px;
+       font-weight: 400;
+}
+.recent-orders-head span,
+.top-customers-head span{
+      font-size: 13px;
+      color: rgb(150, 150, 150);
+      cursor: pointer;
+}
+
+.recent-order-moja,
+.top-customer-moja{
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      margin: 20px 0;
+}
+.recent-order-moja  .profile{
+    flex-shrink: 0;
+}
+
+.recent-order-moja .dt,
+.top-customer-moja .dt{
+       font-size: 13px;
+       color: rgb(150, 150, 150);
 }

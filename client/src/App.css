@@ -9,6 +9,7 @@
 :root{
     --main-color: rgb(3, 223, 216);
     --regular-font: "Outfit", sans-serif;
+    --line: rgba(227, 227, 227, 0.558);
 }
 
 body{
@@ -41,7 +42,20 @@ input{
 }
 h1, h2, h3, h4, h5, h6{
      line-height: 1;
+     color: rgb(50,50,50);
 }
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ ::-webkit-scrollbar-thumb {
+    background:rgb(204, 210, 211); 
+      border-radius:10px;
+}
+
 .logo{
       width: 160px;
 }
@@ -86,14 +100,28 @@ h1, h2, h3, h4, h5, h6{
 
 .profile span{
       font-size: 15px;
-      color: #f2b201
 }
 
 .profile h3{
       font-size: 16px;
       font-weight: 500;
+      color: rgb(50,50,50);
 }
 
+.profile-texts span{
+    font-size: 14px;
+    color: rgb(120, 120, 120);
+}
+.profile-texts span span{
+  font-size: 11px;
+}
+
+.dashboard-body{
+    width: calc(100% - 270px);
+    margin-left: 270px;
+   padding: 30px;
+   min-height: 850px;
+}
 /* Recharts Custom Styles */
 .recharts-default-tooltip{
       border-radius: 8px;
@@ -112,4 +140,16 @@ h1, h2, h3, h4, h5, h6{
 }
 .recharts-default-tooltip ul li span{
      font-size: 15px;
+}
+
+.copyright{
+       text-align: center;
+       margin-top: 40px;
+       padding-top: 20px;
+       border-top: 1px solid var(--line);
+}
+.copyright p{
+      font-size: 13px;
+      color: rgb(120, 120, 120);
+      font-weight: 300;
 }
