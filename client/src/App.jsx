@@ -2,7 +2,8 @@ import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Home from './pages/Home'
 import Login from './pages/Login'
-import DashboardPage from './pages/dashboard/DashboardPage'
+import Dashboard from './pages/Dashboard'
+import Products from './pages/Products'
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
              <Route path='/auth/login' element={<Login />} />
 
              {/* Protected Routes */}
-             <Route path='/user/:id/dashboard' element={<DashboardPage />} />
-    </Routes>
+             <Route path='/user/:id/dashboard' element={<Dashboard />} />
+             <Route path='/user/:id/products' element={<Products />} />
+     </Routes>
   )
 }
 

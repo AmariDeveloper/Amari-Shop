@@ -1,11 +1,11 @@
 .dashboard-wrapper{
       display: flex;
 }
-
 .sidebar-wrapper{
        width: 270px;
        flex-shrink: 0;
        position: fixed;
+       z-index: 99;
        top: 0;
        bottom: 0;
        left: 0;
@@ -171,7 +171,7 @@
     display: flex;
     gap: 20px;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .top-texts h2{
@@ -474,4 +474,71 @@
 .top-customer-moja .dt{
        font-size: 13px;
        color: rgb(150, 150, 150);
+}
+
+
+
+/* Responsiveness */
+@media(max-width: 1100px){
+        .sidebar-wrapper{
+                transform: translateX(-100%)        ;
+                -webkit-transform: translateX(-100%)        ;
+                -moz-transform: translateX(-100%)        ;
+                -ms-transform: translateX(-100%)        ;
+                -o-transform: translateX(-100%)        ;
+                transition: all 0.8s ease       ;
+                -webkit-transition: all 0.8s ease       ;
+                -moz-transition: all 0.8s ease       ;
+                -ms-transition: all 0.8s ease       ;
+                -o-transition: all 0.8s ease       ;
+}
+       .sidebar-wrapper.active{
+           transform: translateX(0);
+           -webkit-transform: translateX(0);
+           -moz-transform: translateX(0);
+           -ms-transform: translateX(0);
+           -o-transform: translateX(0);
+           z-index: 99;
+}
+     .summary-wrapper{
+           grid-template-columns: 1fr 1fr;
+           margin-top: 30px;
+     }
+     .dashboard-split{
+            grid-template-columns: 1fr;
+     }
+     .dashboard-split-big{
+           border-right: 0;
+     }
+}
+
+@media(max-width: 768px){
+         .top-wrapper{
+               position: relative;
+         }
+         .topbar-section{
+               position: absolute;
+               right: 0;
+               top: 0;
+         }
+         .top-texts h2{
+             margin: 20px 0px 5px 0px;
+         }
+
+       .summary-wrapper{
+              grid-template-columns: 1fr;
+       }
+       .shop-analytics{
+            padding-right: 0;
+       }
+       .popular-products{
+              position: relative;
+              overflow-x: auto;
+              max-width: 100%;
+              min-height: 350px;
+       }
+       .popular-products table{
+            width: 600px;
+            position: absolute;
+       }
 }

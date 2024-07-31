@@ -1,13 +1,13 @@
 import { IoNotificationsOutline } from "react-icons/io5";
-import { CiSearch } from "react-icons/ci";
+//import { CiSearch } from "react-icons/ci";
 import { HiChevronDown } from "react-icons/hi2";
 import profile from "../../assets/profile1.jpg"
 const Topbar = () => {
   return (
     <div className="topbar-section">
-              <div className="search-widget">
+              {/* <div className="search-widget">
                         <span><CiSearch /></span>
-              </div>
+              </div> */}
               <div className="notification-wrap">
                          <span><IoNotificationsOutline /></span>
               </div>
