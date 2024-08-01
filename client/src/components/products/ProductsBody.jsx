@@ -7,6 +7,9 @@ import { CiSearch } from "react-icons/ci";
 import Sorter from "./Sorter";
 import CollectionType from "./CollectionType";
 import ProductCard from "./ProductCard";
+import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
+import product1 from "../../assets/flops.jpg"
+import { IoIosStar } from "react-icons/io";
 
 const ProductsBody = () => {
   const [sidebarStatus, setSidebarStatus] = useContext(sidebarContext);
@@ -42,7 +45,49 @@ const ProductsBody = () => {
                                     <ProductCard />
                           </div>
                           <div className="products-body-table">
-                                     <h2>Table version goes here</h2>
+                                     <table>
+                                              <thead>
+                                                        <tr>
+                                                                  <th><span><MdOutlineCheckBoxOutlineBlank /></span></th>
+                                                                  <th>Product Details</th>
+                                                                  <th>Category</th>
+                                                                  <th>Options</th>
+                                                                  <th>Price</th>
+                                                                  <th>Quantity</th>
+                                                                  <th>Rate</th>
+                                                                  <th>Actions</th>
+                                                        </tr>
+                                              </thead>
+                                              <tbody>
+                                                            <tr>
+                                                                     <td><span><MdOutlineCheckBoxOutlineBlank /></span></td>
+                                                                     <td className="p-deets">
+                                                                                <div className="profile">
+                                                                                          <img src={product1} alt="" className="profile-image"/>
+                                                                                          <div className="profile-texts">
+                                                                                                    <h3>Lengendary Fenty flip flops </h3>
+                                                                                                    <p>Carefully crafted for comfort under...</p>
+                                                                                          </div>
+                                                                                </div>
+                                                                     </td>
+                                                                     <td className="p-categories">
+                                                                              <span>Clothing</span>
+                                                                              <span>Footware</span>
+                                                                     </td>
+                                                                     <td>Colors</td>
+                                                                     <td className="p-price">
+                                                                               <span>Ksh</span>
+                                                                                <h4>2500</h4>
+                                                                     </td>
+                                                                     <td>11</td>
+                                                                     <td>
+                                                                              <div className="reviews">
+                                                                                          <span></span>
+                                                                              </div>
+                                                                     </td>
+                                                            </tr>
+                                              </tbody>
+                                     </table>
                           </div>
                </div>
     </div>
