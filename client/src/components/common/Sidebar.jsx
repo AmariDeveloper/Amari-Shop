@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useLocation, useParams } from "react-router-dom"
 import { RxDashboard } from "react-icons/rx";
 import { HiOutlinePresentationChartLine } from "react-icons/hi2";
 import { CiBoxes } from "react-icons/ci";
@@ -8,11 +8,18 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import logo from "../../assets/logo.png"
-import { useCallback, useContext, useEffect, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { sidebarContext } from "../../lib/sidebarcontext";
+import { GoPlus } from "react-icons/go";
+import { HiOutlineRectangleStack } from "react-icons/hi2";
+import { TbBrandStackoverflow } from "react-icons/tb";
+import { BsTags } from "react-icons/bs";
+import { IoOptionsSharp } from "react-icons/io5";
+
 const Sidebar = () => {
   const [ sidebarStatus, setSidebarStatus] = useContext(sidebarContext);
   const sidebarRef = useRef();
+  const [productOption, setProductOption] = useState(false);
 
   const handleOutsideClick = useCallback((e) => {
         if(sidebarRef.current && !sidebarRef.current.contains(e.target)){
@@ -26,26 +33,52 @@ const Sidebar = () => {
             document.addEventListener("click", handleOutsideClick, true);
   }, [handleOutsideClick])
 
+ const toggleOptions = () => setProductOption(!productOption);
+ const closeOptions = () => {
+        setProductOption(false)
+ }
+
+ //sanitize url switch and optionbox
+ const { pathname } = useLocation();
+ const extracted_path = pathname.slice(28);
+
+ useEffect(() => {
+       const product_options = ["categories", "brands", "variations", "tags"];
+        if(product_options.includes(extracted_path)){
+              setProductOption(true)
+        }
+ }, [extracted_path])
   return (
     <div ref={sidebarRef} className={sidebarStatus ? "sidebar-wrapper active" : "sidebar-wrapper"}>
-              <Link to={'/'} className="logo">
-                        <img src={logo} alt="" />
-               </Link>
-               <nav>
-                        <ul>
-                                   <li><NavLink to={"/user/666b4e300b7a9ee5378cb04b/dashboard"}><span><RxDashboard /></span> Dashboard</NavLink></li>
-                                   <li><NavLink to={"/user/666lfjda/analytics"}><span><HiOutlinePresentationChartLine /></span>Overview</NavLink></li>
-                                   <li><NavLink to={"/user/hlsfi4440934/products"}><span><CiBoxes /></span>Products</NavLink></li>
-                                   <li><NavLink to={"/"}><span><BsBasket /></span>Orders</NavLink></li>
-                                   <li><NavLink to={"/"}><span><PiUsersFourLight /></span>Customers</NavLink></li>
-                                   <li><NavLink to={"/"}><span><IoSettingsOutline /></span>Settings</NavLink></li>
-                        </ul>
+                <div className="sidebar-inner">
+                           <Link to={'/'} className="logo">
+                                   <img src={logo} alt="" />
+                          </Link>
+                          <nav>
+                                   <ul>
+                                               <li onClick={closeOptions}><NavLink to={"/user/666b4e300b7a9ee5378cb04b/dashboard"}><span><RxDashboard /></span> Dashboard</NavLink></li>
+                                               <li><NavLink to={"/user/666lfjda/analytics"}><span><HiOutlinePresentationChartLine /></span>Overview</NavLink></li>
+                                               <li onClick={toggleOptions} className="dropy"><NavLink to={"/user/hlsfi4440934/products"}><span><CiBoxes /></span>Products</NavLink>  <span onClick={toggleOptions} className="plus"><GoPlus /></span>
+                                               </li>
+                                               <div className={ productOption ? "dropdown active" : "dropdown"}>
+                                                           <ul>
+                                                                   <li><Link className={extracted_path === "categories" ? "active": ""} to={"/user/hlsfi4440934/products/categories"}><span><HiOutlineRectangleStack /></span>Categories</Link></li>
+                                                                    <li><Link className={extracted_path === "brands" ? "active": ""} to={"/user/hlsfi4440934/products/brands"}><span><TbBrandStackoverflow /></span>Brands</Link></li>
+                                                                    <li><Link to={"/products/variations"}><span><IoOptionsSharp /></span>Variations</Link></li>
+                                                                    <li><Link to={"/products/tags"}><span><BsTags /></span>Tags</Link></li>
+                                                            </ul>
+                                               </div>
+                                               <li><NavLink to={"/"}><span><BsBasket /></span>Orders</NavLink></li>
+                                              <li><NavLink to={"/"}><span><PiUsersFourLight /></span>Customers</NavLink></li>
+                                              <li><NavLink to={"/"}><span><IoSettingsOutline /></span>Settings</NavLink></li>
+                                    </ul>
 
-                        <div className="extras">
-                                   <Link to={"/"}><span><IoIosHelpCircleOutline /></span>Help Center</Link>
-                                   <button><span><AiOutlinePoweroff /></span>Logout</button>
-                        </div>
-               </nav>
+                                   <div className="extras">
+                                              <Link to={"/"}><span><IoIosHelpCircleOutline /></span>Help Center</Link>
+                                              <button><span><AiOutlinePoweroff /></span>Logout</button>
+                                   </div>
+                          </nav>
+                </div>
     </div>
   )
 }

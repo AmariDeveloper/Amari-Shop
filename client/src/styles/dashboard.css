@@ -11,6 +11,13 @@
        left: 0;
        background: white;
        border-right: 1px solid rgba(220, 220, 220, 0.5);
+       overflow-y: auto;
+}
+.sidebar-wrapper::-webkit-scrollbar{
+    display: none;
+}
+.sidebar-inner{
+    height: 100%;
 }
 .sidebar-wrapper .logo{
       width: 140px;
@@ -36,10 +43,38 @@
      flex-shrink: 0;
      width: 100%;
      justify-content: center;
-     padding: 15px 0;
+     padding: 15px 20px;
      position: relative;
      align-items: center;
      margin-bottom: 5px;
+}
+.sidebar-wrapper nav ul li.dropy{
+      margin-bottom: 0 !important;
+}
+.sidebar-wrapper nav ul li span.plus{
+      color: gray;
+      cursor: pointer;
+}
+
+.sidebar-wrapper .dropdown{
+    width: 85%;
+    margin: auto;
+    overflow: hidden;
+    background: rgba(250, 250, 250, 0.48);
+    max-height: 0;
+    transition: all 0.85s ease;
+    -webkit-transition: all 0.85s ease;
+    -moz-transition: all 0.85s ease;
+    -ms-transition: all 0.85s ease;
+    -o-transition: all 0.85s ease;
+}
+
+.sidebar-wrapper .dropdown.active{
+      max-height: 200px;
+}
+
+.sidebar-wrapper .dropdown  ul li{
+      margin: 0
 }
 .sidebar-wrapper nav ul li:has(a.active),
 .sidebar-wrapper nav ul li:has(a:hover){
@@ -80,7 +115,7 @@
     display: flex;
     align-items: center;
     gap: 3px;
-    width: 80%;
+    width: 100%;
     color: rgb(55, 55, 55);
     transition: all 0.7s ease;
     -webkit-transition: all 0.7s ease;
@@ -89,6 +124,9 @@
     -o-transition: all 0.7s ease;
     font-size: 16px;
     font-weight: 300;
+}
+.sidebar-wrapper .dropdown ul li a{
+    font-size: 15px
 }
 .sidebar-wrapper nav ul li a:hover,
 .sidebar-wrapper nav ul li a.active{
@@ -99,13 +137,16 @@
      font-size: 20px;
      display: flex;
 }
-
+.sidebar-wrapper .dropdown ul li a span{
+    font-size: 18px;
+}
 .sidebar-wrapper .extras{
        display: flex;
        flex-direction: column;
        gap: 20px;
        width: 80%;
        margin: auto;
+       padding-bottom: 40px;
 }
 
 .sidebar-wrapper .extras a{

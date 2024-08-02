@@ -9,6 +9,7 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { sidebarContext } from "../../lib/sidebarcontext"
 
 const DashboardBody = () => {
+  // eslint-disable-next-line no-unused-vars
   const [sidebarStatus, setSidebarStatus ] = useContext(sidebarContext);
   return (
     <div className="dashboard-body">
