@@ -1,0 +1,74 @@
+.settings-header{
+    margin: 20px 0;
+    display: flex;
+    align-items:flex-end;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.settings-header h3{
+    font-size: 25px;
+    margin-bottom: 5px;
+    font-weight: 400;
+}
+
+.settings-header p{
+    font-weight: 400;
+    color: rgb(80, 80, 80);
+}
+
+.settings-action{
+       display: flex;
+       gap: 20px;
+       align-items: center;
+}
+
+.settings-action button{
+      width: 100px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 7px;
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      -ms-border-radius: 7px;
+      -o-border-radius: 7px;
+      border: 0;
+      cursor: pointer;
+}
+.settings-action button:first-child{
+       background: white;
+       box-shadow: 0px 0px 3px -1px rgb(199, 199, 199);
+       transition: all 0.8s ease;
+       -webkit-transition: all 0.8s ease;
+       -moz-transition: all 0.8s ease;
+       -ms-transition: all 0.8s ease;
+       -o-transition: all 0.8s ease;
+}
+.settings-action button:first-child:hover{
+     background-color: rgba(255, 241, 241, 0.8);;
+}
+.settings-action button:last-child{
+      background: var(--main-color);
+      color: white;
+}
+
+
+.settings-form{
+       display: grid;
+       grid-template-columns: 2fr 1fr;
+       gap: 40px;
+       margin-top: 30px;
+}
+
+.settings-form .details-side{
+    box-shadow: 0px 0px 2px -1px rgb(183, 183, 183);
+    background: white;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
