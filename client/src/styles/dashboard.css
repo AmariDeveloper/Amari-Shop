@@ -246,7 +246,9 @@
      -o-border-radius: 6px;
      cursor: pointer;
 }
-
+.topbar-section .profile-image{
+    box-shadow: 0px 0px 2px -1px gainsboro;
+}
 
 .summary-wrapper{
        margin: 50px 0;

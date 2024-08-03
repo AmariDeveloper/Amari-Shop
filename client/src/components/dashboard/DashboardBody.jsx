@@ -7,10 +7,13 @@ import ShopAnalytics from "./ShopAnalytics"
 import SummaryStrip from "./SummaryStrip"
 import { HiOutlineMenu } from "react-icons/hi";
 import { sidebarContext } from "../../lib/sidebarcontext"
+import { useSelector } from "react-redux"
 
 const DashboardBody = () => {
   // eslint-disable-next-line no-unused-vars
   const [sidebarStatus, setSidebarStatus ] = useContext(sidebarContext);
+  const { profile } = useSelector(state => state.auth);
+  const firstname = profile ? profile.name.split(" ")[0] : ""
   return (
     <div className="dashboard-body">
               <div className="top-wrapper">
@@ -18,7 +21,7 @@ const DashboardBody = () => {
                                    <span onClick={() => setSidebarStatus(true)} className="sidebar-btn">
                                             <HiOutlineMenu />
                                    </span>
-                                  <h2>Welcome Back, Efron</h2>
+                                  <h2>Welcome Back, {firstname}</h2>
                                   <p>Here&apos;s what&apos;s happening with your store today</p>
                          </div>
                          <Topbar />

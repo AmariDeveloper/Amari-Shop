@@ -61,3 +61,14 @@ export const LoginUser = asyncHandler(async(req, res) => {
                throw new Error("Invalid email or password.")
          }
 })
+
+//get logged in user profile details
+export const GetUserProfile = asyncHandler(async(req, res) => {
+          const user = await User.findById(req.user._id).select("-password");
+
+          if(user){
+                res.status(200).json({ user })
+          }else{
+                res.status(400).json({ message: "User profile couldn't be fetched at this time."})
+          }
+})
