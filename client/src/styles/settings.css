@@ -39,10 +39,7 @@
       cursor: pointer;
 }
 
-.settings-action button .spinner1{
-     width: 16px;
-     height: 16px;
-}
+
 .settings-action .cancel-btn{
        background: white;
        box-shadow: 0px 0px 3px -1px rgb(199, 199, 199);

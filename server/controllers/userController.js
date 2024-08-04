@@ -100,7 +100,7 @@ export const UpdateUserProfile = asyncHandler(async(req, res) => {
                        bio: bio,
                        profileImage: profileImage
                }, { new: true})
-              console.log(updatedUser)
+              
                if(updatedUser){
                        res.status(201).json({ message: "Settings saved successfully", info: updatedUser})
                }else{

@@ -38,7 +38,8 @@ img{
 
 button, 
 textarea,
-input{
+input,
+select{
     font-family: var(--regular-font);
 }
 h1, h2, h3, h4, h5, h6{
@@ -175,7 +176,15 @@ h1, h2, h3, h4, h5, h6{
       color: rgb(120, 120, 120);
       font-weight: 300;
 }
+.form-row .error{
+      font-size: 13px;
+      color: #fa0000;
+}
 
+.dashboard-body button .spinner1{
+    width: 16px;
+    height: 16px;
+}
 
 /* Notification pop */
 .notification-pop{

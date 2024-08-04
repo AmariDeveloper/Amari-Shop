@@ -3,7 +3,8 @@ import dotenv from "dotenv"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import connectToDb from "./config/dbconnection.js";
-import UserRoutes from "./routes/userRoutes.js"
+import UserRoutes from "./routes/userRoutes.js";
+import ProductRoutes from "./routes/productRoutes.js"
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 //initialize .env file
 dotenv.config();
@@ -24,7 +25,7 @@ app.use(cors(corsConfig))
 
 //Routes
 app.use("/api/v1/user", UserRoutes);
-
+app.use("/api/v1/product", ProductRoutes);
 
 //Error handling
 app.use(notFound);

@@ -42,7 +42,7 @@ const Sidebar = () => {
 
  //sanitize url switch and optionbox
  const { pathname } = useLocation();
- const extracted_path = pathname.slice(28);
+ const extracted_path = userInfo.username === "@" ? pathname.slice(28) : pathname.slice(27);
 
  useEffect(() => {
        const product_options = ["categories", "brands", "variations", "tags"];
@@ -64,10 +64,10 @@ const Sidebar = () => {
                                                </li>
                                                <div className={ productOption ? "dropdown active" : "dropdown"}>
                                                            <ul>
-                                                                   <li><Link className={extracted_path === "categories" ? "active": ""} to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/categories`}><span><HiOutlineRectangleStack /></span>Categories</Link></li>
-                                                                    <li><Link className={extracted_path === "brands" ? "active": ""} to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/brands`}><span><TbBrandStackoverflow /></span>Brands</Link></li>
-                                                                    <li><Link to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/variations`}><span><IoOptionsSharp /></span>Variations</Link></li>
-                                                                    <li><Link to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/tags`}><span><BsTags /></span>Tags</Link></li>
+                                                                   <li><Link className={extracted_path === "categories" ? "active": ""} to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/products/categories`}><span><HiOutlineRectangleStack /></span>Categories</Link></li>
+                                                                    <li><Link className={extracted_path === "brands" ? "active": ""} to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/products/brands`}><span><TbBrandStackoverflow /></span>Brands</Link></li>
+                                                                    <li><Link to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/products/variations`}><span><IoOptionsSharp /></span>Variations</Link></li>
+                                                                    <li><Link to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/products/tags`}><span><BsTags /></span>Tags</Link></li>
                                                             </ul>
                                                </div>
                                                <li><NavLink to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/orders`}><span><BsBasket /></span>Orders</NavLink></li>

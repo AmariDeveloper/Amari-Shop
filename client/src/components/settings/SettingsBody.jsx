@@ -3,7 +3,7 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { sidebarContext } from "../../lib/sidebarcontext";
 import Topbar from "../common/Topbar";
 import { IoCloudUploadOutline } from "react-icons/io5";
-import profileImg from "../../assets/profile1.jpg"
+import profileImg from "../../assets/dummy.jpg"
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from 'react-hook-form'
