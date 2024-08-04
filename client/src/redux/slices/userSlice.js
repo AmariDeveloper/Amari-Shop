@@ -18,7 +18,7 @@ export const userSlice = apiSlice.injectEndpoints({
               updateUserProfile: builder.mutation({
                       query: (payload) => ({
                               url: "v1/user/update-user-profile",
-                              method: "POST",
+                              method: "PUT",
                               body: payload
                       })
               })

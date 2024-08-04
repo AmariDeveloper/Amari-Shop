@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler"
 import User from "../models/User.js"
 import generateToken from "../utils/generateToken.js";
-
+import cloudinary from "../utils/cloudinary.js"
 
 //Register User
 export const RegisterUser = asyncHandler(async(req, res) => {
@@ -71,4 +71,40 @@ export const GetUserProfile = asyncHandler(async(req, res) => {
           }else{
                 res.status(400).json({ message: "User profile couldn't be fetched at this time."})
           }
+})
+
+//update profile details
+export const UpdateUserProfile = asyncHandler(async(req, res) => {
+        const user = await User.findById(req.user._id);
+      
+        if(user){
+              let profileImage;
+               //profile photo not uploaded
+               if(!req.file){
+                     profileImage = user.profileImage;
+               }else{
+                    const cloudinary_result = await cloudinary.uploader.upload(req.file.path, { folder: "ProfilePhotos"});
+
+                    profileImage = cloudinary_result.secure_url;
+               }
+
+               //update user
+               const { firstname, lastname, email, username, phone, country, bio } = JSON.parse(req.body.data);
+
+               const updatedUser = await User.findByIdAndUpdate(user._id, {
+                       name: `${firstname} ${lastname}`,
+                       email: email,
+                       username: username,
+                       phone: phone,
+                       country: country,
+                       bio: bio,
+                       profileImage: profileImage
+               }, { new: true})
+              console.log(updatedUser)
+               if(updatedUser){
+                       res.status(201).json({ message: "Settings saved successfully", info: updatedUser})
+               }else{
+                      res.status(500).json({ message: "Settings update failed"})
+               }               
+        }
 })

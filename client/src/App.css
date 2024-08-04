@@ -177,6 +177,109 @@ h1, h2, h3, h4, h5, h6{
 }
 
 
+/* Notification pop */
+.notification-pop{
+     position: fixed;
+     right: 20px;
+     bottom: 20px;
+     width: 350px;
+     padding: 20px;
+     border: 1px solid;
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     border-radius: 10px;
+     -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+     -ms-border-radius: 10px;
+     -o-border-radius: 10px;
+     border: 2px solid white;
+     box-shadow: 0px 0px 2px -1px rgb(184, 197, 197);
+     transform: translateX(400px);
+     -webkit-transform: translateX(400px);
+     -moz-transform: translateX(400px);
+     -ms-transform: translateX(400px);
+     -o-transform: translateX(400px);
+     transition: all 0.8s ease-in-out;
+     -webkit-transition: all 0.8s ease-in-out;
+     -moz-transition: all 0.8s ease-in-out;
+     -ms-transition: all 0.8s ease-in-out;
+     -o-transition: all 0.8s ease-in-out;
+     background: rgba(168, 255, 252, 0.4);
+}
+.notification-pop.active{
+      transform: translateX(0);
+      -webkit-transform: translateX(0);
+      -moz-transform: translateX(0);
+      -ms-transform: translateX(0);
+      -o-transform: translateX(0);
+}
+.notification-pop.Success{
+     background: rgba(173, 255, 221, 0.421);
+}
+.notification-pop.Error{
+      background: rgb(255, 163, 163, 0.4)
+}
+.notification-pop h4{
+      font-weight: 400;
+      font-size: 16px;
+      margin-bottom: 2px;
+     color: var(--main-color);
+}
+.notification-pop.Success h4{
+    color: rgb(26, 208, 132);
+}
+.notification-pop.Error h4{
+       color: rgb(255, 52, 52);
+}
+.notification-pop span:not(.close-pop){
+      width: 40px;
+      height: 40px;
+      border-radius: 40px;
+      display: flex;
+      flex-shrink: 0;
+      background: white;
+      align-items: center;
+      justify-content: center;
+      color: var(--main-color);
+      -webkit-border-radius: 40px;
+      -moz-border-radius: 40px;
+      -ms-border-radius: 40px;
+      -o-border-radius: 40px;
+}
+.notification-pop.Success span{
+    color: rgb(26, 208, 132);
+}
+.notification-pop.Error span{
+    color: rgb(255, 52, 52);
+}
+
+.notification-pop p{
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--main-color);
+}
+.notification-pop.Success p{
+    color: rgb(26, 208, 132);
+}
+.notification-pop.Error p{
+      color: rgb(255, 52, 52);
+}
+.notification-pop .close-pop{
+      position: absolute;
+      right: 10px;
+      top: 8px;
+      font-size: 13px;
+      width: 20px;
+      height: 20px;
+      color: rgb(120, 120, 120);
+      display: flex;
+      justify-content: flex-end;
+      cursor: pointer;
+}
+
+
+
 @media(max-width: 1100px){
     .dashboard-body{
         width: 100%;
@@ -190,4 +293,11 @@ h1, h2, h3, h4, h5, h6{
         .topbar-section .profile h3{
                 display: none;
         }
+
+}
+
+@media(max-width: 480px){
+    .notification-pop{
+         width: 75%;
+     }
 }

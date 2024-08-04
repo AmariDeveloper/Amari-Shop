@@ -53,26 +53,26 @@ const Sidebar = () => {
   return (
     <div ref={sidebarRef} className={sidebarStatus ? "sidebar-wrapper active" : "sidebar-wrapper"}>
                 <div className="sidebar-inner">
-                           <Link to={'/'} className="logo">
+                           <Link to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/dashboard`} className="logo">
                                    <img src={logo} alt="" />
                           </Link>
                           <nav>
                                    <ul>
-                                               <li onClick={closeOptions}><NavLink to={`/user/${userInfo.id}/dashboard`}><span><RxDashboard /></span> Dashboard</NavLink></li>
-                                               <li><NavLink to={`/user/${userInfo.id}/analytics`}><span><HiOutlinePresentationChartLine /></span>Overview</NavLink></li>
-                                               <li onClick={toggleOptions} className="dropy"><NavLink to={`/user/${userInfo.id}/products`}><span><CiBoxes /></span>Products</NavLink>  <span onClick={toggleOptions} className="plus"><GoPlus /></span>
+                                               <li onClick={closeOptions}><NavLink to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/dashboard`}><span><RxDashboard /></span> Dashboard</NavLink></li>
+                                               <li><NavLink to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/analytics`}><span><HiOutlinePresentationChartLine /></span>Overview</NavLink></li>
+                                               <li onClick={toggleOptions} className="dropy"><NavLink to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/products`}><span><CiBoxes /></span>Products</NavLink>  <span onClick={toggleOptions} className="plus"><GoPlus /></span>
                                                </li>
                                                <div className={ productOption ? "dropdown active" : "dropdown"}>
                                                            <ul>
-                                                                   <li><Link className={extracted_path === "categories" ? "active": ""} to={`/user/${userInfo.id}/categories`}><span><HiOutlineRectangleStack /></span>Categories</Link></li>
-                                                                    <li><Link className={extracted_path === "brands" ? "active": ""} to={`/user/${userInfo.id}/brands`}><span><TbBrandStackoverflow /></span>Brands</Link></li>
-                                                                    <li><Link to={`/user/${userInfo.id}/variations`}><span><IoOptionsSharp /></span>Variations</Link></li>
-                                                                    <li><Link to={`/user/${userInfo.id}/tags`}><span><BsTags /></span>Tags</Link></li>
+                                                                   <li><Link className={extracted_path === "categories" ? "active": ""} to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/categories`}><span><HiOutlineRectangleStack /></span>Categories</Link></li>
+                                                                    <li><Link className={extracted_path === "brands" ? "active": ""} to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/brands`}><span><TbBrandStackoverflow /></span>Brands</Link></li>
+                                                                    <li><Link to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/variations`}><span><IoOptionsSharp /></span>Variations</Link></li>
+                                                                    <li><Link to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/tags`}><span><BsTags /></span>Tags</Link></li>
                                                             </ul>
                                                </div>
-                                               <li><NavLink to={`/user/${userInfo.id}/orders`}><span><BsBasket /></span>Orders</NavLink></li>
-                                              <li><NavLink to={`/user/${userInfo.id}/customers`}><span><PiUsersFourLight /></span>Customers</NavLink></li>
-                                              <li><NavLink to={`/user/${userInfo.id}/settings`}><span><IoSettingsOutline /></span>Settings</NavLink></li>
+                                               <li><NavLink to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/orders`}><span><BsBasket /></span>Orders</NavLink></li>
+                                              <li><NavLink to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/customers`}><span><PiUsersFourLight /></span>Customers</NavLink></li>
+                                              <li><NavLink to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/settings`}><span><IoSettingsOutline /></span>Settings</NavLink></li>
                                     </ul>
 
                                    <div className="extras">

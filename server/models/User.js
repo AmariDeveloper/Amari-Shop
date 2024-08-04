@@ -21,6 +21,15 @@ const userSchema = mongoose.Schema({
   },
   profileImage: {
          type: String,
+  },
+  bio: {
+         type: String
+  },
+  phone: {
+        type: String
+  },
+  country: {
+        type: String
   }
 }, { timestamps: true})
 

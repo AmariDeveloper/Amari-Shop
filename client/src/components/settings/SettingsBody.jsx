@@ -10,6 +10,8 @@ import { useForm } from 'react-hook-form'
 import { useUpdateUserProfileMutation } from "../../redux/slices/userSlice";
 import { setUserProfile, updateUsername } from "../../redux/slices/authSlice";
 import Spinner1 from "../common/Spinner1";
+import AppNotification from "../common/AppNotification";
+import { setAppNotification } from "../../redux/slices/utilSlice";
 
 const SettingsBody = () => {
       // eslint-disable-next-line no-unused-vars
@@ -65,14 +67,24 @@ const updateUserProfile = async (data) => {
 
       try {
            const res = await updateProfileAction(formData);
-           dispatch(setUserProfile({...res.data.info}));
-           dispatch(updateUsername(res.data.info.username ));
+           if(res.error){
+                 dispatch(setAppNotification({ status: true, message: res.error.data.message, type: "Error"}))
+           }else{
+                 dispatch(setUserProfile({...res.data.info}));
+                 dispatch(updateUsername(res.data.info.username ));
+                 dispatch(setAppNotification({status: true, message: res.data.message, type: "Success"}))
+           }
       } catch (error) {
             console.log(error)
       }
 }
+
+const fireNotification = ()=>{
+
+}
   return (
     <div className="dashboard-body">
+                <AppNotification />
                 <div className="top-wrapper">
                          <div className="top-texts">
                                    <span onClick={() => setSidebarStatus(true)} className="sidebar-btn">
@@ -89,7 +101,7 @@ const updateUserProfile = async (data) => {
                                               <p>Update your photo and personal details here.</p>
                                      </div>
                                      <div className="settings-action">
-                                               <button>Cancel</button>
+                                               <p className="cancel-btn" onClick={fireNotification}>Cancel</p>
                                                <button type="submit">{ isLoading ? <Spinner1 /> : "Save"}</button>
                                      </div>
                          </div>
