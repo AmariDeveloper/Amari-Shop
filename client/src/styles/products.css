@@ -459,18 +459,18 @@
       width: 45px;
       height: 45px;
 }
-.form-row .image-area span{
+.form-row .image-area .uploader{
       position: relative;
       font-size: 15px;
       cursor: pointer;
       color: rgb(120, 120, 120);
 }
-.form-row .image-area span input{
+.form-row .image-area .uploader input{
        position :absolute;
        opacity: 0;
        cursor: pointer;
 }
-.form-row .image-action span{
+.form-row .image-action .uploader{
       color: var(--main-color);
 }
 .form-row .image-action p{
@@ -568,6 +568,124 @@
        color: #fa0000;
 }
 
+.modal{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(50, 61, 66, 0.523);
+      z-index: -44;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+}
+.modal.active{
+      z-index: 99;
+      opacity: 1;
+}
+.modal-body{
+      width: 300px;
+      border-radius: 10px;
+      padding: 20px;
+      background: white;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+      text-align: center;
+}
+
+.modal-body.delete span{
+      width: 50px;
+      height: 50px;
+      margin: 0px auto 10px auto;
+      display: flex;
+      color: #fa0000;
+      background: rgb(249, 220, 220);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 7px;
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      -ms-border-radius: 7px;
+      -o-border-radius: 7px;
+}
+.modal-body h3{
+       font-weight: 500;
+       line-height: 1.4;
+       margin-bottom: 10px;
+}
+.modal-body .modal-btns{
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+}
+.modal-btns button{
+      width: 100px;
+      height: 40px;
+      background: transparent;
+      border-radius: 6px;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      -ms-border-radius: 6px;
+      -o-border-radius: 6px;
+      cursor: pointer;
+      border: 0;
+}
+.modal-btns button:nth-child(1){
+      background-color: #d1f3ff;
+}
+.modal-btns button:nth-child(2),
+.form-row.btns span.cancel{
+      background-color: #ffd8d8;
+}
+
+.modal-body.edit{
+          width: 500px;
+          padding: 0px 20px 20px 20px;
+          text-align: left;
+}
+.modal-body.edit h3{
+       border-bottom: 1px solid var(--line);
+       padding: 10px 0;
+       text-align: center;
+}
+.modal-body.edit .form-row{
+      margin-bottom: 10px;
+}
+
+.modal-body.edit .textarea-control{
+       height: 120px !important;
+}
+
+.form-row.btns{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin: 20px 0;
+}
+
+.form-row.btns span.cancel{
+       display: flex;
+       height: 45px;
+       width: 100px;
+       align-items: center;
+       justify-content: center;
+       font-size: 14px;
+       cursor: pointer;
+       border-radius: 7px;
+       -webkit-border-radius: 7px;
+       -moz-border-radius: 7px;
+       -ms-border-radius: 7px;
+       -o-border-radius: 7px;
+       color: rgb(50,50,50);
+}
+.form-row.btns button{
+      margin: 0;
+}
 
 
 

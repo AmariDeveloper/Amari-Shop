@@ -8,6 +8,7 @@ import Categories from './pages/products/Categories'
 import Brands from './pages/products/Brands'
 import ProtectedRoutes from './utils/ProtectedRoutes'
 import Settings from './pages/Settings'
+import Variations from './pages/products/Variations'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                        <Route path='/user/:id/products' element={<Products />} />
                        <Route path='/user/:id/products/categories' element={<Categories />} />
                        <Route path='/user/:id/products/brands' element={<Brands />} />
+                       <Route path='/user/:id/products/variations' element={<Variations />} />
                        <Route path='/user/:id/settings' element={<Settings />} />
              </Route>
      </Routes>

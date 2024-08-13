@@ -66,8 +66,8 @@ const Sidebar = () => {
                                                            <ul>
                                                                    <li><Link className={extracted_path === "categories" ? "active": ""} to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/products/categories`}><span><HiOutlineRectangleStack /></span>Categories</Link></li>
                                                                     <li><Link className={extracted_path === "brands" ? "active": ""} to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/products/brands`}><span><TbBrandStackoverflow /></span>Brands</Link></li>
-                                                                    <li><Link to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/products/variations`}><span><IoOptionsSharp /></span>Variations</Link></li>
-                                                                    <li><Link to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/products/tags`}><span><BsTags /></span>Tags</Link></li>
+                                                                    <li><Link className={extracted_path === "variations" ? "active": ""}   to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/products/variations`}><span><IoOptionsSharp /></span>Variations</Link></li>
+                                                                    <li><Link className={extracted_path === "tags" ? "active": ""}  to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/products/tags`}><span><BsTags /></span>Tags</Link></li>
                                                             </ul>
                                                </div>
                                                <li><NavLink to={`/user/${userInfo.username === "@" ? userInfo.id : userInfo.username}/orders`}><span><BsBasket /></span>Orders</NavLink></li>

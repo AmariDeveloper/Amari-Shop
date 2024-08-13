@@ -5,18 +5,23 @@ import { useState, useEffect } from "react";
 import { IoCheckmark } from "react-icons/io5";
 import { useCreateCategoryMutation } from "../../../redux/slices/productSlice";
 import Spinner1 from "../../common/Spinner1";
+import { useDispatch } from "react-redux";
+import { setAppNotification } from "../../../redux/slices/utilSlice";
 
 const CategoryCreateForm = () => {
-  const { register, handleSubmit, formState: { errors }, reset, watch } = useForm();
+  const { register, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm();
   const [ userImage, setUserImage ] = useState([])
   const [ imageUrl, setImageUrl] = useState([]);
   const [ status, setStatus] = useState(false);
+  const dispatch = useDispatch();
 
-
-  const slugValue = watch("name",)
-
-    //upload profile image
-    const uploadThumbnailImage = (e) => {
+const slugValue = watch("name", "")
+useEffect(() => {
+       const slug_val = slugValue.replaceAll(" ", "-").toLowerCase();
+       setValue("slug", slug_val )
+}, [setValue, slugValue])
+    //upload thumbnail image
+    const uploadThumbnail = (e) => {
       setUserImage([...e.target.files]); 
   }
   
@@ -44,15 +49,24 @@ const [ createCategory, { isLoading }] = useCreateCategoryMutation();
 
 const handleCategoryForm = async(data) => {
        const formData = new FormData();
-       console.log(data)
        formData.append("data", JSON.stringify(data));
+  
        formData.append("categoryThumbnail", data.categoryThumbnail[0]);
-
+      
        try {
             const res = await createCategory(formData).unwrap();
-
+          
+            if(res.error){
+                 dispatch(setAppNotification({ status: true, message: res.error.data.message, type: "Error"}))
+            }else{
+                  dispatch(setAppNotification({ status: true, message: res.message, type: "Success"}))
+                  reset();
+                  clearImageThumbnail();
+            }
        } catch (error) {
-              console.log(error)
+               reset();
+               clearImageThumbnail();
+              dispatch(setAppNotification({ status: true, message: error.data.message, type: "Error"}))
        }
 }
   return (
@@ -66,7 +80,7 @@ const handleCategoryForm = async(data) => {
                        </div>
                        <div className="form-row">
                                  <label htmlFor="slug">Category slug</label>
-                                 <input type="text" {...register("slug")} value={slugValue && slugValue.replace(" ", "-").toLowerCase()} className="input-control"  />
+                                 <input type="text" {...register("slug")} value={slugValue.replaceAll(" ", "-").toLowerCase()} className="input-control"  />
                        </div>
                        <div className="form-row">
                                  <label htmlFor="parent">Parent category</label>
@@ -89,10 +103,10 @@ const handleCategoryForm = async(data) => {
                                                          <p onClick={clearImageThumbnail}>Remove</p>
                                               </div>
                                               : 
-                                              <span>
-                                                      <input type="file" {...register("categoryThumbnail")} onChange={uploadThumbnailImage} />
+                                              <div className="uploader">
+                                                      <input type="file" {...register("categoryThumbnail", { onChange: uploadThumbnail })}  />
                                                    Upload Image
-                                              </span>
+                                              </div>
                                         }
                                 </div>
                        </div>

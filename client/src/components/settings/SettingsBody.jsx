@@ -154,7 +154,7 @@ const fireNotification = ()=>{
                                                          </div>
                                                  </div>
                                                  <div className="photo-upload">
-                                                               <input type="file" {...register("profileImage")} onChange={uploadProfileImage} />
+                                                               <input type="file" {...register("profileImage", { onChange: uploadProfileImage})} />
                                                               <span className="icon"><IoCloudUploadOutline /></span>
                                                               <p><span>Click </span>to upload your image</p>
                                                  </div>
