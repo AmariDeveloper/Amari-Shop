@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import cloudinary from "../utils/cloudinary.js";
 import Category from "../models/products/ProductCategories.js";
+import Variation from "../models/products/ProductVariations.js";
 
 export const AddNewCategory = asyncHandler(async(req, res) => {
        const { name, slug, parent, description } = JSON.parse(req.body.data);
@@ -87,4 +88,27 @@ export const EditCategory = asyncHandler(async(req, res) => {
                      res.status(500).json({ message: "Category update failed."})
               }
        }
+})
+
+//Create a Variation
+export const CreateVariation = asyncHandler(async(req, res) => {
+          const { name, description, components } = req.body;
+
+          const tweakedName = name.toLowerCase();
+
+          const variationExists = await Variation.findOne({ name: tweakedName});
+
+          if(variationExists){
+                 res.status(503).json({ message: "Variation already exists"})
+          }else{
+                const newVariation = await Variation.create({
+                      name: tweakedName,
+                      description: description,
+                      components: components
+                })
+
+                if()
+          }
+
+          res.status(500).json({ message: "Imefika vilivyo my friend"})
 })
