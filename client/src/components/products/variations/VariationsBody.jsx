@@ -3,6 +3,10 @@ import Topbar from "../../common/Topbar";
 import { HiOutlineMenu } from "react-icons/hi"
 import { sidebarContext } from "../../../lib/sidebarcontext";
 import { useContext } from "react";
+import VariationsForm from "./VariationsForm";
+import VariationList from "./VariationList";
+import DeleteVariationModal from "./DeleteVariationModal";
+import EditVariationModal from "./EditVariationModal";
 const VariationsBody = () => {
           // eslint-disable-next-line no-unused-vars
   const [sidebarStatus, setSidebarStatus] = useContext(sidebarContext);
@@ -20,8 +24,11 @@ const VariationsBody = () => {
                  <Topbar />
             </div>
             <div className="categories-row-wrapper">
-                       
+                       <VariationsForm />
+                       <VariationList />
             </div>
+           <EditVariationModal />
+            <DeleteVariationModal />
     </div>
   )
 }

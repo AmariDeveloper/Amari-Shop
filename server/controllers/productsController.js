@@ -46,7 +46,7 @@ export const DeleteCategory = asyncHandler(async(req, res) => {
 
          try {
               const deleted = await Category.findOneAndDelete({name: name })
-              console.log(deleted)
+       
              if(deleted){
                     res.status(200).json({ message: "Category deleted Successfully."})
              }else{
@@ -107,8 +107,56 @@ export const CreateVariation = asyncHandler(async(req, res) => {
                       components: components
                 })
 
-                if()
+                if(newVariation){
+                      res.status(201).json({ message: "New variation created."})
+                }else{
+                     res.status(500).json({ message: "Error while creating variation."})
+                }
           }
+})
 
-          res.status(500).json({ message: "Imefika vilivyo my friend"})
+//Get all created variations
+export const GetAllVariations = asyncHandler(async(req, res) => {
+       const variations = await Variation.find({});
+
+       if(variations){
+              res.status(200).json({ variations })
+       }else{
+              res.status(500).json({ message: "No variations fetched at this moment."})
+       }
+})
+
+//Edit a variation
+export const EditVariation = asyncHandler(async(req, res) => {
+         const { name, description, components } = req.body;
+
+         const cased_name = name.toLowerCase();
+
+         const updateVariation = await Variation.findOneAndUpdate({ name: cased_name}, {
+                  name: cased_name,
+                  description: description,
+                  components: components
+         }, { new: true})
+
+         if(updateVariation){
+              res.status(200).json({ message: "Variation update successful"})
+         }else{
+               res.status(500).json({ message: "Variation update failed"})
+         }
+       
+})
+//Delete a variation
+export const DeleteVariation = asyncHandler(async(req, res) => {
+       const { id } = req.body;
+
+       try {
+              const deleted = await Variation.findByIdAndDelete(id);
+              if(deleted){
+                      res.status(201).json({ message: "Variation deleted Successfully."})
+              }else{
+                     res.status(503).json({ message: "Variation deletion failed."})
+              }
+       } catch (error) {
+              console.log(error)
+       }
 })

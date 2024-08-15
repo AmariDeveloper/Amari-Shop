@@ -47,7 +47,7 @@ const CategoryList = () => {
                                                                  <td>
                                                                           <div className="c-actions">
                                                                                     <span title="edit" onClick={() => EditModal(item)}><CiEdit /></span>
-                                                                                    <span title="delet" onClick={() => DeleteModal(item.name)}><AiOutlineDelete /></span>
+                                                                                    <span title="delete" onClick={() => DeleteModal(item.name)}><AiOutlineDelete /></span>
                                                                           </div>
                                                                  </td>
                                                         </tr>

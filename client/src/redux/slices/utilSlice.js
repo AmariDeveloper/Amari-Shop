@@ -9,7 +9,10 @@ const initialState = {
         },
         categories: localStorage.getItem("Categories") ? JSON.parse(localStorage.getItem("Categories")) : null,
         editModal: { status: false, data: null},
-        deleteModal: { status: false, category_name: ""}
+        deleteModal: { status: false, category_name: ""},
+        variations: localStorage.getItem("Variations") ? JSON.parse(localStorage.getItem("Variations")) : null,
+        editVariationModal: { status: false, data: null },
+        deleteVariationModal: { status: false, id: ""}
 }
 
 const utilSlice = createSlice({
@@ -51,6 +54,26 @@ const utilSlice = createSlice({
             closeDeleteModal: (state) => {
                    state.deleteModal.status = false;
                    state.deleteModal.category_name = ""
+            },
+            setVariations: (state, action) => {
+                   state.variations = action.payload;
+                   localStorage.setItem("Variations", JSON.stringify(action.payload))
+            },
+            openVariationEditModal: (state, action) => {
+                   state.editVariationModal.status = true;
+                   state.editVariationModal.data = action.payload
+            },
+            closeVariationEditModal: (state) => {
+                     state.editVariationModal.status = false;
+                     state.editVariationModal.data = null
+            },
+            openDeleteVariationModal: (state, action) => {
+                    state.deleteVariationModal.status = true;
+                    state.deleteVariationModal.id = action.payload
+            },
+            closeDeleteVariationModal: (state) => {
+                   state.deleteVariationModal.status = false;
+                   state.deleteVariationModal.id = ""
             }
        }
 })
@@ -64,7 +87,12 @@ export const {
        openEditModal,
        closeEditModal,
        openDeleteModal,
-       closeDeleteModal
+       closeDeleteModal,
+       setVariations,
+       openVariationEditModal,
+       closeVariationEditModal,
+       openDeleteVariationModal,
+       closeDeleteVariationModal
 } = utilSlice.actions;
 
 export default utilSlice.reducer;

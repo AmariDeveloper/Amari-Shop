@@ -32,7 +32,38 @@ export const productSlice = apiSlice.injectEndpoints({
                                body: payload
                        }),
                        invalidatesTags: ["Categories"]
-               })
+               }),
+               createVariation: builder.mutation({
+                     query: (payload) => ({
+                             url: "/v1/product/create-variation",
+                             method: "POST",
+                             body: payload
+                     }),
+                     invalidatesTags: ["Variation"]
+               }),
+               getAllVariations: builder.query({
+                       query: () => ({
+                              url: "/v1/product/get-all-variations",
+                              method: "GET"
+                       }),
+                       providesTags: ["Variation"]
+               }),
+               editVariation: builder.mutation({
+                      query: (payload) => ({
+                            url: "/v1/product/edit-variation",
+                            method: "PUT",
+                            body: payload
+                      }),
+                      invalidatesTags: ["Variation"]
+               }),
+               deleteVariation: builder.mutation({
+                     query: (payload) => ({
+                             url: "/v1/product/delete-variation",
+                             method: "DELETE",
+                             body: payload
+                     }),
+                     invalidatesTags: ['Variation']
+               }),
        })
 })
 
@@ -40,5 +71,9 @@ export const {
       useCreateCategoryMutation,
       useGetCategoriesQuery,
       useDeleteCategoryMutation,
-      useEditCategoryMutation
+      useEditCategoryMutation,
+      useCreateVariationMutation,
+      useGetAllVariationsQuery,
+      useDeleteVariationMutation,
+      useEditVariationMutation
 } = productSlice
