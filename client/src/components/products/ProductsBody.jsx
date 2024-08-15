@@ -11,13 +11,19 @@ import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import product1 from "../../assets/flops.jpg"
 import { IoIosStar,IoIosStarOutline } from "react-icons/io";
 import { FiMoreHorizontal } from "react-icons/fi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import NewProductModal from "./NewProductModal";
+import { openCreateProductModal } from "../../redux/slices/utilSlice";
 
 
 const ProductsBody = () => {
   // eslint-disable-next-line no-unused-vars
   const [sidebarStatus, setSidebarStatus] = useContext(sidebarContext);
   const { productCollectionType } = useSelector(state => state.utils)
+  const dispatch = useDispatch();
+
+  const openNewProductModal = () => dispatch(openCreateProductModal());
+  
   return (
     <div className="dashboard-body">
              <div className="top-wrapper">
@@ -30,9 +36,10 @@ const ProductsBody = () => {
                          </div>
                          <Topbar />
               </div>
+              <NewProductModal />
                <div className="products-strip-container">
                          <div className="products-header">
-                                    <button><span><MdOutlineAddShoppingCart /></span> New Product</button>
+                                    <button onClick={openNewProductModal}><span><MdOutlineAddShoppingCart /></span> New Product</button>
                                     <div className="product-options">
                                               <div className="search-area">
                                                       <span><CiSearch /></span>

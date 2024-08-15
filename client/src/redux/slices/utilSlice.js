@@ -12,7 +12,8 @@ const initialState = {
         deleteModal: { status: false, category_name: ""},
         variations: localStorage.getItem("Variations") ? JSON.parse(localStorage.getItem("Variations")) : null,
         editVariationModal: { status: false, data: null },
-        deleteVariationModal: { status: false, id: ""}
+        deleteVariationModal: { status: false, id: ""},
+        productModal: { status: false }
 }
 
 const utilSlice = createSlice({
@@ -74,6 +75,16 @@ const utilSlice = createSlice({
             closeDeleteVariationModal: (state) => {
                    state.deleteVariationModal.status = false;
                    state.deleteVariationModal.id = ""
+            },
+
+            //open create product modal
+            openCreateProductModal: (state) => {
+                   state.productModal.status = true
+            },
+
+            //close product modal
+            closeCreateProductModal: (state) => {
+                  state.productModal.status = false
             }
        }
 })
@@ -92,7 +103,9 @@ export const {
        openVariationEditModal,
        closeVariationEditModal,
        openDeleteVariationModal,
-       closeDeleteVariationModal
+       closeDeleteVariationModal,
+       openCreateProductModal,
+       closeCreateProductModal
 } = utilSlice.actions;
 
 export default utilSlice.reducer;
