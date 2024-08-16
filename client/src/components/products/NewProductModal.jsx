@@ -8,9 +8,11 @@ import { GoUpload } from "react-icons/go";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
+//import {CKEditor} from '@ckeditor/ckeditor5-react';
+//import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const NewProductModal = () => {
-    const { productModal } = useSelector(state => state.utils)
+    const { productModal, categories } = useSelector(state => state.utils)
     const dispatch = useDispatch();
     const { register } = useForm();
     const closeProductModal = () => dispatch(closeCreateProductModal());
@@ -20,6 +22,9 @@ const NewProductModal = () => {
     const [ status, setStatus ] = useState(false)
     const [ galleryImages, setGalleryImages ] = useState([])
     const [galleryStatus, setGalleryStatus] = useState(false)
+    const [ selectedCategories, setSelectedCategories ] = useState([])
+    const [id, setId] = useState(`${Math.random().toString(36).substring(2, 7)}`)
+
     useEffect(() => {
            if(productModal.status){
                  productModalRef.current.classList.add("active")
@@ -87,6 +92,24 @@ const NewProductModal = () => {
          }
     }, [galleryImages])
     
+
+    //add categories
+    const selectCategory = (e) =>{
+             if(selectedCategories.map(item => item.name).includes(e)){
+                  return;
+             }
+             setSelectedCategories([
+                   ...selectedCategories,
+                   { id: id, name: e}
+             ])
+             setId(`${Math.random().toString(36).substring(2, 7)}`)
+    }
+    //remove category
+    const removeCategory = (id) => {
+           setSelectedCategories(
+                  selectedCategories.filter(item => item.id !== id)
+           )
+    }
   return (
     <div ref={productModalRef} className="product-modal">
                <div className="product-modal-content">
@@ -183,8 +206,60 @@ const NewProductModal = () => {
                                                                              </div>
                                                                  </div>
                                                          </div>
+
+                                                         <div className="product-pricing">
+                                                                    <h4 className="product-form-title">Pricing</h4>
+
+                                                                    <div className="form-row split">
+                                                                               <div className="form-column">
+                                                                                           <label htmlFor="regular price">Regular Price</label>
+                                                                                           <input type="number" pattern="+[0,9]" className="input-control" placeholder="Enter price of product" />
+                                                                               </div>
+                                                                               <div className="form-column">
+                                                                                           <label htmlFor="selling price">Selling Price</label>
+                                                                                           <input type="number" pattern="+[0,9]" className="input-control" placeholder="Enter offer price" />
+                                                                               </div>
+                                                                    </div>
+                                                         </div>
+
+                                                         <div className="additional-info">
+                                                                    <h4 className="product-form-title">Additional Info</h4>
+                                                                     <div className="form-row">
+                                                                              <label htmlFor="product explanations">Product explanations</label>
+                                                                              {/* <div className="ck-editor-form">
+                                                                                        <CKEditor  editor={ ClassicEditor } />
+                                                                              </div> */}
+                                                                              <div className="additional-form">
+                                                                                       <textarea className="textarea-control" placeholder="Provide more information about the product"></textarea>
+                                                                              </div>
+                                                                     </div>
+                                                         </div>
                                              </div>
-                                             <div className="product-modal-column"></div>
+                                             <div className="product-modal-column">
+                                                       <div className="form-row">
+                                                              <label htmlFor="Publish status">Publish Status</label>
+                                                              <select className="input-control">
+                                                                       <option value="Draft">Draft</option>
+                                                                       <option value="Pubished">Published</option>
+                                                              </select>
+                                                       </div>
+                                                       <div className="form-row">
+                                                                 <label htmlFor="product categories">Product Category</label>
+                                                                 <select className="input-control" onChange={(e) => selectCategory(e.target.value)}>
+                                                                           <option value="">Choose a category</option>
+                                                                           { categories && categories.length > 0 && categories.map(item =>
+                                                                                 <option key={item._id} value={item.name}>{item.name}</option>
+                                                                           )}
+                                                                 </select>
+                                                                 <div className="selected-categories">
+                                                                            { selectedCategories.map(item => 
+                                                                                  <div key={item.id} className="result">
+                                                                                             {item.name} <span onClick={() => removeCategory(item.id)}><CgClose /></span>
+                                                                                  </div>
+                                                                            )}
+                                                                 </div>
+                                                       </div>
+                                             </div>
                                     </div>
                          </form>
                </div>

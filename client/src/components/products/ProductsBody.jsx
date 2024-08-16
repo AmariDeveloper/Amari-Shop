@@ -113,7 +113,7 @@ const ProductsBody = () => {
                                                                        </div>
                                                               </td>
                                                      </tr>
-                                                     <br />
+                                                    
                                                      <tr>
                                                               <td><span className="p-check"><MdOutlineCheckBoxOutlineBlank /></span></td>
                                                               <td className="p-deets">
