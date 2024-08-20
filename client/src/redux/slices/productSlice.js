@@ -64,6 +64,15 @@ export const productSlice = apiSlice.injectEndpoints({
                      }),
                      invalidatesTags: ['Variation']
                }),
+
+               //Create product
+               createNewProduct: builder.mutation({
+                       query: (payload) => ({
+                              url: "/v1/product/create-new-product",
+                              method: "POST",
+                              body: payload
+                       })
+               })
        })
 })
 
@@ -75,5 +84,6 @@ export const {
       useCreateVariationMutation,
       useGetAllVariationsQuery,
       useDeleteVariationMutation,
-      useEditVariationMutation
+      useEditVariationMutation,
+      useCreateNewProductMutation
 } = productSlice

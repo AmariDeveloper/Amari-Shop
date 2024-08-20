@@ -3,6 +3,7 @@ import { protect } from "../middleware/authMiddleware.js";
 import { upload } from "../utils/multer.js";
 import {
      AddNewCategory,
+     CreateNewProduct,
      CreateVariation,
      DeleteCategory,
      DeleteVariation,
@@ -14,6 +15,7 @@ import {
 
 const router = express.Router();
 
+router.post("/create-new-product", protect, upload.array("productImages"), CreateNewProduct);
 router.post("/create-new-category", protect, upload.single("categoryThumbnail"), AddNewCategory);
 router.get("/get-all-categories", protect, GetAllCategories);
 router.delete("/delete-category", protect, DeleteCategory);

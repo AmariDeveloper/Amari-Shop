@@ -543,13 +543,13 @@
       display: flex;
       gap: 10px;
 }
-.category-list-table .v-list,
-.category-list-table .v-list-colors{
+ .v-list,
+.v-list-colors{
       display: flex;
       gap: 5px;
       flex-wrap: wrap;
 }
-.category-list-table .v-list span{
+.v-list span{
       display: inline-flex;
       align-items: center;
       gap: 3px;
@@ -563,7 +563,12 @@
       -ms-border-radius: 5px;
       -o-border-radius: 5px;
 }
-.category-list-table .v-list-colors span{
+.v-list-colors .type-box{
+       width: 20px;
+       height: 20px;
+       display: flex;
+}
+ .v-list-colors span{
       width: 20px;
       height: 20px;
       border-radius:4px;
@@ -816,7 +821,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 30px;
+      padding: 10px 40px;
       position: sticky;
       background: white;
       top: 0;
@@ -841,7 +846,7 @@
 }
 
 .product-modal-body{
-      padding: 10px 30px;
+      padding: 10px 40px;
       display: grid;
       grid-template-columns: 3.5fr 1.75fr;
       gap: 30px;
@@ -1047,6 +1052,60 @@
 .gallery-image-moja:hover span{
       opacity: 1;
 }
+
+.variation-choices{
+      margin-top: 10px;
+}
+.variation-choices span{
+      cursor: pointer;
+}
+.variation-choices .v-list span.active{
+      background: var(--main-color);
+      color: white;
+}
+.variation-choices .v-list-colors span.active{
+      border: 2px solid var(--main-color)
+}
+
+.form-row.btn button{
+      width: 100%;
+      margin-top: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

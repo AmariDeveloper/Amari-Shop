@@ -3,6 +3,13 @@ import cloudinary from "../utils/cloudinary.js";
 import Category from "../models/products/ProductCategories.js";
 import Variation from "../models/products/ProductVariations.js";
 
+//Create a new product
+export const CreateNewProduct = asyncHandler(async(req, res) => {
+         console.log(JSON.parse(req.body.data.general))
+         console.log(req.files)
+         const productMainImage = req.files.pop();
+         const otherProductImages = req.files;
+})
 export const AddNewCategory = asyncHandler(async(req, res) => {
        const { name, slug, parent, description } = JSON.parse(req.body.data);
        
