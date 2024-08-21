@@ -197,6 +197,7 @@
      -moz-border-radius: 8px;
      -ms-border-radius: 8px;
      -o-border-radius: 8px;
+     height: 275px;
 }
 .product-card .category-and-price{
     display: flex;
@@ -747,6 +748,7 @@
       -o-border-radius: 7px;
 }
 .special-form-results,
+.option-results,
 .selected-categories{
       display: flex;
       gap: 10px;
@@ -755,7 +757,8 @@
 }
 
 .special-form-results .result,
-.selected-categories .result{
+.selected-categories .result,
+.option-results .result{
       display: flex;
       align-items: center;
       gap: 3px;

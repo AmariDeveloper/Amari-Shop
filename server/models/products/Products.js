@@ -26,7 +26,8 @@ const productsSchema = mongoose.Schema({
                  product_selected_variations: [ { id: String, name: String }]
          },
          product_brand: { type: String},
-         product_tags: [{ type: String}]
+         product_tags: [{ name: String }],
+         reviews: { type: String}
 }, { timestamps: true })
 
 const Product = mongoose.model("Product", productsSchema);

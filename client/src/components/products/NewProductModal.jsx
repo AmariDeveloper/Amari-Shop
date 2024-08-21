@@ -1,6 +1,6 @@
 import { CgClose } from "react-icons/cg"
 import { useDispatch, useSelector } from "react-redux"
-import { closeCreateProductModal } from "../../redux/slices/utilSlice";
+import { closeCreateProductModal, setAppNotification } from "../../redux/slices/utilSlice";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { CiImageOn } from "react-icons/ci";
@@ -20,7 +20,7 @@ const NewProductModal = () => {
     const { productModal, categories, variations } = useSelector(state => state.utils)
     const { selectedVariation } = useSelector(state => state.productUtils);
     const dispatch = useDispatch();
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const closeProductModal = () => dispatch(closeCreateProductModal());
     const productModalRef = useRef();
     const [ productImage, setProductImage] = useState([]);
@@ -97,6 +97,7 @@ const NewProductModal = () => {
            const updatedList = galleryImages.filter(item => item.path !== id);
            setGalleryImages(updatedList)
     }
+
     useEffect(() => {
          if(!galleryImages.length > 0){
               setGalleryStatus(false)
@@ -150,7 +151,19 @@ const NewProductModal = () => {
           setTags(tags.filter(item => item.name !==val));
     }
 
-
+//reset everything after successful upload
+const resetProductForm = () => {
+       dispatch(closeCreateProductModal());
+       reset();
+       setSelectedCategories([]);
+       selectCategory("");
+       switchVariationType("");
+       setTags([]);
+       setGalleryImages([]);
+       setGalleryStatus(false);
+       setStatus(false);
+       dispatch(clearSelectedVariation())
+}
     //POST request to create product
     const [ createNewProduct, { isLoading }] = useCreateNewProductMutation();
 
@@ -163,15 +176,23 @@ const NewProductModal = () => {
                  tags: tags
          }
         const images = otherProductImages.concat(form_data["product-main-image"][0])
+   
          formData.append("data", JSON.stringify(data));
          for (const file of images){
                 formData.append("productImages", file);
          }
          
          try {
-               const res = await createNewProduct(formData)
+               const res = await createNewProduct(formData).unwrap();
+               if(res.error){
+                      dispatch(setAppNotification({ status: true, message: res.error.data.message, type: "Error"}))
+               }else{
+                     dispatch(setAppNotification({ status: true, message: res.message, type: "Success"}));
+                     resetProductForm();
+               }
          } catch (error) {
                 console.log(error)
+                dispatch(setAppNotification({ status: true, message: error.data.message, type: "Error"}))
          }
     }
   return (

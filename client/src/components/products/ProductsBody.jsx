@@ -8,18 +8,19 @@ import Sorter from "./Sorter";
 import CollectionType from "./CollectionType";
 import ProductCard from "./ProductCard";
 import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
-import product1 from "../../assets/flops.jpg"
 import { IoIosStar,IoIosStarOutline } from "react-icons/io";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import NewProductModal from "./NewProductModal";
 import { openCreateProductModal } from "../../redux/slices/utilSlice";
+import AppNotification from "../common/AppNotification";
 
 
 const ProductsBody = () => {
   // eslint-disable-next-line no-unused-vars
   const [sidebarStatus, setSidebarStatus] = useContext(sidebarContext);
   const { productCollectionType } = useSelector(state => state.utils)
+  const { all_products } = useSelector(state => state.productUtils);
   const dispatch = useDispatch();
 
   const openNewProductModal = () => dispatch(openCreateProductModal());
@@ -36,6 +37,7 @@ const ProductsBody = () => {
                          </div>
                          <Topbar />
               </div>
+              <AppNotification />
               <NewProductModal />
                <div className="products-strip-container">
                          <div className="products-header">
@@ -52,10 +54,9 @@ const ProductsBody = () => {
 
                          { productCollectionType === "Grid" ?
                               <div className="products-body-row">
-                                        <ProductCard />
-                                        <ProductCard />
-                                        <ProductCard />
-                                        <ProductCard />
+                                      { all_products && all_products.length > 0 ?  all_products.map(product =>
+                                                <ProductCard key={product._id} data={product}  />
+                                       ) : "No products yet"}                        
                               </div>
                               :
                               <div className="products-body-table">
@@ -73,87 +74,54 @@ const ProductsBody = () => {
                                                  </tr>
                                        </thead>
                                        <tbody>
-                                                     <tr>
-                                                              <td><span className="p-check"><MdOutlineCheckBoxOutlineBlank /></span></td>
-                                                              <td className="p-deets">
-                                                                         <div className="profile">
-                                                                                   <img src={product1} alt="" className="profile-image"/>
-                                                                                   <div className="profile-texts">
-                                                                                             <h3>Lengendary Fenty flip flops </h3>
-                                                                                             <p>Carefully crafted for comfort under...</p>
-                                                                                   </div>
-                                                                         </div>
-                                                              </td>
-                                                              <td className="p-categories">
-                                                                       <span>Clothing</span>
-                                                                       <span>Footware</span>
-                                                              </td>
-                                                              <td>Colors</td>
-                                                              <td>
-                                                                        <div className="p-price">
-                                                                                 <span>Ksh</span>
-                                                                                 <h4>2500</h4>
-                                                                        </div>
-                                                              </td>
-                                                              <td>11</td>
-                                                              <td>
-                                                                       <div className="reviews">
-                                                                                   <span><IoIosStar /></span>
-                                                                                   <span><IoIosStar /></span>
-                                                                                   <span><IoIosStar /></span>
-                                                                                   <span><IoIosStar /></span>
-                                                                                   <span><IoIosStarOutline /></span>
-                                                                                   <span>4.2(182)</span>
-                                                                       </div>
-                                                              </td>
-                                                              <td>
-                                                                      <div className="p-actions">
-                                                                                 <span>Edit</span>
-                                                                                 <span><FiMoreHorizontal /></span>
-                                                                       </div>
-                                                              </td>
-                                                     </tr>
-                                                    
-                                                     <tr>
-                                                              <td><span className="p-check"><MdOutlineCheckBoxOutlineBlank /></span></td>
-                                                              <td className="p-deets">
-                                                                         <div className="profile">
-                                                                                   <img src={product1} alt="" className="profile-image"/>
-                                                                                   <div className="profile-texts">
-                                                                                             <h3>Lengendary Fenty flip flops </h3>
-                                                                                             <p>Carefully crafted for comfort under...</p>
-                                                                                   </div>
-                                                                         </div>
-                                                              </td>
-                                                              <td className="p-categories">
-                                                                       <span>Clothing</span>
-                                                                       <span>Footware</span>
-                                                              </td>
-                                                              <td>Colors</td>
-                                                              <td>
-                                                                        <div className="p-price">
-                                                                                 <span>Ksh</span>
-                                                                                 <h4>2500</h4>
-                                                                        </div>
-                                                              </td>
-                                                              <td>11</td>
-                                                              <td>
-                                                                       <div className="reviews">
-                                                                                   <span><IoIosStar /></span>
-                                                                                   <span><IoIosStar /></span>
-                                                                                   <span><IoIosStar /></span>
-                                                                                   <span><IoIosStar /></span>
-                                                                                   <span><IoIosStarOutline /></span>
-                                                                                   <span>4.2(182)</span>
-                                                                       </div>
-                                                              </td>
-                                                              <td>
-                                                                       <div className="p-actions">
-                                                                                 <span>Edit</span>
-                                                                                 <span><FiMoreHorizontal /></span>
-                                                                       </div>
-                                                              </td>
-                                                     </tr>
+                                            { all_products && all_products.length > 0 ? all_products.map(product => 
+                                                <tr key={product._id}>
+                                                       <td><span className="p-check"><MdOutlineCheckBoxOutlineBlank /></span></td>
+                                                       <td className="p-deets">
+                                                                  <div className="profile">
+                                                                            <img src={product.product_imagery.product_main_image} alt="" className="profile-image"/>
+                                                                            <div className="profile-texts">
+                                                                                      <h3>{product.product_title}</h3>
+                                                                                      <p>{product.product_short_description.slice(0, 35)}...</p>
+                                                                            </div>
+                                                                  </div>
+                                                       </td>
+                                                       <td className="p-categories">
+                                                                    {product.product_categories.length > 0 && product.product_categories.map(item => <span key={item.id}>{item.name}</span>)}
+                                                       </td>
+                                                       <td>
+                                                                 <div className="option-results">
+                                                                        { product.product_variations && product.product_variations.product_selected_variations.length > 0 ? 
+                                                                              <>
+                                                                                   { product.product_variations.product_selected_variations.map(item => <div className="result" key={item.id}>{item.name}</div>)}
+                                                                              </> : "-"}
+                                                                 </div>
+                                                       </td>
+                                                       <td>
+                                                                 <div className="p-price">
+                                                                          <span>Ksh</span>
+                                                                          <h4>{product.product_pricing.product_regular_price}</h4>
+                                                                 </div>
+                                                       </td>
+                                                       <td>{product.product_inventory.product_stock_quantity}</td>
+                                                       <td>
+                                                                <div className="reviews">
+                                                                            <span><IoIosStar /></span>
+                                                                            <span><IoIosStar /></span>
+                                                                            <span><IoIosStar /></span>
+                                                                            <span><IoIosStar /></span>
+                                                                            <span><IoIosStarOutline /></span>
+                                                                            <span>4.2(182)</span>
+                                                                </div>
+                                                       </td>
+                                                       <td>
+                                                               <div className="p-actions">
+                                                                          <span>Edit</span>
+                                                                          <span><FiMoreHorizontal /></span>
+                                                                </div>
+                                                       </td>
+                                              </tr>
+                                            ): "No products fetched at this time."}
                                        </tbody>
                               </table>
                    </div>

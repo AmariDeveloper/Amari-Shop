@@ -13,7 +13,7 @@ const initialState = {
         variations: localStorage.getItem("Variations") ? JSON.parse(localStorage.getItem("Variations")) : null,
         editVariationModal: { status: false, data: null },
         deleteVariationModal: { status: false, id: ""},
-        productModal: { status: true }
+        productModal: { status: false }
 }
 
 const utilSlice = createSlice({

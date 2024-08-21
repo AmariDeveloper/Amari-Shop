@@ -2,6 +2,25 @@ import { apiSlice } from "../apiSlice";
 
 export const productSlice = apiSlice.injectEndpoints({
        endpoints: (builder) => ({
+            //Create product
+              createNewProduct: builder.mutation({
+                     query: (payload) => ({
+                            url: "/v1/product/create-new-product",
+                             method: "POST",
+                            body: payload
+                     }),
+                     invalidatesTags: ['Products']
+               }),
+
+               //Get all products
+               getCreatedProducts: builder.query({
+                     query: () => ({
+                               url: "v1/product/get-all-products",
+                               method: "GET",
+                     }),
+                     providesTags: ["Products"]
+               }),
+
                createCategory: builder.mutation({
                       query: (payload) => ({
                                url: "v1/product/create-new-category",
@@ -64,19 +83,12 @@ export const productSlice = apiSlice.injectEndpoints({
                      }),
                      invalidatesTags: ['Variation']
                }),
-
-               //Create product
-               createNewProduct: builder.mutation({
-                       query: (payload) => ({
-                              url: "/v1/product/create-new-product",
-                              method: "POST",
-                              body: payload
-                       })
-               })
        })
 })
 
 export const {
+       useCreateNewProductMutation,
+      useGetCreatedProductsQuery,
       useCreateCategoryMutation,
       useGetCategoriesQuery,
       useDeleteCategoryMutation,
@@ -85,5 +97,4 @@ export const {
       useGetAllVariationsQuery,
       useDeleteVariationMutation,
       useEditVariationMutation,
-      useCreateNewProductMutation
 } = productSlice

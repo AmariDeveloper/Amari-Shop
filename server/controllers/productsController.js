@@ -2,14 +2,95 @@ import asyncHandler from "express-async-handler";
 import cloudinary from "../utils/cloudinary.js";
 import Category from "../models/products/ProductCategories.js";
 import Variation from "../models/products/ProductVariations.js";
-
+import Product from "../models/products/Products.js";
+import { generateRandomCharacters } from "../utils/generateRandomChar.js";
 //Create a new product
 export const CreateNewProduct = asyncHandler(async(req, res) => {
-         console.log(JSON.parse(req.body.data.general))
-         console.log(req.files)
          const productMainImage = req.files.pop();
          const otherProductImages = req.files;
+
+         const { general, categories, variations, tags } = JSON.parse(req.body.data);
+         const {
+              product_title,
+              product_short_description,
+              product_sku,
+              product_stock_status,
+              product_stock_quantity,
+              product_sold_individually,
+              product_price,
+              product_selling_price,
+              product_additional_info,
+              published_status,
+              brand
+         } = general;
+
+         const productExists = await Product.findOne({ product_title });
+
+         if(productExists){
+                res.status(503).json({ message: "Product already exists!"})
+         }else{
+               /*upload images to cloudinary */
+              const other_image_urls = []
+              const cloudinary_main_image = await cloudinary.uploader.upload(productMainImage.path, { folder: "Product Main Images"});
+
+              for(let file of otherProductImages){
+                     const cloudinary_other_image = await cloudinary.uploader.upload(file.path, { folder: "Product Images"} );
+                     if(cloudinary_other_image){
+                           other_image_urls.push(cloudinary_other_image.secure_url) 
+                     }
+              }
+
+              //create new product 
+              const newProduct = await Product.create({
+                       product_title: product_title,
+                       product_slug:  product_title.replaceAll(" ", "-"),
+                       product_short_description: product_short_description,
+                       product_inventory: {
+                             product_sku_code: product_sku == "" ? generateRandomCharacters() : product_sku.toUpperCase(),
+                             product_stock_status: product_stock_status,
+                             product_stock_quantity: product_stock_quantity,
+                             is_product_sold_individually: product_sold_individually
+                       },
+                       product_imagery: {
+                             product_main_image: cloudinary_main_image.secure_url,
+                             product_gallery: other_image_urls
+                       },
+                       product_pricing: {
+                            product_regular_price: product_price,
+                            product_selling_price: product_selling_price,
+                       },
+                       product_additional_info: product_additional_info,
+                       product_publish_status: published_status,
+                       product_brand: brand,
+                       product_categories: categories,
+                       product_variations: {
+                              product_variation_name: variations.variationName,
+                              product_selected_variations: variations.selected
+                       },
+                      product_tags: tags
+              })
+           
+              if(newProduct){
+                     res.status(201).json({ message: "New product created successfully."})
+              }else{
+                     res.status(500).json({ message: "Internal error while creating product!"})
+              }
+         }
 })
+
+
+//Get all products
+export const GetAllProducts = asyncHandler(async(req, res) => {
+        const products = await Product.find({});
+
+        if(products){
+              res.status(200).json({ products })
+        }else{
+              res.status(500).json({ message: "Error occured while fetching products"})
+        }
+})
+
+
 export const AddNewCategory = asyncHandler(async(req, res) => {
        const { name, slug, parent, description } = JSON.parse(req.body.data);
        

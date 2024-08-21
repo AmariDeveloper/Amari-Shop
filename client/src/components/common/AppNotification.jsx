@@ -18,7 +18,7 @@ const AppNotification = () => {
          if(appNotification.status){
              setTimeout(() => {
                    dispatch(removeAppNotification());
-             }, 5000)
+             }, 7500)
          }
   }, [dispatch, appNotification])
 

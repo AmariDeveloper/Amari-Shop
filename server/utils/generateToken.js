@@ -7,7 +7,7 @@ const generateToken = (res, userId) => {
               httpOnly: true,
               secure: process.env.NODE_ENV === 'production',
               sameSite: "strict",
-              maxAge: 12 * 60 * 60 * 1000
+              maxAge: 48 * 60 * 60 * 1000
        })
 }
 

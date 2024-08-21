@@ -1,23 +1,22 @@
-import product1 from "../../assets/sweater.jpg"
+/* eslint-disable react/prop-types */
 import { GiRoundStar } from "react-icons/gi";
 
-const ProductCard = () => {
+const ProductCard = ({ data }) => {
   return (
     <div className="product-card">
             <div className="product-image">
-                     <img src={product1} alt="" />
+                     <img src={data.product_imagery.product_main_image} alt="" />
             </div>
             <div className="category-and-price">
                        <div className="categories">
-                                  <span>Fashion & Textiles</span>
-                                  <span>Men</span>
+                                  {data.product_categories.length > 0 && data.product_categories.map(item => <span key={item.id}>{item.name}</span>)}
                        </div>
                        <div className="price">
-                                 <h3><span>Ksh.</span> 2,500</h3>
+                                 <h3><span>Ksh.</span> {data.product_pricing.product_regular_price}</h3>
                        </div>
             </div>
             <div className="product-name">
-                      <h3>Calvin Klein Sweater Mono Embroidered</h3>
+                      <h3>{data.product_title}</h3>
             </div>
             <div className="reviews">
                       <span className="star"><GiRoundStar /></span>
