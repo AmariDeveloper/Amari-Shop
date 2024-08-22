@@ -83,26 +83,26 @@ const NewProductModal = () => {
                   "image/*": [".jpg", ".jpeg", ".png"]
             },
             onDrop: (acceptedFiles) => {
-                  setOtherProductImages(acceptedFiles);
-                  setGalleryImages(
-                        acceptedFiles.map(file => Object.assign(file, {
-                               preview: URL.createObjectURL(file)
-                        }))
-                  )
+                  setOtherProductImages([...otherProductImages, ...acceptedFiles]);
+            
+                  const sanitized_newly_uploaded = acceptedFiles.map(file => Object.assign(file, {
+                          preview: URL.createObjectURL(file)
+                  }))
+                  setGalleryImages([
+                         ...galleryImages,
+                         ...sanitized_newly_uploaded
+                  ])
                   setGalleryStatus(true)
             }
     })
 
     const removeGalleryImage = (id) => {
            const updatedList = galleryImages.filter(item => item.path !== id);
+           const updated_other_images_list = otherProductImages.filter(item => item.path !== id)
            setGalleryImages(updatedList)
+           setOtherProductImages(updated_other_images_list)
     }
 
-    useEffect(() => {
-         if(!galleryImages.length > 0){
-              setGalleryStatus(false)
-         }
-    }, [galleryImages])
     
 
     //add categories
@@ -276,14 +276,19 @@ const resetProductForm = () => {
                                                                              <label htmlFor="gallery images">Product gallery images</label>
 
                                                                              <div className="product-gallery-trigger">
-                                                                                         { galleryStatus ? 
+                                                                                         { galleryStatus && galleryImages.length > 0 ? 
                                                                                                <div className="uploaded-images">
-                                                                                                       { galleryImages.length > 0 && galleryImages.map(image => 
+                                                                                                       {  galleryImages.map(image => 
                                                                                                               <div className="gallery-image-moja" key={image.path}>
                                                                                                                        <img src={image.preview} alt="" />
                                                                                                                        <span onClick={() => removeGalleryImage(image.path)}><RiDeleteBin6Line /></span>
                                                                                                               </div>
                                                                                                        )}
+                                                                                                       <div { ...getRootProps()} className="add-more-gallery-images">
+                                                                                                                <input { ...getInputProps} className="dropy" />
+                                                                                                                <span><GoUpload /></span>
+                                                                                                                <p>Add More</p>
+                                                                                                      </div>
                                                                                                </div>
                                                                                                :
                                                                                                <div {...getRootProps()} className="dropbox-container">

@@ -1,9 +1,13 @@
 /* eslint-disable react/prop-types */
 import { GiRoundStar } from "react-icons/gi";
+import { useDispatch } from "react-redux";
+import { openEditProductModal } from "../../redux/slices/productUtilSlice";
 
 const ProductCard = ({ data }) => {
+  const dispatch = useDispatch();
+  const openEditModal = () => dispatch(openEditProductModal(data))
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={openEditModal}>
             <div className="product-image">
                      <img src={data.product_imagery.product_main_image} alt="" />
             </div>

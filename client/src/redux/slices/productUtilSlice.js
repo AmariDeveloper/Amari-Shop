@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
        all_products: localStorage.getItem("All Products") ? JSON.parse(localStorage.getItem("All Products")) : [],
-       selectedVariation: []
+       selectedVariation: [],
+       editProductModal: {status: false, data: null}
 }
 
 const productUtilSlice = createSlice({
@@ -13,8 +14,14 @@ const productUtilSlice = createSlice({
                      state.all_products = action.payload;
                      localStorage.setItem("All Products", JSON.stringify(action.payload));
               },
-
-
+              openEditProductModal: (state, action) => {
+                     state.editProductModal.status = true;
+                     state.editProductModal.data = action.payload
+              },
+              closeEditProductModal: (state) => {
+                     state.editProductModal.status = false;
+                     state.editProductModal.data = null
+              },
 
 
 
@@ -33,6 +40,8 @@ const productUtilSlice = createSlice({
 
 export const {
        setAllProducts,
+       openEditProductModal,
+       closeEditProductModal,
        setSelectedVariation,
        removeSelectedVariation,
        clearSelectedVariation

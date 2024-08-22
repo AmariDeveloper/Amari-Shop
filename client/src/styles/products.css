@@ -984,7 +984,8 @@
       cursor: pointer;
       position: relative;
 }
-.dropbox-container span{
+.dropbox-container span,
+.add-more-gallery-images span{
       width: 45px;
       height: 45px;
       display: flex;
@@ -999,16 +1000,33 @@
       margin-bottom: 10px;;
 }
 
-.dropbox-container p{
+.dropbox-container p,
+.add-more-gallery-images p{
        font-size: 15px;
        font-weight: 300;
        color: rgb(50,50,50);
 }
-.dropbox-container .dropy{
+.dropbox-container .dropy,
+.add-more-gallery-images .dropy{
       position: absolute;
       opacity: 0;
 }
-
+.add-more-gallery-images{
+      height: 150px;
+      width: 150px;
+      border: 1px dashed gainsboro;
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+}
 .uploaded-images{
       display: flex;
       flex-wrap: wrap;

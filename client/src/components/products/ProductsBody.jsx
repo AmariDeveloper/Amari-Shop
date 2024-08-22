@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import NewProductModal from "./NewProductModal";
 import { openCreateProductModal } from "../../redux/slices/utilSlice";
 import AppNotification from "../common/AppNotification";
+import EditProductModal from "./EditProductModal";
 
 
 const ProductsBody = () => {
@@ -39,6 +40,7 @@ const ProductsBody = () => {
               </div>
               <AppNotification />
               <NewProductModal />
+              <EditProductModal />
                <div className="products-strip-container">
                          <div className="products-header">
                                     <button onClick={openNewProductModal}><span><MdOutlineAddShoppingCart /></span> New Product</button>
