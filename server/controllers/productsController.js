@@ -79,6 +79,41 @@ export const CreateNewProduct = asyncHandler(async(req, res) => {
 })
 
 
+//edit product
+export const EditProduct = asyncHandler(async(req, res) => {
+        const productMainImage = req.files["mainImage"] && req.files['mainImage'][0];
+        const otherProductImages = req.files["galleryImages"] && req.files["galleryImages"];
+        
+        const { general, categories, variations, tags } = JSON.parse(req.body.data);
+
+        const {
+              product_title,
+              product_short_description,
+              product_sku,
+              product_stock_status,
+              product_stock_quantity,
+              product_sold_individually,
+              product_price,
+              product_selling_price,
+              product_additional_info,
+              published_status,
+              brand
+         } = general;
+
+         const currentProduct = await Product.findOne({ product_title })
+       
+         /* Upload images to cloudinary if uploaded */
+         let main_image, other_image_urls = [];
+        if(productMainImage){
+               const cloudinary_main_image = await cloudinary.uploader.upload(productMainImage.path, { folder: "Product Main Images"});
+               if(cloudinary_main_image) main_image = cloudinary_main_image.secure_url;
+        }else{
+              main_image = currentProduct.product_imagery.product_main_image;
+        }
+        console.log(main_image)
+
+})
+
 //Get all products
 export const GetAllProducts = asyncHandler(async(req, res) => {
         const products = await Product.find({});

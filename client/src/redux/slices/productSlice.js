@@ -11,6 +11,15 @@ export const productSlice = apiSlice.injectEndpoints({
                      }),
                      invalidatesTags: ['Products']
                }),
+               //Edit product
+              editProduct: builder.mutation({
+                     query: (payload) => ({
+                            url: "v1/product/edit-product",
+                            method: "PUT",
+                            body: payload
+                     }),
+                     invalidatesTags: ["Products"]
+              }),
 
                //Get all products
                getCreatedProducts: builder.query({
@@ -88,6 +97,9 @@ export const productSlice = apiSlice.injectEndpoints({
 
 export const {
        useCreateNewProductMutation,
+       useEditProductMutation,
+
+
       useGetCreatedProductsQuery,
       useCreateCategoryMutation,
       useGetCategoriesQuery,

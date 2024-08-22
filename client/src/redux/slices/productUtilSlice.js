@@ -28,8 +28,10 @@ const productUtilSlice = createSlice({
                setSelectedVariation: (state, action) => {
                       state.selectedVariation.push(action.payload)
                },
+               setExistingSelectedVariation: (state, action) => {
+                      state.selectedVariation = action.payload;
+               },
                removeSelectedVariation: (state, action) => {
-                      console.log(action.payload)
                       state.selectedVariation = state.selectedVariation.filter(item => item.name !== action.payload)
                },
                clearSelectedVariation: (state) => {
@@ -43,6 +45,7 @@ export const {
        openEditProductModal,
        closeEditProductModal,
        setSelectedVariation,
+       setExistingSelectedVariation,
        removeSelectedVariation,
        clearSelectedVariation
 } = productUtilSlice.actions
