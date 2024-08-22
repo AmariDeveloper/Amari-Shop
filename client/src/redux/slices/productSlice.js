@@ -20,7 +20,15 @@ export const productSlice = apiSlice.injectEndpoints({
                      }),
                      invalidatesTags: ["Products"]
               }),
-
+              //Delete product
+              deleteProduct: builder.mutation({
+                     query: (payload) => ({
+                            url: "v1/product/delete-product",
+                            method: "DELETE",
+                            body: payload
+                     }),
+                     invalidatesTags: ['Products']
+              }),
                //Get all products
                getCreatedProducts: builder.query({
                      query: () => ({
@@ -96,10 +104,9 @@ export const productSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-       useCreateNewProductMutation,
-       useEditProductMutation,
-
-
+      useCreateNewProductMutation,
+      useEditProductMutation,
+      useDeleteProductMutation,
       useGetCreatedProductsQuery,
       useCreateCategoryMutation,
       useGetCategoriesQuery,

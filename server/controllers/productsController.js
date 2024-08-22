@@ -110,9 +110,68 @@ export const EditProduct = asyncHandler(async(req, res) => {
         }else{
               main_image = currentProduct.product_imagery.product_main_image;
         }
-        console.log(main_image)
+        
+        if(otherProductImages){
+              other_image_urls.push(...currentProduct.product_imagery.product_gallery);
+              for(let file of otherProductImages){
+                     const cloudinary_other_image = await cloudinary.uploader.upload(file.path, { folder: "Product Images"});
+                     if(cloudinary_other_image){
+                            other_image_urls.push(cloudinary_other_image.secure_url);
+                     }
+              }
+        }else{
+              other_image_urls.push(...currentProduct.product_imagery.product_gallery)
+        }
+      
+       //initiate editing
+       const editedProduct = await Product.findOneAndUpdate({ product_title: product_title}, {
+              product_title: product_title,
+              product_slug: product_title.replaceAll(" ", "-"),
+              product_short_description: product_short_description,
+              product_inventory: {
+                     product_sku_code: product_sku == "" ? generateRandomCharacters() : product_sku.toUpperCase(),
+                     product_stock_status: product_stock_status,
+                     product_stock_quantity: product_stock_quantity,
+                     is_product_sold_individually: product_sold_individually
+               },
+               product_imagery: {
+                     product_main_image: main_image,
+                     product_gallery: other_image_urls
+               },
+               product_pricing: {
+                    product_regular_price: product_price,
+                    product_selling_price: product_selling_price,
+               },
+               product_additional_info: product_additional_info,
+               product_publish_status: published_status,
+               product_brand: brand,
+               product_categories: categories,
+               product_variations: {
+                      product_variation_name: variations.variationName,
+                      product_selected_variations: variations.selected
+               },
+              product_tags: tags
+       }, { new: true})
 
+       if(editedProduct){
+              res.status(201).json({ message: "Product edit successfully."})
+       }else{
+              res.status(500).json({ message: "Internal server error while editing product!"})
+       }
 })
+//Delete Product
+export const DeleteProduct = asyncHandler(async(req, res) => {
+         const { id } = req.body;
+
+         const deletedProduct = await Product.findByIdAndDelete(id);
+
+         if(deletedProduct){
+               res.status(201).json({ message: "Product deleted successfully."})
+         }else{
+              res.status(500).json({ message: "Internal server error occured while deleting the product"})
+         }
+})
+
 
 //Get all products
 export const GetAllProducts = asyncHandler(async(req, res) => {

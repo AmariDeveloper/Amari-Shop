@@ -12,6 +12,7 @@ import SMoja from "./utils/SMoja";
 import ScMoja from "./utils/ScMoja";
 import Spinner1 from "../common/Spinner1";
 import { useEditProductMutation } from "../../redux/slices/productSlice";
+import { setAppNotification } from "../../redux/slices/utilSlice";
 
 
 const EditProductModal = () => {
@@ -233,8 +234,15 @@ const submitEditForm = async(form_data) => {
         }
        try{
               const res = await editProduct(formData).unwrap();
+              if(res.error){
+                     dispatch(setAppNotification({ status: true, message: res.error.data.message, type: "Error"}))
+              }else{
+                    dispatch(setAppNotification({ status: true, message: res.message, type: "Success"}));
+                    dispatch(closeEditProductModal());
+              }
        }catch(error){
-            console.log(error)
+            //console.log(error)
+            dispatch(setAppNotification({ status: true, message: error.data.message, type: "Error"}))
        }
       
 }     

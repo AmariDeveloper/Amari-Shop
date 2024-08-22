@@ -9,13 +9,14 @@ import CollectionType from "./CollectionType";
 import ProductCard from "./ProductCard";
 import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import { IoIosStar,IoIosStarOutline } from "react-icons/io";
-import { FiMoreHorizontal } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import NewProductModal from "./NewProductModal";
 import { openCreateProductModal } from "../../redux/slices/utilSlice";
 import AppNotification from "../common/AppNotification";
 import EditProductModal from "./EditProductModal";
-
+import { openDeleteProductModal, openEditProductModal } from "../../redux/slices/productUtilSlice";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import DeleteProductModal from "./DeleteProductModal";
 
 const ProductsBody = () => {
   // eslint-disable-next-line no-unused-vars
@@ -25,7 +26,8 @@ const ProductsBody = () => {
   const dispatch = useDispatch();
 
   const openNewProductModal = () => dispatch(openCreateProductModal());
-  
+  const openEditModal = (data) => dispatch(openEditProductModal(data));
+  const openDeleteModal = (data) => dispatch(openDeleteProductModal(data))
   return (
     <div className="dashboard-body">
              <div className="top-wrapper">
@@ -41,6 +43,7 @@ const ProductsBody = () => {
               <AppNotification />
               <NewProductModal />
               <EditProductModal />
+              <DeleteProductModal />
                <div className="products-strip-container">
                          <div className="products-header">
                                     <button onClick={openNewProductModal}><span><MdOutlineAddShoppingCart /></span> New Product</button>
@@ -92,12 +95,21 @@ const ProductsBody = () => {
                                                                     {product.product_categories.length > 0 && product.product_categories.map(item => <span key={item.id}>{item.name}</span>)}
                                                        </td>
                                                        <td>
-                                                                 <div className="option-results">
-                                                                        { product.product_variations && product.product_variations.product_selected_variations.length > 0 ? 
+                                                                { product.product_variations && product.product_variations.product_variation_name === 'color' ?
+                                                                       <div className="v-list-colors">
+                                                                                 { product.product_variations.product_selected_variations.map(v => 
+                                                                                        <span key={v.id} style={{ background: `${v.name}`}} title={v.name}></span>
+                                                                                 )}
+                                                                       </div>
+                                                                      :
+                                                                      <div className="option-results">
+                                                                        { product.product_variations.product_selected_variations.length > 0 ? 
                                                                               <>
                                                                                    { product.product_variations.product_selected_variations.map(item => <div className="result" key={item.id}>{item.name}</div>)}
                                                                               </> : "-"}
-                                                                 </div>
+                                                                     </div>
+                                                                 }
+                                                                 
                                                        </td>
                                                        <td>
                                                                  <div className="p-price">
@@ -118,8 +130,8 @@ const ProductsBody = () => {
                                                        </td>
                                                        <td>
                                                                <div className="p-actions">
-                                                                          <span>Edit</span>
-                                                                          <span><FiMoreHorizontal /></span>
+                                                                          <span onClick={() => openEditModal(product)}>Edit</span>
+                                                                          <span onClick={() => openDeleteModal(product._id)}><RiDeleteBin6Line /></span>
                                                                 </div>
                                                        </td>
                                               </tr>

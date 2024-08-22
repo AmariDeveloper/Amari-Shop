@@ -6,6 +6,7 @@ import {
      CreateNewProduct,
      CreateVariation,
      DeleteCategory,
+     DeleteProduct,
      DeleteVariation,
      EditCategory,
      EditProduct,
@@ -22,6 +23,7 @@ router.put("/edit-product", protect, upload.fields([
        { name: "mainImage", maxCount: 1},
        { name: "galleryImages", maxCount: 20}
 ]), EditProduct);
+router.delete("/delete-product", protect,DeleteProduct);
 router.post("/create-new-category", protect, upload.single("categoryThumbnail"), AddNewCategory);
 router.get("/get-all-products", GetAllProducts);
 router.get("/get-all-categories", GetAllCategories);

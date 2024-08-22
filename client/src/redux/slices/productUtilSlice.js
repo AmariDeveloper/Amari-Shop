@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
        all_products: localStorage.getItem("All Products") ? JSON.parse(localStorage.getItem("All Products")) : [],
        selectedVariation: [],
-       editProductModal: {status: false, data: null}
+       editProductModal: {status: false, data: null},
+       deleteProductModal: { status: false, id: null }
 }
 
 const productUtilSlice = createSlice({
@@ -22,9 +23,14 @@ const productUtilSlice = createSlice({
                      state.editProductModal.status = false;
                      state.editProductModal.data = null
               },
-
-
-
+              openDeleteProductModal: (state, action) => {
+                     state.deleteProductModal.status = true;
+                     state.deleteProductModal.id = action.payload
+              },
+               closeDeleteProductModal: (state) => {
+                     state.deleteProductModal.status = false;
+                     state.deleteProductModal.id = null
+               },
                setSelectedVariation: (state, action) => {
                       state.selectedVariation.push(action.payload)
                },
@@ -44,10 +50,12 @@ export const {
        setAllProducts,
        openEditProductModal,
        closeEditProductModal,
+       openDeleteProductModal,
+       closeDeleteProductModal,
        setSelectedVariation,
        setExistingSelectedVariation,
        removeSelectedVariation,
-       clearSelectedVariation
+       clearSelectedVariation,
 } = productUtilSlice.actions
 
 export default productUtilSlice.reducer

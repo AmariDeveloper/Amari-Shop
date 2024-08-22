@@ -20,9 +20,9 @@ function App() {
               <Route element={<ProtectedRoutes />}>
                        <Route path='/user/:id/dashboard' element={<Dashboard />} />
                        <Route path='/user/:id/products' element={<Products />} />
-                       <Route path='/user/:id/products/categories' element={<Categories />} />
-                       <Route path='/user/:id/products/brands' element={<Brands />} />
-                       <Route path='/user/:id/products/variations' element={<Variations />} />
+                       <Route path='/user/:id/products/:name' element={<Categories />} />
+                       <Route path='/user/:id/products/:name' element={<Brands />} />
+                       <Route path='/user/:id/products/:name' element={<Variations />} />
                        <Route path='/user/:id/settings' element={<Settings />} />
              </Route>
      </Routes>
