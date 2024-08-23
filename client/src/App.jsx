@@ -1,14 +1,14 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Dashboard from './pages/Dashboard'
-import Products from './pages/Products'
-import Categories from './pages/products/Categories'
-import Brands from './pages/products/Brands'
+import Home from './pages/public/Home'
+import Login from './pages/backend/Login'
+import Dashboard from './pages/backend/Dashboard'
+import Products from './pages/backend/Products'
+import Categories from './pages/backend/products/Categories'
+import Brands from './pages/backend/products/Brands'
 import ProtectedRoutes from './utils/ProtectedRoutes'
-import Settings from './pages/Settings'
-import Variations from './pages/products/Variations'
+import Settings from './pages/backend/Settings'
+import Variations from './pages/backend/products/Variations'
 
 function App() {
   return (

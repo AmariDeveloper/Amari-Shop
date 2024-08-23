@@ -1,0 +1,54 @@
+import logo from "../../../assets/logo.png"
+import { Link } from "react-router-dom"
+import { HiOutlineUserCircle } from "react-icons/hi2";
+import { HiOutlineShoppingCart } from "react-icons/hi2";
+import { GoSearch } from "react-icons/go";
+import { HiChevronDown } from "react-icons/hi2";
+import CategoriesDropdown from "./CategoriesDropdown";
+import { useState } from "react";
+
+const Header = () => {
+  const [dropdownStatus, setDropdownStatus] = useState(false)
+  return (
+    <header>
+            <div className="inner-row">
+                        <div className="header-content">
+                                   <div className="flex-item-column">
+                                             <Link to={"/"} className="logo-item">
+                                                     <img src={logo} alt="" className="logo" />
+                                              </Link>
+                                              <nav>
+                                                       <div className="head-categories">
+                                                                <div className={dropdownStatus ? "head-categories-wrap active" : "head-categories-wrap"} onClick={() => setDropdownStatus(!dropdownStatus)}>
+                                                                        Categories 
+                                                                        <span><HiChevronDown /></span>
+                                                                </div>
+                                                                <CategoriesDropdown status={dropdownStatus} handleStatus={setDropdownStatus} />
+                                                       </div>
+                                                       <ul>
+                                                               <li><Link to={"/"}>Deals</Link></li>
+                                                               <li><Link to={"/"}>Shop</Link></li>
+                                                               <li><Link to={"/"}>New & Featured</Link></li>
+                                                       </ul>
+                                              </nav>
+                                   </div>
+                                   <div className="right flex-item-column">
+                                            <div className="box">
+                                                      <span><HiOutlineUserCircle /></span>
+                                                      <h3>Sign In</h3>
+                                            </div>
+                                            <div className="box">
+                                                      <span><GoSearch /></span>
+                                            </div>
+                                            <div className="box">
+                                                      <span><HiOutlineShoppingCart /></span>
+                                                      <figure>3</figure>
+                                            </div>
+                                   </div>
+                        </div>
+            </div>
+    </header>
+  )
+}
+
+export default Header
