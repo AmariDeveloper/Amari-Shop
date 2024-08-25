@@ -5,33 +5,39 @@ header{
 .header-content{
     display: flex;
     justify-content: space-between;
-    gap: 40px;
+    gap: 20px;
     align-items: center;
     height: 85px;
 }
 
 .header-content .logo-item{
-    display: flex;
+    display: inline-flex;
     flex-shrink: 0;
+    justify-content: center;
+
 }
 .logo-item img{
      object-fit: contain;
 }
+
+.mobile-menu-btn{
+       display: none;
+}
 .header-content .flex-item-column{
     display: flex;
     gap: 50px;
+    position: relative;
 }
 .flex-item-column.right{
        gap: 10px;;
 }
 .flex-item-column nav{
     display: flex;
-    gap: 30px;
     align-items: center;
 }
 .flex-item-column nav ul{
     display: flex;
-    gap: 30px;
+    gap: 10px;
 }
 .flex-item-column nav ul li a{
     display: inline-flex;
@@ -46,6 +52,22 @@ header{
 }
 .flex-item-column nav ul li a:hover{
     background: var(--light-gray);
+}
+.menu-btn{
+      cursor: pointer;
+      width: 38px;
+      height: 35px;
+      border-radius: 6px;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      -ms-border-radius: 6px;
+      -o-border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      display: none;
+      border: 1px solid rgba(220, 220, 220, 0.2)
 }
 .flex-item-column nav .head-categories{
       position: relative;
@@ -147,10 +169,67 @@ header{
     font-size: 18px;
 }
 
-.flex-item-column .box:hover{
+.flex-item-column .box:hover,
+.header-content .menu-btn:hover{
     background: var(--light-gray)
 }
 
 .flex-item-column .box figure{
       font-size: 12px;
+}
+
+
+
+
+
+
+
+@media(max-width: 1090px){
+       .flex-item-column .menu-btn{
+             display: flex;
+       }
+
+       .flex-item-column nav .head-categories,
+       .flex-item-column nav ul{
+              display: none;
+       }
+}
+
+@media(max-width: 768px){
+     .flex-item-column .menu-btn,
+     .flex-item-column.right .box.account{
+            display: none;
+     }
+
+   .header-content  .flex-item-column{
+           display: flex;
+           justify-content: center;
+           position: relative;;
+           width: max-content;
+           gap: 0px;
+     }
+     .mobile-menu-btn,
+     .mobile-menu-btn .menu-btn{
+            display: flex;
+     }
+     .logo-item img{
+           width: 150px;
+     }
+     .mobile-menu-btn{
+           display: flex;
+           gap: 15px;
+     }
+     .mobile-menu-btn .spacer{
+          width: 25px;
+     }
+}
+
+@media(max-width: 480px){
+        .mobile-menu-btn .spacer, 
+        .flex-item-column .search{
+               display: none;
+        }
+        .logo-item img{
+               width: 120px;
+        }
 }

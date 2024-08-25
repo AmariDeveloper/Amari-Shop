@@ -6,6 +6,7 @@ import { GoSearch } from "react-icons/go";
 import { HiChevronDown } from "react-icons/hi2";
 import CategoriesDropdown from "./CategoriesDropdown";
 import { useState } from "react";
+import { CgMenuLeft } from "react-icons/cg";
 
 const Header = () => {
   const [dropdownStatus, setDropdownStatus] = useState(false)
@@ -13,11 +14,16 @@ const Header = () => {
     <header>
             <div className="inner-row">
                         <div className="header-content">
+                                    <div className="mobile-menu-btn">
+                                                <span className="menu-btn"><CgMenuLeft /></span>
+                                                <span className="spacer"></span>
+                                    </div>
                                    <div className="flex-item-column">
                                              <Link to={"/"} className="logo-item">
                                                      <img src={logo} alt="" className="logo" />
                                               </Link>
                                               <nav>
+                                                        <span className="menu-btn"><CgMenuLeft /></span>
                                                        <div className="head-categories">
                                                                 <div className={dropdownStatus ? "head-categories-wrap active" : "head-categories-wrap"} onClick={() => setDropdownStatus(!dropdownStatus)}>
                                                                         Categories 
@@ -33,11 +39,11 @@ const Header = () => {
                                               </nav>
                                    </div>
                                    <div className="right flex-item-column">
-                                            <div className="box">
+                                            <div className="box account">
                                                       <span><HiOutlineUserCircle /></span>
                                                       <h3>Sign In</h3>
                                             </div>
-                                            <div className="box">
+                                            <div className="box search">
                                                       <span><GoSearch /></span>
                                             </div>
                                             <div className="box">
