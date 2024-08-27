@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux"
 import ProductCard from "./products/ProductCard"
+import QuickViewProductModal from "./products/QuickViewProductModal";
 
 const HomeProducts = () => {
   const { all_published_products } = useSelector(state => state.client);
 
   return (
     <div className="home-products">
+              <QuickViewProductModal />
              <div className="inner-row">
                       <div className="home-products-content">
                                  <h2 className="section-title">Most Popular Products</h2>

@@ -7,9 +7,11 @@ import { HiChevronDown } from "react-icons/hi2";
 import CategoriesDropdown from "./CategoriesDropdown";
 import { useState } from "react";
 import { CgMenuLeft } from "react-icons/cg";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const [dropdownStatus, setDropdownStatus] = useState(false)
+  const [dropdownStatus, setDropdownStatus] = useState(false);
+  const { shopping_cart } = useSelector(state => state.client);
   return (
     <header>
             <div className="inner-row">
@@ -48,7 +50,7 @@ const Header = () => {
                                             </div>
                                             <div className="box">
                                                       <span><HiOutlineShoppingCart /></span>
-                                                      <figure>3</figure>
+                                                      <figure>{shopping_cart.cartTotal}</figure>
                                             </div>
                                    </div>
                         </div>

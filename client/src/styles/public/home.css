@@ -499,6 +499,7 @@ header{
       color: white;
       cursor: pointer;
 }
+
 .client-product-card:hover .image-wrapper img{
       height: 360px;
 }
@@ -509,6 +510,7 @@ header{
      -ms-transform: translate(-50%, -5px);
      -o-transform: translate(-50%, -5px);
 }
+
 .add-to-cart-box{
      position: absolute;
      top: 20px;
@@ -562,6 +564,7 @@ header{
      margin: 5px 0;
      display: flex;
      gap: 10px;
+     justify-content: space-between;
 }
 .product-name-row h3{
      font-size: 22px;
@@ -579,6 +582,8 @@ header{
 }
 .product-name-row h4{
       margin-top: 5px;
+      font-size: 25px;
+      font-weight: 500;
 }
 .product-name-row h4 span{
       font-size: 13px;
@@ -586,29 +591,294 @@ header{
 }
 
 
+/* Client Modal */
+.client-modal{
+       position: fixed;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background: rgba(234, 246, 249, 0.92);
+       z-index: -99;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       opacity: 0;
+}
+.client-modal.active{
+        z-index: 999;
+        opacity: 1;
+}
+.client-modal-content{
+       width: 1000px;
+       height: 75%;
+       background: rgb(255, 255, 255);
+       display: grid;
+       grid-template-columns: 1fr 1fr;
+       border-radius: 10px;
+       overflow: hidden;
+       -webkit-border-radius: 10px;
+       -moz-border-radius: 10px;
+       -ms-border-radius: 10px;
+       -o-border-radius: 10px;
+}
+
+.client-modal-content .description-row-column{
+       padding: 30px;
+       position: relative;
+       height: 99%;
+      overflow-y: scroll;
+}
+.sale-wrap p{
+      background: var(--main-color);
+      display: inline-block;
+      padding: 5px 15px;
+      font-size: 14px;
+      color: whitesmoke;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+      display: none;
+}
+.description-row-column .modal-close{
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      font-size: 16px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      background: var(--light-gray);
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+}
+.description-row-column h2{
+       font-size: 40px;
+       margin: 10px 0;
+       font-weight: 500;
+       line-height: 1.3;
+}
+
+.review-wrap{
+       display: flex;
+       gap: 5px;
+       align-items: center;
+       margin-bottom: 10px;
+}
+.review-wrap .review-stars{
+      display: flex;
+      align-items: center;
+}
+.review-stars span{
+      display: flex;
+      color: rgb(255, 170, 0);;
+}
+.review-wrap p{
+      font-size: 14px;;
+}
+
+.price-row h4{
+      font-size: 16px;
+      font-weight: 400;
+}
+.price-row .ksh{
+      font-size: 15px;
+      font-weight: 500;
+}
+.price-row h3{
+      font-size:36px;
+      display: flex;
+      font-weight: 500;
+      align-items: center;
+      gap: 5px;
+}
+
+.price-short-description-row{
+       margin: 10px 0
+}
+.price-short-description-row p{
+      line-height: 1.5;
+      font-weight: 340;
+}
+
+.product-quick-cart-options{
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      margin: 20px 0;
+}
+
+.cart-number-adjustments{
+      width: 180px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+}
+.cart-number-adjustments .adjust{
+      width: 45px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: black;
+      border-radius: 8px;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      -webkit-transition: all 0.35s ease;
+      -moz-transition: all 0.35s ease;
+      -ms-transition: all 0.35s ease;
+      -o-transition: all 0.35s ease;
+}
+.cart-number-adjustments .adjust:hover{
+      transform: scale(0.95);
+      -webkit-transform: scale(0.95);
+      -moz-transform: scale(0.95);
+      -ms-transform: scale(0.95);
+      -o-transform: scale(0.95);
+}
+.cart-number-adjustments .adjust span{
+      color: white;
+      font-size: 22px;
+      display: flex;
+}
+.adjust-showcase{
+      width: 45px;
+      height: 45px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(220, 220, 220, 0.5);
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+}
+.adjust-showcase h3{
+      font-size: 16px;
+      font-weight: 500;
+}
+
+.add-to-cart-btn{
+      width: 200px;
+      height: 45px;
+      background: var(--main-color);
+      border-radius: 7px;
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      -ms-border-radius: 7px;
+      -o-border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+}
+.add-to-cart-btn::before{
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      left: 0;
+      transition: all 0.35s ease;
+      transform: translateX(-100%);
+      -webkit-transform: translateX(-100%);
+      -moz-transform: translateX(-100%);
+      -ms-transform: translateX(-100%);
+      -o-transform: translateX(-100%);
+      -webkit-transition: all 0.35s ease;
+      -moz-transition: all 0.35s ease;
+      -ms-transition: all 0.35s ease;
+      -o-transition: all 0.35s ease;
+}
+.add-to-cart-btn:hover::before{
+       transform: translateX(0);
+       -webkit-transform: translateX(0);
+       -moz-transform: translateX(0);
+       -ms-transform: translateX(0);
+       -o-transform: translateX(0);
+}
+.add-to-cart-btn h4{
+      font-size: 16px;
+      color: white;
+      font-weight: 500;
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.quick-product-extras{
+      border-top: 1px solid gainsboro;
+      padding-top: 10px;
+      margin-top: 40px;
+}
+.categories,
+.tags,
+.socials{
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 5px;
+}
+.categories h4,
+.tags h4,
+.socials h4{
+      font-weight: 500;
+}
+.categories ul,
+.tags ul,
+.socials ul{
+      display: flex;
+      gap: 15px;
+}
+.categories ul li a,
+.tags ul li a{
+      color: #222;
+      position: relative;
+      display: inline-flex;
+      padding:6px 0 4px 0;
+      font-size: 15px;
+      transition: all 0.75s ease;
+      -webkit-transition: all 0.75s ease;
+      -moz-transition: all 0.75s ease;
+      -ms-transition: all 0.75s ease;
+      -o-transition: all 0.75s ease;
+}
+.categories ul li a::after,
+.tags ul li a::after{
+      content: "";
+      width: 0%;
+      height: 2px;
+      background: var(--main-color);
+      position: absolute;
+      bottom: 0;
+      transition: all 0.75s ease;
+      -webkit-transition: all 0.75s ease;
+      -moz-transition: all 0.75s ease;
+      -ms-transition: all 0.75s ease;
+      -o-transition: all 0.75s ease;
+}
+.categories ul li a:hover,
+.tags ul li a:hover{
+      color: var(--main-color);
+}
+.categories ul li a:hover::after,
+.tags ul li a:hover::after{
+      width: 100%;
+}
 
 
 
@@ -660,6 +930,13 @@ header{
        .hero-grid:nth-child(2) .hero-grid-texts{
              width: 100%;
        }
+
+       .client-modal-content{
+              width: 95%;
+       }
+       .products-row{
+                grid-template-columns: repeat(3,1fr);
+       }
 }
 
 @media(max-width: 768px){
@@ -699,8 +976,32 @@ header{
      .hero-grid:nth-child(1){
            max-height: 450px;
      }
-}
+     .client-modal-content{
+          grid-template-columns: 1fr;
+          height: 90%;
+     }
+     .client-modal-content .image-row-column{
+            height: 350px;
+     }
 
+     .products-row{
+           grid-template-columns: 1fr 1fr;
+     }
+
+     .product-name-row h3{
+            font-size: 18px;
+     }
+
+      .description-row-column h2,
+      .price-row h3{
+             font-size: 30px;
+      }
+}
+@media(max-width: 600px){
+      .products-row{
+            grid-template-columns: 1fr;
+      }
+}
 @media(max-width: 480px){
         .mobile-menu-btn .spacer, 
         .flex-item-column .search{
