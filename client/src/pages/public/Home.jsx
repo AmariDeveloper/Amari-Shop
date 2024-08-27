@@ -7,6 +7,7 @@ import HomeCategories from "../../components/public/home/HomeCategories"
 import HomeProducts from "../../components/public/home/HomeProducts"
 import { useDispatch } from "react-redux"
 import { setAllPublishedProducts } from "../../redux/slices/public/clientSlice"
+import ShoppingCartModal from "../../components/public/home/products/ShoppingCartModal"
 const Home = () => {
    const dispatch = useDispatch();
    const { data: published_products } = useGetAllPublishedProductsQuery({ refetchOnMountOrArgChange: true });
@@ -22,6 +23,7 @@ const Home = () => {
            <HeroSection />
            <HomeCategories />
            <HomeProducts />
+           <ShoppingCartModal />
     </>
   )
 }

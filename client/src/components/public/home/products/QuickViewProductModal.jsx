@@ -4,6 +4,7 @@ import { CgClose } from "react-icons/cg"
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeQuickViewModal } from "../../../../redux/slices/public/clientSlice";
+import { addProductToShoppingCartFromQuickView } from "../../../../redux/slices/public/cartSlice";
 const QuickViewProductModal = () => {
   const [ cartValue, setCartValue ] = useState(1);
   const { quick_view_modal } = useSelector(state => state.client);
@@ -16,7 +17,18 @@ const QuickViewProductModal = () => {
                setCartValue(prev => prev - 1)
           }
   }
-  const closeQuickView = () => dispatch(closeQuickViewModal());
+  const closeQuickView = () => {
+         dispatch(closeQuickViewModal());
+         setCartValue(1)
+  }
+
+  //Add product to shopping cart
+  const addProductToCart = (data) => {
+         const payload = { data: data, quantity: cartValue}
+         dispatch(addProductToShoppingCartFromQuickView(payload))
+         dispatch(closeQuickViewModal());
+         setCartValue(1)
+  }
 
   const product = quick_view_modal.data ? quick_view_modal.data : null
   return (
@@ -61,7 +73,7 @@ const QuickViewProductModal = () => {
                                                                         <span><RxPlus /></span>
                                                              </div>
                                                  </div>
-                                                 <div className="add-to-cart-btn">
+                                                 <div className="add-to-cart-btn" onClick={() => addProductToCart(product)}>
                                                              <h4>Add to Cart</h4>
                                                  </div>
                                     </div>

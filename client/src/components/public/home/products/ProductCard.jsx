@@ -1,10 +1,15 @@
 /* eslint-disable react/prop-types */
 import { HiOutlineShoppingCart } from "react-icons/hi2";
-import { useDispatch } from "react-redux";
-import { addProductToShoppingCart, openQuickViewModal } from "../../../../redux/slices/public/clientSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {  openQuickViewModal } from "../../../../redux/slices/public/clientSlice";
+import { addProductToShoppingCart } from "../../../../redux/slices/public/cartSlice";
+import { PiCheckLight } from "react-icons/pi";
 
 const ProductCard = ({ data }) => {
    const dispatch = useDispatch();
+   const { shopping_cart } = useSelector(state => state.cart);
+
+   const isAlreadyInCart = shopping_cart.map(item => item._id).includes(data._id);
 
    const openQuickView = (product) => {
            dispatch(openQuickViewModal(product))
@@ -16,11 +21,12 @@ const ProductCard = ({ data }) => {
   return (
     <div className="client-product-card">
               <div className="image-wrapper">
-                        <div className="add-to-cart-box" onClick={() => addToShoppingCart(data)} >
-                                  <span><HiOutlineShoppingCart /></span>
+                        <div className="add-to-cart-box" >
+                                  { isAlreadyInCart ?  <span className="checked"><PiCheckLight /></span> : <span onClick={() => addToShoppingCart(data)} ><HiOutlineShoppingCart /></span> }
                         </div>
                        <img src={data.product_imagery.product_main_image} alt="" />
-                       <button onClick={() => openQuickView(data)}>Quick View</button>
+                        { isAlreadyInCart ? "" :  <button onClick={() => openQuickView(data)}>Quick View</button> }
+                      
               </div>
               <div className="product-name-row">
                        <h3>{data.product_title}</h3>

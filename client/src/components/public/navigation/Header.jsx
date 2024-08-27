@@ -7,11 +7,16 @@ import { HiChevronDown } from "react-icons/hi2";
 import CategoriesDropdown from "./CategoriesDropdown";
 import { useState } from "react";
 import { CgMenuLeft } from "react-icons/cg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { openShoppingCartSidebar } from "../../../redux/slices/public/cartSlice";
+
 
 const Header = () => {
   const [dropdownStatus, setDropdownStatus] = useState(false);
-  const { shopping_cart } = useSelector(state => state.client);
+  const { shopping_cart } = useSelector(state => state.cart);
+ const dispatch = useDispatch();
+
+ const openShoppingBasket = () => dispatch(openShoppingCartSidebar());
   return (
     <header>
             <div className="inner-row">
@@ -48,9 +53,9 @@ const Header = () => {
                                             <div className="box search">
                                                       <span><GoSearch /></span>
                                             </div>
-                                            <div className="box">
+                                            <div className="box" onClick={openShoppingBasket}>
                                                       <span><HiOutlineShoppingCart /></span>
-                                                      <figure>{shopping_cart.cartTotal}</figure>
+                                                      <figure>{shopping_cart.length}</figure>
                                             </div>
                                    </div>
                         </div>

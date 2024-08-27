@@ -503,6 +503,9 @@ header{
 .client-product-card:hover .image-wrapper img{
       height: 360px;
 }
+.client-product-card:has(.checked) .image-wrapper img{
+      height: 375px;
+}
 .client-product-card:hover .image-wrapper button{
      transform: translate(-50%, -5px);
      -webkit-transform: translate(-50%, -5px);
@@ -528,6 +531,12 @@ header{
      -o-border-radius: 50%;
      cursor: pointer;
      overflow: hidden;
+}
+.add-to-cart-box:has(.checked){
+       opacity: 0;
+}
+.client-product-card:hover .add-to-cart-box:has(.checked){
+       opacity: 1;
 }
 .add-to-cart-box::before{
      content: "";
@@ -582,8 +591,9 @@ header{
 }
 .product-name-row h4{
       margin-top: 5px;
-      font-size: 25px;
-      font-weight: 500;
+      font-size: 22px;
+      font-weight: 600;
+      font-family: var(--regular-font);
 }
 .product-name-row h4 span{
       font-size: 13px;
@@ -880,11 +890,78 @@ header{
       width: 100%;
 }
 
+/* Shopping cart modal */
+.shopping-cart-modal{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 20, 25, 0.508);
+      z-index: -999;
+      opacity: 0;
+}
+.shopping-cart-modal.active{
+       z-index: 999;
+       opacity: 1;
+}
 
+.shopping-cart-modal-content{
+       position: absolute;
+       right: 0;
+        width: 500px;
+        height: 100%;
+      background-color: white;
+}
 
-
-
-
+.shopping-cart-header{
+       border-bottom: 1px solid var(--line);
+       display: flex;
+       padding: 20px 30px;
+       position: sticky;
+       top: 0;
+       justify-content: space-between;
+       align-items: center;
+}
+.shopping-cart-header h3{
+      font-size: 24px;
+      font-weight: 450;
+}
+.shopping-cart-header .left-cart-aligned{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+}
+.shopping-cart-header .left-cart-aligned figure{
+       width: 25px;
+       height: 25px;
+       flex-shrink: 0;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       font-size: 13px;
+       border-radius: 4px;
+       -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+       -ms-border-radius: 4px;
+       -o-border-radius: 4px;
+       background: var(--main-color);
+       color: white;
+}
+.shopping-cart-header span{
+       width: 35px;
+       height: 35px;
+       cursor: pointer;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       background: var(--light-gray);
+       border-radius: 6px;
+       -webkit-border-radius: 6px;
+       -moz-border-radius: 6px;
+       -ms-border-radius: 6px;
+       -o-border-radius: 6px;
+}
 
 
 
