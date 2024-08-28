@@ -699,7 +699,8 @@ header{
       font-size: 16px;
       font-weight: 400;
 }
-.price-row .ksh{
+.ksh{
+      display: inline-flex;
       font-size: 15px;
       font-weight: 500;
 }
@@ -962,6 +963,129 @@ header{
        -ms-border-radius: 6px;
        -o-border-radius: 6px;
 }
+
+.shopping-cart-modal-body{
+       padding: 20px 30px;
+}
+.shopping-cart-selected-products{
+       display: grid;
+       gap: 10px;
+}
+.select-product-moja{
+       display: flex;
+       gap: 50px;
+       justify-content: space-between;
+       padding: 15px 0;
+       border-bottom: 1px solid var(--line);
+}
+.select-product-moja img{
+      width: 65px;
+      height: 65px;
+      border-radius: 12px;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px;
+      -ms-border-radius: 12px;
+      -o-border-radius: 12px;
+}
+.select-product-moja-column{
+      display: flex;
+      gap: 10px;
+}
+.product-moja-texts h3{
+       font-size: 18px;
+       font-weight: 450;
+       line-height: 1.2;
+       margin-bottom: 10px;
+}
+
+.quantity-and-price{
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      border: 1px solid;
+}
+.quantity-and-price span{
+      display: inline-flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

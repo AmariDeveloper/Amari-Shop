@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import gsap from "gsap"
 import { useCallback, useEffect, useRef } from "react";
 import { closeShoppingCartSidebar } from "../../../../redux/slices/public/cartSlice";
+import { IoCloseOutline } from "react-icons/io5";
 
 const ShoppingCartModal = () => {
     const { isSidebarCartOpen, shopping_cart } = useSelector(state => state.cart);
@@ -53,6 +54,32 @@ const ShoppingCartModal = () => {
                                     </div>
                                    <span onClick={closeShoppingBasket}><CgClose /></span>
                         </div>
+                         <div className="shopping-cart-modal-body">
+                                  <div className="shopping-cart-selected-products">
+                                              { shopping_cart.length > 0 ? 
+                                                       shopping_cart.map(product => 
+                                                                <div className="select-product-moja" key={product._id}>
+                                                                       <div className="select-product-moja-column">
+                                                                                   <img src={product.product_imagery.product_main_image} alt="" />
+                                                                                   <div className="product-moja-texts">
+                                                                                            <h3>{product.product_title}</h3>
+                                                                                            <div className="quantity-and-price">
+                                                                                                        <h3>1</h3>
+                                                                                                        <span><IoCloseOutline /></span>
+                                                                                                        <h2><span className="ksh">ksh.</span> 5,600</h2>
+                                                                                            </div>
+                                                                                   </div>
+                                                                       </div>
+                                                                       <span><CgClose /></span>
+                                                             </div>
+                                                       )
+                                               : 
+                                                    <div className="nothing-in-the-basket">
+                                                             
+                                                    </div>
+                                               }
+                                  </div>
+                         </div>
               </div>
     </div>
   )
