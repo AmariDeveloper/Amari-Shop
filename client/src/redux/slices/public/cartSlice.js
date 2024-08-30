@@ -30,6 +30,11 @@ const cartSlice = createSlice({
                      localStorage.setItem("Shopping Cart", JSON.stringify(state.shopping_cart))
                },
 
+               removeProductFromShoppingCart: (state, action) => {
+                     const filtered = state.shopping_cart.filter(item => item._id !== action.payload);
+                     state.shopping_cart = filtered;
+                     localStorage.setItem("Shopping Cart", JSON.stringify(filtered));
+               },
 
 
 
@@ -45,6 +50,7 @@ const cartSlice = createSlice({
 export const { 
     addProductToShoppingCart,
     addProductToShoppingCartFromQuickView,
+    removeProductFromShoppingCart,
     openShoppingCartSidebar,
     closeShoppingCartSidebar
 } = cartSlice.actions

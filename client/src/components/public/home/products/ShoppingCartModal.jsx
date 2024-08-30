@@ -1,15 +1,17 @@
 import { CgClose } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux"
 import gsap from "gsap"
-import { useCallback, useEffect, useRef } from "react";
-import { closeShoppingCartSidebar } from "../../../../redux/slices/public/cartSlice";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { closeShoppingCartSidebar, removeProductFromShoppingCart } from "../../../../redux/slices/public/cartSlice";
 import { IoCloseOutline } from "react-icons/io5";
+import { Link } from "react-router-dom"
 
 const ShoppingCartModal = () => {
     const { isSidebarCartOpen, shopping_cart } = useSelector(state => state.cart);
     const cartRef = useRef();
     const cartChildRef = useRef();
     const dispatch = useDispatch();
+    const [ subtotal, setSubtotal] = useState(0)
 
     const closeShoppingBasket = () => dispatch(closeShoppingCartSidebar());
 
@@ -44,6 +46,27 @@ const ShoppingCartModal = () => {
            }
     }, [isSidebarCartOpen])
 
+
+    const handleRemoveFromBasket = (id) => {
+          dispatch(removeProductFromShoppingCart(id))
+    }
+
+    //calculate subtotal
+    useEffect(() => {
+            if(shopping_cart && shopping_cart.length > 0){
+                  const extract = shopping_cart.map(item => {
+                         let newStuff = {
+                               product_price: item.product_pricing.product_regular_price,
+                               quantity: item.quantity
+                         }
+                         return newStuff;
+                  })
+                  const total = extract.reduce((accumulator, item) => {
+                         return accumulator += (item.product_price*item.quantity)
+                  }, 0)
+                  setSubtotal(total)
+            }
+    }, [shopping_cart])
   return (
     <div ref={cartRef} className="shopping-cart-modal">
               <div ref={cartChildRef} className="shopping-cart-modal-content">
@@ -55,30 +78,44 @@ const ShoppingCartModal = () => {
                                    <span onClick={closeShoppingBasket}><CgClose /></span>
                         </div>
                          <div className="shopping-cart-modal-body">
-                                  <div className="shopping-cart-selected-products">
-                                              { shopping_cart.length > 0 ? 
-                                                       shopping_cart.map(product => 
+                                  { shopping_cart.length > 0 ?
+                                          <div className="shopping-modal-body-content">
+                                                    <div className="shopping-cart-selected-products">
+                                                            { shopping_cart.map(product => 
                                                                 <div className="select-product-moja" key={product._id}>
                                                                        <div className="select-product-moja-column">
                                                                                    <img src={product.product_imagery.product_main_image} alt="" />
                                                                                    <div className="product-moja-texts">
                                                                                             <h3>{product.product_title}</h3>
                                                                                             <div className="quantity-and-price">
-                                                                                                        <h3>1</h3>
+                                                                                                        <h5>{product.quantity}</h5>
                                                                                                         <span><IoCloseOutline /></span>
-                                                                                                        <h2><span className="ksh">ksh.</span> 5,600</h2>
+                                                                                                        <h4><span className="ksh">ksh.</span>{product.product_pricing.product_regular_price}</h4>
                                                                                             </div>
                                                                                    </div>
                                                                        </div>
-                                                                       <span><CgClose /></span>
+                                                                       <span onClick={() => handleRemoveFromBasket(product._id)} className="remove-btn" title="Remove from cart"><CgClose /></span>
                                                              </div>
-                                                       )
-                                               : 
-                                                    <div className="nothing-in-the-basket">
-                                                             
-                                                    </div>
-                                               }
-                                  </div>
+                                                              )
+                                                           }
+                                                        </div>
+
+                                                        <div className="basket-actions">
+                                                                    <div className="basket-subtotal">
+                                                                                <h4>Subtotal: </h4>
+                                                                                <h5><span className="ksh">ksh.</span>{subtotal.toLocaleString()}</h5>
+                                                                    </div>
+                                                                    <div className="basket-buttons">
+                                                                             <Link to={"/checkout"}>Checkout</Link>
+                                                                             <Link to={"/my-cart"}>View Cart</Link>
+                                                                    </div>
+                                                        </div>
+                                          </div>
+                                       :
+                                        <div className="nothing-in-the-basket">
+                                                  <p>No products in the Shopping cart</p>
+                                         </div>
+                                    }
                          </div>
               </div>
     </div>
