@@ -1,4 +1,4 @@
-import logo from "../../../assets/logo.png"
+import logo from "../../../../assets/logo.png"
 import { Link } from "react-router-dom"
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
@@ -8,7 +8,8 @@ import CategoriesDropdown from "./CategoriesDropdown";
 import { useState } from "react";
 import { CgMenuLeft } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
-import { openShoppingCartSidebar } from "../../../redux/slices/public/cartSlice";
+import { openShoppingCartSidebar } from "../../../../redux/slices/public/cartSlice";
+import ShoppingCartModal from "../products/ShoppingCartModal";
 
 
 const Header = () => {
@@ -18,7 +19,8 @@ const Header = () => {
 
  const openShoppingBasket = () => dispatch(openShoppingCartSidebar());
   return (
-    <header>
+    <>
+               <header>
             <div className="inner-row">
                         <div className="header-content">
                                     <div className="mobile-menu-btn">
@@ -60,7 +62,10 @@ const Header = () => {
                                    </div>
                         </div>
             </div>
+
     </header>
+           <ShoppingCartModal />
+    </> 
   )
 }
 

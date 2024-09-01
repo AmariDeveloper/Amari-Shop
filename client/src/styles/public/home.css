@@ -575,9 +575,9 @@ header{
      justify-content: space-between;
 }
 .product-name-row h3{
-     font-size: 22px;
+     font-size: 20px;
      line-height: 1.2;
-     font-weight: 500;
+     font-weight: 450;
      cursor: pointer;
      transition: all 0.75s ease;
      -webkit-transition: all 0.75s ease;
@@ -590,8 +590,8 @@ header{
 }
 .product-name-row h4{
       margin-top: 5px;
-      font-size: 22px;
-      font-weight: 600;
+      font-size: 20px;
+      font-weight: 550;
       font-family: var(--regular-font);
 }
 .product-name-row h4 span{

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
-import ProductCard from "./products/ProductCard"
-import QuickViewProductModal from "./products/QuickViewProductModal";
+import ProductCard from "../common/products/ProductCard"
+import QuickViewProductModal from "../common/products/QuickViewProductModal";
 
 const HomeProducts = () => {
   const { all_published_products } = useSelector(state => state.client);

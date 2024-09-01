@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {  openQuickViewModal } from "../../../../redux/slices/public/clientSlice";
 import { addProductToShoppingCart } from "../../../../redux/slices/public/cartSlice";
 import { PiCheckLight } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ data }) => {
    const dispatch = useDispatch();
    const { shopping_cart } = useSelector(state => state.cart);
+   const navigate = useNavigate();
 
    const isAlreadyInCart = shopping_cart.map(item => item._id).includes(data._id);
 
@@ -29,7 +31,7 @@ const ProductCard = ({ data }) => {
                       
               </div>
               <div className="product-name-row">
-                       <h3>{data.product_title}</h3>
+                       <h3 onClick={() => navigate(`/product/${data.product_slug}`)}>{data.product_title}</h3>
                        <h4><span>ksh.</span>{data.product_pricing.product_regular_price.toLocaleString()}</h4>
               </div>
     </div>

@@ -9,12 +9,14 @@ import Brands from './pages/backend/products/Brands'
 import ProtectedRoutes from './utils/ProtectedRoutes'
 import Settings from './pages/backend/Settings'
 import Variations from './pages/backend/products/Variations'
+import SingleProduct from './pages/public/SingleProduct'
 
 function App() {
   return (
     <Routes>
              <Route path='/' element={<Home />} />
              <Route path='/auth/login' element={<Login />} />
+             <Route path="/product/:name" element={<SingleProduct />} />
 
              {/* Protected Routes */}
               <Route element={<ProtectedRoutes />}>
