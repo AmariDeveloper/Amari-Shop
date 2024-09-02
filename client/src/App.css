@@ -35,6 +35,10 @@ img{
      width: 1250px;
      margin: auto;
 }
+.inner-row-2{
+     width: 90%;
+     margin: auto;
+}
 
 button, 
 textarea,

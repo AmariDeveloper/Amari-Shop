@@ -17,7 +17,7 @@ const HeroSection = () => {
               </div>
 
               <div className="hero-section-grid">
-                       <div className="inner-row">
+                       <div className="inner-row-2">
                                    <div className="hero-grid-wrapper">
                                                  <div className="hero-grid">
                                                              <div className="hero-grid-texts">

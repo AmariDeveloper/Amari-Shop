@@ -4,7 +4,7 @@ const HomeCategories = () => {
     const { categories } = useSelector(state => state.utils)
   return (
     <div className="home-categories">
-             <div className="inner-row">
+             <div className="inner-row-2">
                         <div className="home-categories-content">
                                     <h2 className="section-title">Explore Popular Categories</h2>
 

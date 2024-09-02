@@ -20,8 +20,8 @@ const Header = () => {
  const openShoppingBasket = () => dispatch(openShoppingCartSidebar());
   return (
     <>
-               <header>
-            <div className="inner-row">
+        <header>
+            <div className="inner-row-2">
                         <div className="header-content">
                                     <div className="mobile-menu-btn">
                                                 <span className="menu-btn"><CgMenuLeft /></span>

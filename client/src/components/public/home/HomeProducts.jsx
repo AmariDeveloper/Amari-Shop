@@ -8,7 +8,7 @@ const HomeProducts = () => {
   return (
     <div className="home-products">
               <QuickViewProductModal />
-             <div className="inner-row">
+             <div className="inner-row-2">
                       <div className="home-products-content">
                                  <h2 className="section-title">Most Popular Products</h2>
                                 <div className="products-row">
