@@ -1,24 +1,28 @@
 /*eslint-disable react/prop-types */
-import { useContext } from "react";
 import { RxMinus, RxPlus  } from "react-icons/rx";
-import { selectorContext } from "./selectorContext";
-
+import { useDispatch } from "react-redux";
+import { decrementVariationQuantityInCartList, incrementVariationQuantityInCartList } from "../../../redux/slices/public/cartSlice";
 const SelectedProductBox = ({ data }) => {
-    const [ chosenVariations, setChosenVariations ] = useContext(selectorContext);
+  const dispatch = useDispatch();
 
-    const incrementProductQuantity = () => {
-             
-    }
+  const incrementQuantity = () => dispatch(incrementVariationQuantityInCartList(data));
+  const decrementQuantity = () => dispatch(decrementVariationQuantityInCartList(data));
   return (
               <div className="selected-product-box">
-                         <div className="name-title">
-                                   {data.kitu.name}
-                         </div>
+                          { data.name[0] === "#" ? 
+                                   <div className="name-color-title">
+                                            <span style={{ background: `${data.name}`}}></span>
+                                   </div>
+                                  :
+                                  <div className="name-title">
+                                            {data.name}
+                                  </div>
+                          }
                          <div className="range-box">
                                    <div className="quantity-ranger">
-                                           <span><RxMinus /></span>
+                                           <span onClick={decrementQuantity}><RxMinus /></span>
                                              <figure>{data.quantity}</figure>
-                                             <span><RxPlus /></span>
+                                             <span onClick={incrementQuantity}><RxPlus /></span>
                                    </div>
                                    <p>Qty: {data.quantity}</p>
                          </div>

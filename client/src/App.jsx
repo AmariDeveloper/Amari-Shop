@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import './App.css'
 import Home from './pages/public/Home'
 import Login from './pages/backend/Login'
@@ -10,13 +10,21 @@ import ProtectedRoutes from './utils/ProtectedRoutes'
 import Settings from './pages/backend/Settings'
 import Variations from './pages/backend/products/Variations'
 import SingleProduct from './pages/public/SingleProduct'
+import Cart from './pages/public/Cart'
+import { useEffect } from 'react'
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+          window.scrollTo(0, 0);
+  }, [location])
   return (
     <Routes>
              <Route path='/' element={<Home />} />
              <Route path='/auth/login' element={<Login />} />
              <Route path="/product/:name" element={<SingleProduct />} />
+             <Route path='/cart' element={<Cart />} />
 
              {/* Protected Routes */}
               <Route element={<ProtectedRoutes />}>

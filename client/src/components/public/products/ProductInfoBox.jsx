@@ -1,25 +1,34 @@
 /* eslint-disable react/prop-types */
 import { TiStar } from "react-icons/ti";
 import { LuCircleDotDashed } from "react-icons/lu";
-import { useContext, useState } from "react";
-import { selectorContext } from "./selectorContext";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addVariationToCartList, removeVariationFromCartList, resetVariationQuantityList } from "../../../redux/slices/public/cartSlice";
+
 
 const ProductInfoBox = ({ product }) => {
     const [selected, setSelected ] = useState([]);
-    const [ chosenVariations, setChosenVariations] = useContext(selectorContext);
+    const [ basketOpen, setBasketOpen ] = useState(false)
+    const dispatch = useDispatch();
      
     const handleSelected = (item) => {
+             setBasketOpen(true)
              if(selected.map(v => v.id).includes(item.id)){
                     const filtered = selected.filter(sm => sm.id !== item.id);
                     setSelected(filtered);
-
-                    const filteredList = chosenVariations.products.length && chosenVariations.products.filter(vr => vr.kitu.id !== item.id);
-                    setChosenVariations({ products: filteredList})
+                    dispatch(removeVariationFromCartList(item.id))
              }else{
                  setSelected([...selected, item]);
-                 setChosenVariations({ products: [...chosenVariations.products, { kitu: item, quantity: 1}]})
+                 dispatch(addVariationToCartList(item))
              }
     }
+
+    useEffect(() => {
+            if(!basketOpen){
+                  dispatch(resetVariationQuantityList());
+            }
+    }, [basketOpen, dispatch])
+  
   return (
     <div className="product-info-section">
             <h2>{product.product_title}</h2>

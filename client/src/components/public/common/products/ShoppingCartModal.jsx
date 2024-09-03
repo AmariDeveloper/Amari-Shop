@@ -107,7 +107,7 @@ const ShoppingCartModal = () => {
                                                                     </div>
                                                                     <div className="basket-buttons">
                                                                              <Link to={"/checkout"}>Checkout</Link>
-                                                                             <Link to={"/my-cart"}>View Cart</Link>
+                                                                             <Link to={"/cart"} onClick={closeShoppingBasket}>View Cart</Link>
                                                                     </div>
                                                         </div>
                                           </div>
