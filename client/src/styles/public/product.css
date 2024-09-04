@@ -358,6 +358,9 @@
     font-size: 17px;
     font-weight: 450;
 }
+.cart-moja{
+      border-bottom: 1px solid var(--line);
+}
 .cart-moja-row{
     display: grid;
     grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
@@ -394,13 +397,96 @@
     display: flex;
     gap: 5px;
 }
-.cart-moja .price .ksh{
+.cart-moja .ksh{
      font-weight: 300;
 }
-.cart-moja .price h4{
+.cart-moja .price h4,
+.subtotal h4{
      font-size: 20px;
+     font-weight: 550;
 }
 
 .cart-moja .variations-row{
-      border: 1px solid;
+     display: grid;
+     grid-template-columns: 1fr 2fr 2fr 1fr;
+}
+
+.cart-moja .variation-type h4{
+      font-size: 18px;
+      font-weight: 400;
+}
+.cart-moja .chosen-variations h4{
+      font-weight: 500;
+}
+
+.cart-moja .variation-column{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-moja .variation-column span.delete{
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      background: var(--light-gray);
+      color: red;
+      cursor: pointer;
+}
+.cart-moja .variation-column span.delete:hover{
+     background: rgba(255, 240, 240, 0.719);
+}
+
+.cart-body-empty{
+    text-align: center;
+    padding: 100px 0;
+}
+
+.cart-box-image{
+     width: 240px;
+     height: 160px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-radius: 20px;
+     -webkit-border-radius: 20px;
+     -moz-border-radius: 20px;
+     -ms-border-radius: 20px;
+     -o-border-radius: 20px;
+     background:  rgba(236, 241, 241, 0.3);
+     margin: 10px auto;
+}
+.cart-box-image img{
+     width: 60px;
+     height: 60px;
+}
+.cart-body-empty h4{
+     font-size: 30px;
+     margin: 20px 0;
+     font-weight: 500;
+}
+
+.cart-body-empty a{
+       width: 200px;
+       height: 50px;
+       border-radius: 7px;
+       -webkit-border-radius: 7px;
+       -moz-border-radius: 7px;
+       -ms-border-radius: 7px;
+       -o-border-radius: 7px;
+       background: var(--main-color);
+       color: white;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       font-size: 15px;
+       margin: auto;
 }

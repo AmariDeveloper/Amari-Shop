@@ -63,6 +63,34 @@ const cartSlice = createSlice({
                              currentItem.quantity++
                       }
                },
+               incrementVariationQuantityinShoppingCart: (state, action) => {
+                      //const currentItem = state.shopping_cart.find(item => item.variations.map(sm => sm._id).includes(action.payload._id))
+                      const currentItem = state.shopping_cart.find(item => item._id === action.payload.id)
+                      if(currentItem){
+                               const currentVar = currentItem.variations.find(item => item.id === action.payload.data.id)
+                               currentVar.quantity++;
+                            //update parent quantity
+                            const sum = currentItem.variations.reduce((acc, curr) => acc + curr.quantity, 0);
+                           currentItem.quantity = sum;
+                      }
+
+               },
+               decrementVariationQuantityInShoppingCart: (state, action) => {
+                    // const currentItem = state.shopping_cart.find(item => item.variations.map(sm => sm._id).includes(action.payload._id))
+                     const currentItem = state.shopping_cart.find(item => item._id === action.payload.id);
+                     
+                     if(currentItem){
+                             const currentVar = currentItem.variations.find(item => item.id === action.payload.data.id);
+                             if(currentVar.quantity <= 1){
+                                     currentVar.quantity = 1
+                             }else{
+                                   currentVar.quantity--
+                             }
+                        //update parent quantity
+                            const sum = currentItem.variations.reduce((acc, curr) => acc + curr.quantity,0);
+                            currentItem.quantity = sum;
+                     }
+               },
                decrementVariationQuantityInCartList: (state, action) => {
                       const currentItem = state.selectedProductVariations.find(item => item.id === action.payload.id);
 
@@ -84,6 +112,21 @@ const cartSlice = createSlice({
                closeShoppingCartSidebar: (state) => {
                      state.isSidebarCartOpen = false
                },
+
+               removeVariationFromShoppingCart: (state,action) => {
+                      const currentItem = state.shopping_cart.find(item => item._id === action.payload.id);
+
+                      if(currentItem){
+                            const filtered = currentItem.variations.filter(item => item.id !== action.payload.data.id);
+                            currentItem.variations = filtered;
+                            if(currentItem.variations.length <= 0){
+                                    state.shopping_cart = state.shopping_cart.filter(item => item._id !== currentItem._id);
+                            }
+                            currentItem.quantity = currentItem.quantity - action.payload.data.quantity
+
+                            localStorage.setItem("Shopping Cart", JSON.stringify(state.shopping_cart));
+                      }
+               },
         }
 })
 
@@ -98,7 +141,10 @@ export const {
     removeVariationFromCartList,
     incrementVariationQuantityInCartList,
     decrementVariationQuantityInCartList,
-    resetVariationQuantityList
+    resetVariationQuantityList,
+    incrementVariationQuantityinShoppingCart,
+    decrementVariationQuantityInShoppingCart,
+    removeVariationFromShoppingCart
 } = cartSlice.actions
 
 export default cartSlice.reducer
