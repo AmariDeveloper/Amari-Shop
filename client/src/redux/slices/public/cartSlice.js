@@ -3,6 +3,7 @@ import { createSlice} from "@reduxjs/toolkit";
 const initialState = {
       shopping_cart: localStorage.getItem("Shopping Cart") ? JSON.parse(localStorage.getItem("Shopping Cart")) : [],
       isSidebarCartOpen: false,
+      shipping_fee: localStorage.getItem("Shipping Fee") ? JSON.parse(localStorage.getItem("Shipping Fee")) : null,
       selectedProductVariations: []
 }
 
@@ -51,7 +52,13 @@ const cartSlice = createSlice({
 
                //update selectedvariations
                addVariationToCartList: (state, action) => {
-                        state.selectedProductVariations.push({ ...action.payload, quantity: 1})
+                        const isVariationAlreadyInCart = state.shopping_cart.find(item => item._id === action.payload.data._id).variations.find(vr => vr.id === action.payload.item.id)
+              
+                        if(isVariationAlreadyInCart){
+                                state.selectedProductVariations.push({ ...isVariationAlreadyInCart, quantity: isVariationAlreadyInCart.quantity})
+                        }else{
+                              state.selectedProductVariations.push({ ...action.payload.item, quantity: 1})
+                        }
                 },
                 removeVariationFromCartList: (state, action) => {
                         const filtered = state.selectedProductVariations.filter(item => item.id !== action.payload);
@@ -72,6 +79,7 @@ const cartSlice = createSlice({
                             //update parent quantity
                             const sum = currentItem.variations.reduce((acc, curr) => acc + curr.quantity, 0);
                            currentItem.quantity = sum;
+                           localStorage.setItem("Shopping Cart", JSON.stringify(state.shopping_cart));
                       }
 
                },
@@ -89,6 +97,7 @@ const cartSlice = createSlice({
                         //update parent quantity
                             const sum = currentItem.variations.reduce((acc, curr) => acc + curr.quantity,0);
                             currentItem.quantity = sum;
+                            localStorage.setItem("Shopping Cart", JSON.stringify(state.shopping_cart));
                      }
                },
                decrementVariationQuantityInCartList: (state, action) => {
@@ -127,6 +136,11 @@ const cartSlice = createSlice({
                             localStorage.setItem("Shopping Cart", JSON.stringify(state.shopping_cart));
                       }
                },
+
+               setShippingFee: (state, action) => {
+                       state.shipping_fee = action.payload;
+                       localStorage.setItem("Shipping Fee", JSON.stringify(action.payload))
+               }
         }
 })
 
@@ -144,7 +158,8 @@ export const {
     resetVariationQuantityList,
     incrementVariationQuantityinShoppingCart,
     decrementVariationQuantityInShoppingCart,
-    removeVariationFromShoppingCart
+    removeVariationFromShoppingCart,
+    setShippingFee
 } = cartSlice.actions
 
 export default cartSlice.reducer

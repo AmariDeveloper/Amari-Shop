@@ -8,7 +8,7 @@ import { addVariationToCartList, removeVariationFromCartList, resetVariationQuan
 
 const ProductInfoBox = ({ product }) => {
     const [selected, setSelected ] = useState([]);
-    const [ basketOpen, setBasketOpen ] = useState(false)
+    const [ basketOpen, setBasketOpen ] = useState(false);
     const dispatch = useDispatch();
      
     const handleSelected = (item) => {
@@ -19,7 +19,7 @@ const ProductInfoBox = ({ product }) => {
                     dispatch(removeVariationFromCartList(item.id))
              }else{
                  setSelected([...selected, item]);
-                 dispatch(addVariationToCartList(item))
+                 dispatch(addVariationToCartList({ data: product, item: item}))
              }
     }
 
@@ -28,7 +28,17 @@ const ProductInfoBox = ({ product }) => {
                   dispatch(resetVariationQuantityList());
             }
     }, [basketOpen, dispatch])
-  
+
+    useEffect(() => {
+            if(product.variations && product.variations.length > 0){
+                   setSelected(product.variations);
+                   setBasketOpen(true)
+                   for(let variation of product.variations){
+                         dispatch(addVariationToCartList({ data: product, item: variation}))
+                   }
+            }
+    }, [setSelected, product, dispatch])
+    
   return (
     <div className="product-info-section">
             <h2>{product.product_title}</h2>

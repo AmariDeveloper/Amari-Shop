@@ -1,18 +1,55 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { GoChevronRight } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import SelectedProductBox from "./SelectedProductBox";
 import { AiOutlineDelete } from "react-icons/ai";
-import { removeVariationFromShoppingCart } from "../../../redux/slices/public/cartSlice";
+import { removeVariationFromShoppingCart, setShippingFee } from "../../../redux/slices/public/cartSlice";
 import emptyCart from "../../../assets/abandoned-cart.png"
+import { shipping } from "../../../data/shipping";
+import { useEffect, useState } from "react";
 
 const CartBody = () => {
-    const { shopping_cart } = useSelector(state => state.cart);
+    const { shopping_cart, shipping_fee } = useSelector(state => state.cart);
     const dispatch = useDispatch();
+    const [ shippingActive, setShippingActive ] =useState(false)
+    const [ shippingResult, setShippingResult ] = useState({});
+    const [cartError, setCartError ] = useState("")
+    const navigate = useNavigate();
+
+    //get shipping if already set
+    useEffect(() => {
+           if(shipping_fee){
+                setShippingResult(shipping_fee)
+           }
+    }, [shipping_fee])
 
     const removeVariation = (data, id) => {
             const payload = { data: data, id: id }
             dispatch(removeVariationFromShoppingCart(payload))
+    }
+
+    const calculateSubtotal = () => {
+            const count = shopping_cart.reduce((total, current) => {
+                     return total + (current.quantity * current.product_pricing.product_regular_price)
+            }, 0)
+            return count
+    }
+
+    const calculateShipping = (val) => {
+         const area = shipping.find(item => item.shipping_cost === parseInt(val))
+         setShippingResult({ location: area.subcounty, cost: parseInt(val)})
+         setShippingActive(false);
+         setCartError("")
+    }
+
+    const proceedToCheckout = () => {
+            if(Object.keys(shippingResult).length > 0){
+                dispatch(setShippingFee(shippingResult))
+                navigate("/checkout")
+            }else{
+                setCartError("Please select shipping area to proceed.")
+            }
+
     }
   return (
     <div className="single-product-body">
@@ -44,7 +81,7 @@ const CartBody = () => {
                                                                                                            <img src={product.product_imagery.product_main_image} alt="" />
                                                                                                  </div>
                                                                                                  <div className="product-name">
-                                                                                                           <h4>{product.product_title}</h4>
+                                                                                                           <h4 onClick={() => navigate(`/product/${product.product_slug}`)}>{product.product_title}</h4>
                                                                                                  </div>
                                                                                                  <div className="price">
                                                                                                              <span className="ksh">ksh.</span>
@@ -80,7 +117,48 @@ const CartBody = () => {
                                                                      }
                                                           </div>
                                                      </div>
-                                                    <div className="cart-body-continue"></div>
+                                                    <div className="cart-body-continue">
+                                                              <div className="cart-order-summary">
+                                                                        <h4>Cart Totals</h4>
+                                                                        <div className="subtotal-summary">
+                                                                                    <h5>Subtotal</h5>
+                                                                                    <h2><span className="ksh">ksh. </span>{calculateSubtotal().toLocaleString()}</h2>
+                                                                        </div>
+                                                                        <div className="shipping-summary">
+                                                                                     <div className="shipping-summary-header">
+                                                                                                  <h5>Shipping</h5>
+                                                                                                  <span onClick={() => setShippingActive(!shippingActive)}>Calculate Shipping</span>
+                                                                                     </div>
+                                                                                     <div className={ shippingActive ? "shipping-ranger active": "shipping-ranger"}>
+                                                                                                 <div className="select-box">
+                                                                                                              <select onChange={(e) => calculateShipping(e.target.value)}>
+                                                                                                                       <option value="">Select Subcounty</option>
+                                                                                                                       { shipping.map(item => <option value={item.shipping_cost}  key={item.id}>{item.subcounty}</option>)}
+                                                                                                              </select>
+                                                                                                 </div>
+                                                                                     </div> 
+                                                                                        {
+                                                                                             Object.keys(shippingResult).length > 0 &&
+                                                                                             <div className="result">
+                                                                                                      <h5>{shippingResult.location},</h5>
+                                                                                                      <p><span className="ksh">ksh.</span>{(shippingResult.cost).toLocaleString()}</p>
+                                                                                          </div>
+                                                                                       }
+                                                                        </div>
+
+                                                                        <div className="cart-total-summary">
+                                                                                    <h5>Grand Total</h5>
+                                                                                    { Object.keys(shippingResult).length > 0 ?
+                                                                                           <h2><span className="ksh">ksh.</span>{(calculateSubtotal()+shippingResult.cost).toLocaleString()}</h2>
+                                                                                           :
+                                                                                           <h2><span className="ksh">ksh.</span>{calculateSubtotal().toLocaleString()}</h2>
+                                                                                    }
+                                                                        </div>
+
+                                                                        <span className="error">{cartError}</span>
+                                                                        <button className="proceed-btn" onClick={proceedToCheckout}>Proceed to Checkout</button>
+                                                              </div>
+                                                    </div>
                                             </div>
                                                  :
                                              <div className="cart-body-empty">

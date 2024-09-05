@@ -12,6 +12,7 @@ import Variations from './pages/backend/products/Variations'
 import SingleProduct from './pages/public/SingleProduct'
 import Cart from './pages/public/Cart'
 import { useEffect } from 'react'
+import Checkout from './pages/public/Checkout'
 
 function App() {
   const location = useLocation();
@@ -25,6 +26,7 @@ function App() {
              <Route path='/auth/login' element={<Login />} />
              <Route path="/product/:name" element={<SingleProduct />} />
              <Route path='/cart' element={<Cart />} />
+             <Route path="/checkout" element={<Checkout />} />
 
              {/* Protected Routes */}
               <Route element={<ProtectedRoutes />}>

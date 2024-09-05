@@ -6,8 +6,11 @@ import GallerSection from "./GallerSection";
 import BasketSection from "./BasketSection";
 const SingleProductBody = () => {
   const { name } = useParams();
+  const { shopping_cart } = useSelector(state => state.cart);
   const { all_published_products } = useSelector(state => state.client);
-  const product = all_published_products.find(item => item.product_slug === name);
+  const isProductAlreadyInCart  = shopping_cart.find(item => item.product_slug === name);
+  const product = isProductAlreadyInCart ? isProductAlreadyInCart :  all_published_products.find(item => item.product_slug === name);
+
 
   return (
     <div className="single-product-body">
