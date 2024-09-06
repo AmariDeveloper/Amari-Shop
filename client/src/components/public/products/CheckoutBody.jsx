@@ -3,7 +3,14 @@ import { GoChevronRight } from "react-icons/go"
 import { shipping } from "../../../data/shipping"
 import { useSelector } from "react-redux"
 const CheckoutBody = () => {
-    const { shopping_cart } = useSelector(state => state.cart);
+    const { shopping_cart, shipping_fee } = useSelector(state => state.cart);
+
+    const totalCostPlusShipping = () => {
+          const count = shopping_cart.reduce((acc, curr) => acc+(curr.product_pricing.product_regular_price * curr.quantity), 0)
+          return count
+    }
+
+    console.log(totalCostPlusShipping());
   return (
     <div className="single-product-body">
               <div className="inner-row-2">
@@ -90,9 +97,27 @@ const CheckoutBody = () => {
                                                                                                                            </div>
                                                                                                                </div>
                                                                                                    </div>
-                                                                                                   <h2><span className="ksh">ksh.</span>{product.product_pricing.product_regular_price}</h2>
+                                                                                                   <h2><span className="ksh">ksh.</span>{(product.product_pricing.product_regular_price * product.quantity).toLocaleString()}</h2>
                                                                                           </div>
                                                                                           )}
+                                                                               </div>
+
+                                                                               <div className="calculation-wrapper">
+                                                                                          <div className="calculation-column">
+                                                                                                     <h5>Subtotal</h5>
+                                                                                                      <h2><span className="ksh">ksh.</span>{totalCostPlusShipping().toLocaleString()}</h2>
+                                                                                          </div>
+                                                                                          <div className="calculation-column">
+                                                                                                       <h5>Shipping fee</h5>
+                                                                                                       <h2><span className="ksh">ksh.</span>{shipping_fee.cost}</h2>
+                                                                                          </div>
+
+                                                                                          <div className="total-calculation-column">
+                                                                                                      <h5>Grand Total</h5>
+                                                                                                      <h2><span className="ksh">ksh.</span>{(totalCostPlusShipping()+shipping_fee.cost).toLocaleString()}</h2>
+                                                                                          </div>
+
+                                                                                          <button className="proceed-btn">Proceed to Payment</button>
                                                                                </div>
                                                                       </div>
                                                            </div>

@@ -47,17 +47,21 @@ const cartSlice = createSlice({
                      state.shopping_cart = filtered;
                      localStorage.setItem("Shopping Cart", JSON.stringify(filtered));
                },
-
-
-
                //update selectedvariations
                addVariationToCartList: (state, action) => {
-                        const isVariationAlreadyInCart = state.shopping_cart.find(item => item._id === action.payload.data._id).variations.find(vr => vr.id === action.payload.item.id)
-              
-                        if(isVariationAlreadyInCart){
-                                state.selectedProductVariations.push({ ...isVariationAlreadyInCart, quantity: isVariationAlreadyInCart.quantity})
+                        //const isVariationAlreadyInCart = state.shopping_cart.find(item => item._id === action.payload.data._id).variations.find(vr => vr.id === action.payload.item.id);
+                        const isProductAlreadyInCart = state.shopping_cart.find(item => item._id === action.payload.data._id);
+
+                        if(isProductAlreadyInCart){
+                              //check for pre-existing variations
+                              const isVariationExisting = isProductAlreadyInCart.variations.find(vr  => vr.id === action.payload.item.id);
+                              if(isVariationExisting){
+                                    state.selectedProductVariations.push({ ...isVariationExisting, quantity: isVariationExisting.quantity })
+                              }else{
+                                    state.selectedProductVariations.push({ ...action.payload.item, quantity: 1})
+                              }
                         }else{
-                              state.selectedProductVariations.push({ ...action.payload.item, quantity: 1})
+                               state.selectedProductVariations.push({...action.payload.item, quantity: 1 })
                         }
                 },
                 removeVariationFromCartList: (state, action) => {
