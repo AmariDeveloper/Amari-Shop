@@ -6,6 +6,7 @@ import utilReducer from "./slices/utilSlice"
 import clientReducer from "./slices/public/clientSlice"
 import productUtilsReducer from "./slices/productUtilSlice"
 import cartReducer from "./slices/public/cartSlice"
+import billingReducer from "./slices/public/billingSlice"
 
 const store = configureStore({
       reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
              utils: utilReducer,
              cart: cartReducer,
              productUtils: productUtilsReducer,
+             billing: billingReducer,
              [apiSlice.reducerPath]: apiSlice.reducer
       },
       middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
