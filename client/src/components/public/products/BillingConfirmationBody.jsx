@@ -2,7 +2,8 @@ import { Link } from "react-router-dom"
 import { GoChevronRight } from "react-icons/go"
 import { LiaUserEditSolid } from "react-icons/lia";
 import { useSelector } from "react-redux";
-
+import mpesalogo from "../../../assets/mpesa.png"
+import card from "../../../assets/visa-mastercard.webp"
 const BillingConfirmationBody = () => {
   const { details } = useSelector(state => state.billing)
   const { shopping_cart, shipping_fee } = useSelector(state => state.cart);
@@ -65,15 +66,28 @@ const BillingConfirmationBody = () => {
                                                     </div>
                                          </div>
 
-                                         <div className="billing-header">
-                                                <h3>Cart Details</h3>
-                                                <p>Edit<span><LiaUserEditSolid /></span></p>
+                                         <div className="billing-header-2">
+                                                <h3>Payment Details</h3>
+                                                <p>Complete your purchase by providing your payment details.</p>
+                                        </div>
+                                        <div className="billing-method">
+                                                   <h3>Select Payment Method</h3>
+                                                   <div className="billing-method-row">
+                                                               <div className="billing-method-one">
+                                                                          <img src="" alt="" />
+                                                                         <h4>Pay with M-Pesa</h4>
+                                                               </div>
+                                                               <div className="billing-method-two">
+                                                                         <img src="" alt="" />
+                                                                         <h4>Pay with Card</h4>
+                                                               </div>
+                                                   </div>
                                         </div>
                               </div>
                               <div className="billing-payment">
                                      <div className="cart-order-sticky">
                                           <div className="cart-order-summary">
-                                                 <h4>Your Order</h4>
+                                                 <h4>Your Order  <span><LiaUserEditSolid />Edit</span></h4>
                                                  <div className="products-in-products">
                                                             { shopping_cart.map(product => 
                                                              <div className="basket-product-moja" key={product._id}>
