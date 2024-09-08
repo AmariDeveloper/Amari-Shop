@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-         billing: localStorage.getItem("Billing Info") ? JSON.parse(localStorage.getItem("Billing Info")): {}
+         details: localStorage.getItem("Billing Info") ? JSON.parse(localStorage.getItem("Billing Info")): {}
 }
 
 const billingSlice = createSlice({
@@ -9,7 +9,8 @@ const billingSlice = createSlice({
        initialState,
        reducers: {
               saveBillingInformation: (state, action) => {
-                    state.billing = action.payload
+                    state.details = {...action.payload}
+                    localStorage.setItem("Billing Info", JSON.stringify(action.payload))
               }
        }
 })

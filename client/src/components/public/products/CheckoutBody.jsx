@@ -1,14 +1,17 @@
 import { Link, useNavigate } from "react-router-dom"
 import { GoChevronRight } from "react-icons/go"
 import { shipping } from "../../../data/shipping"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useForm } from "react-hook-form"
 import { useEffect } from "react"
+import { saveBillingInformation } from "../../../redux/slices/public/billingSlice"
+import { setShippingFee } from "../../../redux/slices/public/cartSlice"
 const CheckoutBody = () => {
     const { shopping_cart, shipping_fee } = useSelector(state => state.cart);
-    const { billing } = useSelector(state => state.billing)
+    const { details } = useSelector(state => state.billing);
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors }} = useForm({
+    const dispatch = useDispatch();
+    const { register, handleSubmit, formState: { errors }, reset} = useForm({
            defaultValues: {
                   firstname: "",
                   lastname: "",
@@ -20,10 +23,16 @@ const CheckoutBody = () => {
     });
  
     useEffect(()=> {
-        //      const defaults = {
-                   
-        //      }
-    }, [])
+             const defaults = {
+                    firstname: details ? details.firstname: "",
+                    lastname: details ? details.lastname : "",
+                    email: details ? details.email : "",
+                    phone: details ? details.phone : "",
+                    subcounty: details ? details.subcounty : shipping_fee.subcounty,
+                    street: details ? details.street : ""
+             }
+             reset(defaults)
+    }, [details, reset, shipping_fee])
 
     const totalCostPlusShipping = () => {
           const count = shopping_cart.reduce((acc, curr) => acc+(curr.product_pricing.product_regular_price * curr.quantity), 0)
@@ -31,7 +40,13 @@ const CheckoutBody = () => {
     }
 
     const SaveDetails = (data) => {
-           console.log(data)
+           dispatch(saveBillingInformation(data));
+           navigate("/checkout/billing-confirmation");
+    }
+
+    const switchShippingCost = (val) => {
+         const area = shipping.find(item => item.subcounty === val);
+         dispatch(setShippingFee({ location: area.subcounty, cost: area.shipping_cost}))
     }
   return (
     <div className="single-product-body">
@@ -72,7 +87,7 @@ const CheckoutBody = () => {
                                                                                         </div>
                                                                                         <div className="form-row">
                                                                                                 <label htmlFor="phone">Phone Number <span>*</span></label>
-                                                                                                <input type="number" {...register("phone", { required: "This input is required"})} className="form-control" placeholder="Phone number" />
+                                                                                                <input type="number" {...register("phone", { required: "This input is required"})} className="form-control" placeholder="+2547xxxxxxx" />
                                                                                                 <span className="error">{errors.phone && errors.phone.message}</span>
                                                                                         </div>
 
@@ -89,12 +104,13 @@ const CheckoutBody = () => {
                                                                                          </div>
                                                                                           <div className="form-row">
                                                                                                      <label htmlFor="subcounty">Subcounty</label>
-                                                                                                     <select className="form-control" {...register("subcounty", { required: "This input is required"})}>
+                                                                                                     <select className="form-control" {...register("subcounty", { required: "This input is required", onChange: (e) => switchShippingCost(e.target.value)})}>
                                                                                                                 <option value="">Choose Subcounty</option>
                                                                                                                 { shipping.map(item => 
                                                                                                                        <option key={item.id}>{item.subcounty}</option>
                                                                                                                 )}
                                                                                                      </select>
+
                                                                                           </div>
                                                                                           <div className="form-row">
                                                                                                      <label htmlFor="street">Street address *</label>
