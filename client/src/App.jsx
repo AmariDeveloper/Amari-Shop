@@ -14,6 +14,7 @@ import Cart from './pages/public/Cart'
 import { useEffect } from 'react'
 import Checkout from './pages/public/Checkout'
 import BillingConfirmation from './pages/public/BillingConfirmation'
+import OrderComplete from './pages/public/OrderComplete'
 
 function App() {
   const location = useLocation();
@@ -29,6 +30,7 @@ function App() {
              <Route path='/cart' element={<Cart />} />
              <Route path="/checkout" element={<Checkout />} />
              <Route path='/checkout/billing-confirmation' element={<BillingConfirmation />} />
+             <Route path='/checkout/order-complete-confirmation' element={<OrderComplete />} />
 
              {/* Protected Routes */}
               <Route element={<ProtectedRoutes />}>

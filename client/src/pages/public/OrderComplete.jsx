@@ -1,15 +1,15 @@
 import Footer from "../../components/public/common/Footer"
 import Navbar from "../../components/public/common/navigation/Navbar"
-import CartBody from "../../components/public/products/CartBody"
+import OrderCompleteBody from "../../components/public/products/OrderCompleteBody"
 
-const Cart = () => {
+const OrderComplete = () => {
   return (
     <>
             <Navbar />
-            <CartBody />
+            <OrderCompleteBody />
             <Footer />
     </>
   )
 }
 
-export default Cart
+export default OrderComplete

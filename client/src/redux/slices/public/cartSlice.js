@@ -144,6 +144,11 @@ const cartSlice = createSlice({
                setShippingFee: (state, action) => {
                        state.shipping_fee = action.payload;
                        localStorage.setItem("Shipping Fee", JSON.stringify(action.payload))
+               },
+
+               clearShoppingCart: (state) => {
+                      state.shopping_cart = [];
+                      localStorage.removeItem("Shopping Cart");
                }
         }
 })
@@ -163,7 +168,8 @@ export const {
     incrementVariationQuantityinShoppingCart,
     decrementVariationQuantityInShoppingCart,
     removeVariationFromShoppingCart,
-    setShippingFee
+    setShippingFee,
+    clearShoppingCart
 } = cartSlice.actions
 
 export default cartSlice.reducer

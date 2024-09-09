@@ -119,15 +119,294 @@
      color: rgb(50,50,50);
 }
 
-.biling-method{
-     
+.billing-method{
+      margin-top: 20px;
 }
 .billing-method h3{
-      
+      font-size: 18px;
+      font-weight: 450;
+      margin-bottom: 10px;;
 }
 
 .billing-method-row{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 30px;
+}
+
+.billing-method img{
+     width: 150px;
+     object-fit: contain;
+     height: 50px;
+}
+.billing-method-moja{
+      border-radius: 8px;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+      cursor: pointer;
+     border: 1px solid var(--light-gray);
+}
+
+.billing-method-moja h4{
+    font-size: 20px;
+    font-weight: 400;
+}
+.billing-method-header{
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      align-items: center;
+}
+.billing-method-header span{
+     display:flex;
+     font-size: 20px;
+     width: 30px;
+     height: 30px;
+     align-items: center;
+     justify-content: center;
+     border-radius: 4px;
+     -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+     -ms-border-radius: 4px;
+     -o-border-radius: 4px;
+     transition: all 0.75s ease;
+     -webkit-transition: all 0.75s ease;
+     -moz-transition: all 0.75s ease;
+     -ms-transition: all 0.75s ease;
+     -o-transition: all 0.75s ease;
+}
+.billing-method-header span:hover{
+     background: var(--light-gray)
+}
+.billing-method-moja.active .billing-method-header span{
+       transform: rotate(180deg);
+       -webkit-transform: rotate(180deg);
+       -moz-transform: rotate(180deg);
+       -ms-transform: rotate(180deg);
+       -o-transform: rotate(180deg);
+       color: var(--main-color);
+}
+.billing-method-details{
+     max-height: 0;
+     overflow: hidden;
+     transition: all 0.75 ease;
+     -webkit-transition: all 0.75 ease;
+     -moz-transition: all 0.75 ease;
+     -ms-transition: all 0.75 ease;
+     -o-transition: all 0.75 ease;
+}
+.billing-method-moja.active .billing-method-details{
+      max-height: 200px;
+}
+.billing-method-details .billing-method-inner{
+      padding: 20px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+}
+.billing-method-input-row{
+     display: flex;
+     gap: 5px;
+     flex-direction: column;
+}
+.billing-method-input-row label{
+      font-weight: 300;
+      font-size: 15px;
+      display: flex;
+      justify-content: space-between;
+}
+.billing-method-input-row label span{
+      font-weight: 500;
+      cursor: pointer;
+      margin-right: 5px;
+      transition: all 0.75s ease;
+      -webkit-transition: all 0.75s ease;
+      -moz-transition: all 0.75s ease;
+      -ms-transition: all 0.75s ease;
+      -o-transition: all 0.75s ease;
+}
+.billing-method-input-row label span:hover{
+     color: var(--main-color);
+}
+.billing-method-input-row .input-control{
+      width: 350px;
+      height: 55px;
+      outline: none;
+      border: 1px solid var(--light-gray);
+      background-color: transparent;
+      border-radius: 7px;
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      -ms-border-radius: 7px;
+      -o-border-radius: 7px;
+      padding-left: 10px;
+}
+
+.billing-method .complete{
+      width: 250px;
+      margin-top: 30px;
+}
+
+
+/** Order Completion Body */
+.completion-box{
+      width: 860px;
+      margin: auto;
+      padding: 40px;
+      background: white;
+      border-radius: 20px;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      -ms-border-radius: 20px;
+      -o-border-radius: 20px;
+}
+
+.completion-box h3{
+     font-size: 40px;
+     text-align: center;
+     margin: 20px 0 10px 0;
+     font-weight: 400;
+}
+.completion-box p{
+       font-size: 18px;
+       color: rgb(111, 111, 111);
+       text-align: center;
+       font-weight: 330;
+}
+
+.extra-details{
+     margin-top: 20px;
+}
+.extra-detail-row{
+       border-top: 1px dashed var(--line);
+       padding: 25px 10px;
+}
+.extra-detail-row h4{
+       font-size: 20px;
+       font-weight: 430;
+       margin-bottom: 10px;
+}
+.extra-detail-row h5{
+      font-size: 17px;
+      font-weight: 350;
+      color: rgb(100, 100, 100);
+}
+
+.order-details{
+     border-top: 1px dashed var(--line);
+     padding: 15px 10px 0px 10px;
+     border-bottom: 1px dashed var(--line);
+}
+
+.order-details h4{
+      font-size: 20px;
+      font-weight: 450;
+}
+.order-details .order-details-row{
+     margin: 10px 0 0 0;
+}
+.order-detail-moja{
+     display: flex;
+     margin-bottom: 20px;
+     justify-content: space-between;
+     flex-wrap: wrap;
+}
+.order-detail-moja img{
+     width: 60px;
+     height: 60px;
+     border-radius: 8px;
+     -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+     -ms-border-radius: 8px;
+     -o-border-radius: 8px;
+}
+
+.order-detail-moja .left-column{
+      display: flex;
+      gap: 10px;
+}
+
+.order-detail-moja .order-deets h5{
+      font-size: 17px;
+      font-weight: 450;
+}
+.order-detail-moja .order-deets figure{
+     font-size: 14px;
+     font-weight: 500;
+}
+.order-detail-moja .vars-wrapper{
+      display: flex;
+      gap: 5px;
+}
+.vars-wrapper .vr-box{
+     width: 30px;
+     height: 20px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+.vars-wrapper .vr-box h6{
+     font-size: 15px;
+     font-weight: 450;
+}
+.vars-wrapper .vr-box h6 span{
+      font-weight: 400;
+      font-size: 13px;
+}
+
+.order-detail-moja h2{
+     font-weight: 440;
+     font-size: 20px;
+}
+
+.completion-box .order-subtotal{
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 15px 0;
+     border-bottom: 1px dashed var(--line);
+}
+.completion-box .order-subtotal h4{
+     font-size: 16px;
+     font-weight: 400;
+}
+
+.completion-box .order-subtotal h2{
+     font-weight: 450;
+     font-size: 21px;
+}
+
+.completion-box .grand-total{
+      padding: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+}
+.completion-box .grand-total h4{
+      font-size: 18px;
+      font-weight: 500;
+}
+.completion-box .grand-total h2{
+     font-size: 24px;
+     font-weight: 500;
+}
+
+.continue-shopping{
+     display: flex;
+     justify-content: center;
+     margin-top: 30px;
+}
+
+.continue-shopping .proceed-btn{
+      width: 200px;
+}
+
+@media(max-width: 1090px){
+       .completion-box{
+             width: 90%;
+       }
 }

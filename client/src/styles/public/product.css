@@ -1,4 +1,5 @@
-.single-product-body{
+.single-product-body,
+.order-completion-body{
     padding: 20px 0;
     background: rgba(238, 245, 244, 0.29);
     min-height: 100vh;

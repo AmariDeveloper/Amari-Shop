@@ -293,6 +293,10 @@ form .error{
       cursor: pointer;
 }
 
+.footer-public.copyright{
+      padding: 20px 0;
+}
+
 @media(max-width: 1280px){
     .inner-row{
            width: 90%;

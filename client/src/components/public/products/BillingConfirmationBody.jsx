@@ -1,18 +1,51 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { GoChevronRight } from "react-icons/go"
 import { LiaUserEditSolid } from "react-icons/lia";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import mpesalogo from "../../../assets/mpesa.png"
-import card from "../../../assets/visa-mastercard.webp"
+//import card from "../../../assets/visa-mastercard.webp"
+import { GoChevronDown } from "react-icons/go";
+import { useRef, useState } from "react";
+import { clearShoppingCart } from "../../../redux/slices/public/cartSlice";
+import { saveOrderInformation } from "../../../redux/slices/public/billingSlice";
 const BillingConfirmationBody = () => {
   const { details } = useSelector(state => state.billing)
   const { shopping_cart, shipping_fee } = useSelector(state => state.cart);
-
+ const [ activePaymentMethod, setActivePaymentMethod ] = useState(false);
+ const inputRef = useRef();
+ const navigate = useNavigate();
+ const dispatch = useDispatch();
 
   const totalCostPlusShipping = () => {
          const count = shopping_cart.reduce((acc, curr) => acc+(curr.product_pricing.product_regular_price * curr.quantity), 0)
          return count
  }
+const prefillExisitingPhoneNumber = () => {
+       inputRef.current.value = details.phone
+}
+
+const PurchaseCompletion = () => {
+        const basketOrder = shopping_cart.map(product => {
+                const order_details = {
+                        title: product.product_title,
+                        id: product._id,
+                        price: product.product_pricing.product_regular_price*product.quantity,
+                        total_quantity: product.quantity,
+                        variations: product.variations,
+                        main_image: product.product_imagery.product_main_image,
+                }
+                return order_details;
+        })
+        const payload = {
+                basket: basketOrder,
+                ...details,
+                shipping: shipping_fee.cost,
+                grandTotal: totalCostPlusShipping()
+        }
+        dispatch(saveOrderInformation(payload))
+        navigate("/checkout/order-complete-confirmation")
+        dispatch(clearShoppingCart());
+}
   return (
     <div className="single-product-body">
              <div className="inner-row-2">
@@ -32,7 +65,7 @@ const BillingConfirmationBody = () => {
 
                                         <div className="billing-header">
                                                 <h3>Billing Details</h3>
-                                                <p>Edit<span><LiaUserEditSolid /></span></p>
+                                                <p onClick={() => navigate("/checkout")}>Edit<span><LiaUserEditSolid /></span></p>
                                         </div>
 
                                          <div className="billing-info-row">
@@ -73,21 +106,34 @@ const BillingConfirmationBody = () => {
                                         <div className="billing-method">
                                                    <h3>Select Payment Method</h3>
                                                    <div className="billing-method-row">
-                                                               <div className="billing-method-one">
-                                                                          <img src="" alt="" />
-                                                                         <h4>Pay with M-Pesa</h4>
+                                                               <div className={activePaymentMethod  ? "billing-method-moja active" : "billing-method-moja"}>
+                                                                         <div className="billing-method-header" onClick={() => setActivePaymentMethod(!activePaymentMethod)}>
+                                                                                  <h4>Pay with M-Pesa</h4>
+                                                                                  <span><GoChevronDown /></span>
+                                                                         </div>
+                                                                         <div className="billing-method-details">
+                                                                                   <div className="billing-method-inner">
+                                                                                               <img src={mpesalogo} alt="" />
+                                                                                               <div className="billing-method-input-row">
+                                                                                                          <label htmlFor="stmt">Enter your mpesa number <span onClick={prefillExisitingPhoneNumber}>Prefill</span></label>
+                                                                                                         <input ref={inputRef} type="number" className="input-control" placeholder="+254712xxxxx" />
+                                                                                               </div>
+                                                                                   </div>
+                                                                         </div>
                                                                </div>
-                                                               <div className="billing-method-two">
-                                                                         <img src="" alt="" />
-                                                                         <h4>Pay with Card</h4>
-                                                               </div>
+                                                               {/* <div className={ activePaymentMethod === 1 ? "billing-method-moja active" : "billing-method-moja"} onClick={() => switchActivePayment(1)}>
+                                                                        <h4>Pay with Card</h4>
+                                                                         <img src={card} alt="" />
+                                                               </div> */}
                                                    </div>
+
+                                                   <button className="proceed-btn complete" onClick={PurchaseCompletion}>Complete Purchase</button>
                                         </div>
                               </div>
                               <div className="billing-payment">
                                      <div className="cart-order-sticky">
                                           <div className="cart-order-summary">
-                                                 <h4>Your Order  <span><LiaUserEditSolid />Edit</span></h4>
+                                                 <h4>Your Order  <span onClick={() => navigate("/cart")}><LiaUserEditSolid />Edit</span></h4>
                                                  <div className="products-in-products">
                                                             { shopping_cart.map(product => 
                                                              <div className="basket-product-moja" key={product._id}>

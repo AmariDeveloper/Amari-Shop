@@ -106,7 +106,7 @@ const ShoppingCartModal = () => {
                                                                                 <h5><span className="ksh">ksh.</span>{subtotal.toLocaleString()}</h5>
                                                                     </div>
                                                                     <div className="basket-buttons">
-                                                                             <Link to={"/checkout"}>Checkout</Link>
+                                                                             <Link to={"/checkout"} onClick={closeShoppingBasket}>Checkout</Link>
                                                                              <Link to={"/cart"} onClick={closeShoppingBasket}>View Cart</Link>
                                                                     </div>
                                                         </div>

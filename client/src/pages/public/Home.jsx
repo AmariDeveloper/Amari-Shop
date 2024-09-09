@@ -7,6 +7,7 @@ import HomeCategories from "../../components/public/home/HomeCategories"
 import HomeProducts from "../../components/public/home/HomeProducts"
 import { useDispatch } from "react-redux"
 import { setAllPublishedProducts } from "../../redux/slices/public/clientSlice"
+import Footer from "../../components/public/common/Footer"
 
 const Home = () => {
    const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const Home = () => {
            <HeroSection />
            <HomeCategories />
            <HomeProducts />
+           <Footer />
     </>
   )
 }
