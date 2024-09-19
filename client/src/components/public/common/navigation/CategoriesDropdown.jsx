@@ -9,6 +9,7 @@ const CategoriesDropdown = ({ status, handleStatus }) => {
     const dropdownRef = useRef();
     const dispatch = useDispatch();
     const { categories } = useSelector(state => state.utils);
+    const parentCategories = categories && categories.filter(item => item.parent === "None");
     const handleOutsideClick = useCallback((e) => {
              if(dropdownRef.current && !dropdownRef.current.contains(e.target)){
                     handleStatus(false)
@@ -30,7 +31,7 @@ const CategoriesDropdown = ({ status, handleStatus }) => {
   return (
     <div ref={dropdownRef} className={ status ? "categories-dropdown active" : "categories-dropdown"}>
             <ul>
-                    { categories && categories.length > 0 && categories.map(category => 
+                    { categories && parentCategories.map(category => 
                            <li key={category._id}><Link to={"/"}>{category.name}</Link></li>
                     )}
             </ul>

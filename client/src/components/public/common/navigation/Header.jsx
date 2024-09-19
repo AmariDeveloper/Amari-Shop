@@ -41,8 +41,8 @@ const Header = () => {
                                                                 <CategoriesDropdown status={dropdownStatus} handleStatus={setDropdownStatus} />
                                                        </div>
                                                        <ul>
+                                                                 <li><Link to={"/"}>Shop</Link></li>
                                                                <li><Link to={"/"}>Deals</Link></li>
-                                                               <li><Link to={"/"}>Shop</Link></li>
                                                                <li><Link to={"/"}>New & Featured</Link></li>
                                                        </ul>
                                               </nav>

@@ -16,8 +16,6 @@ const CategoryCreateForm = () => {
   const dispatch = useDispatch();
   const { categories } = useSelector(state => state.utils);
 
-  console.log(categories)
-
 const slugValue = watch("name", "")
 useEffect(() => {
        const slug_val = slugValue.replaceAll(" ", "-").toLowerCase();
