@@ -2,6 +2,7 @@ import express from "express"
 import { 
     GetUserProfile, 
     LoginUser, 
+    LogoutUser, 
     RegisterUser, 
     UpdateUserProfile
 } from "../controllers/userController.js";
@@ -13,5 +14,6 @@ const router = express.Router();
 router.post("/register", RegisterUser);
 router.post("/login", LoginUser)
 router.get("/user-profile", protect, GetUserProfile)
-router.put("/update-user-profile", protect, upload.single("profileImage"), UpdateUserProfile)
+router.put("/update-user-profile", protect, upload.single("profileImage"), UpdateUserProfile);
+router.post("/logout", LogoutUser);
 export default router;

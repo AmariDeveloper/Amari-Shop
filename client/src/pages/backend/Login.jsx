@@ -61,7 +61,7 @@ const Login = () => {
                                                                </div>
                                                               <div className="login-form-row">
                                                                        <div className="password-input">
-                                                                                <input type="password" placeholder="Password" {...register("password", { required: "Please enter your password"})}  />
+                                                                                <input type={status ? "text" : "password"} placeholder="Password" {...register("password", { required: "Please enter your password"})}  />
                                                                                  <div className="toggle-btn" onClick={() => setStatus(!status)}>
                                                                                           { status ? <span><VscEyeClosed /></span> : <span><VscEye /></span>}
                                                                                  </div>

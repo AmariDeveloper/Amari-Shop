@@ -1,4 +1,4 @@
-import { Link, NavLink, useParams } from "react-router-dom"
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom"
 import { RxDashboard } from "react-icons/rx";
 import { HiOutlinePresentationChartLine } from "react-icons/hi2";
 import { CiBoxes } from "react-icons/ci";
@@ -15,13 +15,19 @@ import { HiOutlineRectangleStack } from "react-icons/hi2";
 import { TbBrandStackoverflow } from "react-icons/tb";
 import { BsTags } from "react-icons/bs";
 import { IoOptionsSharp } from "react-icons/io5";
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { useLogoutUserMutation } from "../../../redux/slices/userSlice";
+import { setAppNotification } from "../../../redux/slices/utilSlice";
+import { clearCredentials, clearUserProfile } from "../../../redux/slices/authSlice";
+import toast from "react-hot-toast";
 
 const Sidebar = () => {
   const [ sidebarStatus, setSidebarStatus] = useContext(sidebarContext);
   const { userInfo } = useSelector(state => state.auth)
   const sidebarRef = useRef();
   const [productOption, setProductOption] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOutsideClick = useCallback((e) => {
         if(sidebarRef.current && !sidebarRef.current.contains(e.target)){
@@ -49,6 +55,25 @@ const Sidebar = () => {
               setProductOption(true)
         }
  }, [name])
+
+ //Logout 
+ const [ logoutUser ] = useLogoutUserMutation();
+
+ const logout = () => {
+        try {
+              const res = logoutUser().unwrap();
+
+              if(res){
+                     dispatch(clearCredentials());
+                     dispatch(clearUserProfile());
+                     navigate("/auth/login")
+                    toast.success(res.message, { id: "logout-message"})
+              }
+        } catch (error) {
+            //console.log(error)
+            dispatch(setAppNotification({ status: true, message: error.data.message, type: "Error"}))
+        }
+ }
   return (
     <div ref={sidebarRef} className={sidebarStatus ? "sidebar-wrapper active" : "sidebar-wrapper"}>
                 <div className="sidebar-inner">
@@ -76,7 +101,7 @@ const Sidebar = () => {
 
                                    <div className="extras">
                                               <Link to={"/"}><span><IoIosHelpCircleOutline /></span>Help Center</Link>
-                                              <button><span><AiOutlinePoweroff /></span>Logout</button>
+                                              <button onClick={logout}><span><AiOutlinePoweroff /></span>Logout</button>
                                    </div>
                           </nav>
                 </div>

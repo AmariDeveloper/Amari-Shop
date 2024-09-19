@@ -29,7 +29,6 @@ const authSlice = createSlice({
                       state.userInfo.username = action.payload
                       changeUsername(action.payload)
               },
-
         }
 })
 
