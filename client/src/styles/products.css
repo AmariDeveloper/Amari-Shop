@@ -543,6 +543,11 @@
       gap: 8px;
       align-items: center;
 }
+.category-list-table .c-name .s-line{
+       display: flex;
+       font-size: 20px;
+       color: var(--main-color);
+}
 .category-list-table .c-name p{
       font-size: 15px;
 }

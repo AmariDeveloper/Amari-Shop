@@ -3,6 +3,7 @@ import { CiEdit } from "react-icons/ci";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { openEditModal, openDeleteModal } from "../../../../redux/slices/utilSlice";
+import { BsDashLg } from "react-icons/bs";
 
 const CategoryList = () => {
   const { categories } = useSelector(state => state.utils)
@@ -33,12 +34,12 @@ const CategoryList = () => {
                                                        <tr key={item._id}>
                                                                  <td> 
                                                                         <div className="c-name">
+                                                                                { item.parent === "None" ? "" : <span className="s-line"><BsDashLg /></span>}
                                                                                  { item.thumbnail && item.thumbnail !== "" ?
                                                                                        <img src={item.thumbnail} className="profile-image" alt="" />
                                                                                        :
                                                                                        <img src={dummy} className="profile-image" alt="" />
                                                                                 }
-                                                                                  
                                                                                   <p>{item.name}</p>
                                                                         </div>
                                                                  </td>

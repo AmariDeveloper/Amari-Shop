@@ -10,7 +10,7 @@ const ProductCard = ({ data }) => {
    const dispatch = useDispatch();
    const { shopping_cart } = useSelector(state => state.cart);
    const navigate = useNavigate();
-
+  console.log(data)
    const isAlreadyInCart = shopping_cart.map(item => item._id).includes(data._id);
 
    const openQuickView = (product) => {
@@ -23,11 +23,12 @@ const ProductCard = ({ data }) => {
   return (
     <div className="client-product-card">
               <div className="image-wrapper">
+                       { data.product_variations.product_selected_variations.length == 0  && 
                         <div className="add-to-cart-box" >
                                   { isAlreadyInCart ?  <span className="checked"><PiCheckLight /></span> : <span onClick={() => addToShoppingCart(data)} ><HiOutlineShoppingCart /></span> }
-                        </div>
+                        </div> }
                        <img src={data.product_imagery.product_main_image} alt="" />
-                        { isAlreadyInCart ? "" :  <button onClick={() => openQuickView(data)}>Quick View</button> }
+                        {  data.product_variations.product_selected_variations.length > 0 || isAlreadyInCart  ? "" :  <button onClick={() => openQuickView(data)}>Quick View</button> }
                       
               </div>
               <div className="product-name-row">

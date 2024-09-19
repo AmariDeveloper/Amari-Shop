@@ -14,7 +14,7 @@ const SummaryStrip = () => {
                 <span>Total Sales</span>
                 <div className="summary-grid">
                          <div className="summary-grid-texts">
-                                   <h4><span>Ksh.</span>114,187</h4>
+                                   <h4><span>Ksh.</span>0</h4>
                          </div>
                          <div className="summary-analytics">
                                     <div className="spans">
@@ -32,7 +32,7 @@ const SummaryStrip = () => {
                 <span>Total Customers</span>
                 <div className="summary-grid">
                          <div className="summary-grid-texts">
-                                   <h4>4,187</h4>
+                                   <h4>0</h4>
                          </div>
                          <div className="summary-analytics">
                                     <div className="spans">
@@ -50,7 +50,7 @@ const SummaryStrip = () => {
                 <span>Total Orders</span>
                 <div className="summary-grid">
                          <div className="summary-grid-texts">
-                                   <h4>1,485</h4>
+                                   <h4>0</h4>
                          </div>
                          <div className="summary-analytics">
                                     <div className="spans">
@@ -68,7 +68,7 @@ const SummaryStrip = () => {
                 <span>Total Refunds</span>
                 <div className="summary-grid">
                          <div className="summary-grid-texts">
-                                   <h4>403</h4>
+                                   <h4>0</h4>
                          </div>
                          <div className="summary-analytics">
                                     <div className="spans">

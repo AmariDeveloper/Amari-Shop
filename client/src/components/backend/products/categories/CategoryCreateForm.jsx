@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { IoCheckmark } from "react-icons/io5";
 import { useCreateCategoryMutation } from "../../../../redux/slices/productSlice";
 import Spinner1 from "../../common/Spinner1";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAppNotification } from "../../../../redux/slices/utilSlice";
 
 const CategoryCreateForm = () => {
@@ -14,6 +14,9 @@ const CategoryCreateForm = () => {
   const [ imageUrl, setImageUrl] = useState([]);
   const [ status, setStatus] = useState(false);
   const dispatch = useDispatch();
+  const { categories } = useSelector(state => state.utils);
+
+  console.log(categories)
 
 const slugValue = watch("name", "")
 useEffect(() => {
@@ -86,6 +89,9 @@ const handleCategoryForm = async(data) => {
                                  <label htmlFor="parent">Parent category</label>
                                   <select className="input-control" {...register("parent")}>
                                             <option value="None">None</option>
+                                            { categories && categories.length > 0 && categories.map(category => 
+                                                 <option key={category._id}>{category.name}</option>
+                                            )}
                                   </select>
                        </div>
                        <div className="form-row">
