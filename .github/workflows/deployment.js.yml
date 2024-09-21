@@ -65,7 +65,7 @@ jobs:
             - name: Move to the server directory 
               run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/server
             - name: Install dependencies
-              run: npm install 
+              run: npm install -f
           
   # create .env file for the server
      create-envfile:
