@@ -30,18 +30,11 @@ jobs:
                      node-version: ${{ matrix.node-version }}
                      cache-dependency-path: "client"
 
-              # - name: Move to frontend stage
-              #   run: cd /home/frontend
-              # - name: Remove current build folder
-              #   run: rm -rf dist
-              # - name: Install dependencies
-              #   run: npm install
-              - name: "Go back to work folder"
+              - name: "Go to work folder"
                 run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/client
-              # - name: Build for Production
-              #   run: npm run build
+    
               - name: Replace build folder
-                run:  mv dist /home/frontend
+                run:  sudo mv dist /home/frontend
 
     #server module
      server: 
