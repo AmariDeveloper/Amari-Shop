@@ -30,10 +30,10 @@ jobs:
                      node-version: ${{ matrix.node-version }}
                      cache-dependency-path: "client"
 
-              - name: Move to frontend stage
-                run: cd /home/frontend
-              - name: Remove current build folder
-                run: rm -rf dist
+              # - name: Move to frontend stage
+              #   run: cd /home/frontend
+              # - name: Remove current build folder
+              #   run: rm -rf dist
               # - name: Install dependencies
               #   run: npm install
               - name: "Go back to work folder"
@@ -42,8 +42,6 @@ jobs:
               #   run: npm run build
               - name: Replace build folder
                 run:  mv dist /home/frontend
-                
-
 
     #server module
      server: 
