@@ -22,17 +22,17 @@ jobs:
               uses: actions/setup-node@v4
               with:
                    node-version: ${{ matrix.node-version }}
-                   cache: "npm"
-                   cache-dependency-path: "/home/actions-runner/_work/Amari-Shop/Amari-Shop"
+                   #cache: "npm"
+                   #cache-dependency-path: "/home/actions-runner/_work/Amari-Shop/Amari-Shop"
             
             #Run production build for the client
-            - run: cd client
+            - run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/client
             - run: npm install 
             - run: npm run build
             - run: sudo mv dist /home/frontend
 
             #Run production build for the server
-            - run: cd server
+            - run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/server
             - run: npm install
 
      create-envfile:
