@@ -30,8 +30,13 @@ jobs:
                      node-version: ${{ matrix.node-version }}
                      cache-dependency-path: "client"
 
-              - name: Move build folder to frontend stage
-                run: mv dist /home/frontend
+              - name: Move to frontend stage
+                run: cd /home/frontend
+              - name: Remove current build folder
+                run: sudo rm -rf dist
+              - name: Replace build folder
+                run: sudo mv dist /home/frontend
+                
 
 
     #server module
