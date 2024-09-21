@@ -55,12 +55,17 @@ jobs:
           steps:
             - name: Server Repository
               uses: actions/checkout@v4
+              with:
+                    persist-credentials: false
 
             - name: Setup Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v4
               with:
                    node-version: ${{ matrix.node-version }}
                    cache-dependency-path: "server"
+
+            - name: Switch cloning method
+              run: git config --global url."https://${{secrets.PAT}}@github.com/".insteadOf ssh://git@github.com/
 
             - name: Move to the server directory 
               run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/server
