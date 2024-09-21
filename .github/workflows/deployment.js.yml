@@ -33,9 +33,9 @@ jobs:
               - name: Move to frontend stage
                 run: cd /home/frontend
               - name: Remove current build folder
-                run: sudo rm -rf dist
+                run: rm -rf dist
               - name: Replace build folder
-                run: sudo mv dist /home/frontend
+                run:  mv dist /home/frontend
                 
 
 
@@ -62,7 +62,7 @@ jobs:
                    cache-dependency-path: "server"
 
             - name: Install dependencies
-              run: sudo npm install 
+              run: npm install 
           
   # create .env file for the server
      create-envfile:
@@ -72,7 +72,7 @@ jobs:
         steps:
            - run: |
                   cd server
-                  sudo touch .env
+                  touch .env
                   echo SERVER_PORT=${{ secrets.SERVER_PORT }} >> .env
                   echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env
                   echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
@@ -87,7 +87,7 @@ jobs:
            steps:
              - run: |
                     cd server
-                    sudo pm2 stop index.js
-                    sudo pm2 start index.js
-                    sudo pm2 save
+                    pm2 stop index.js
+                    pm2 start index.js
+                    pm2 save
 
