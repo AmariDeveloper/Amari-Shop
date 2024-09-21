@@ -89,7 +89,7 @@ jobs:
            needs: [ client, server, create-envfile ]
            steps:
              - run: |
-                    cd server
+                    cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/server
                     pm2 stop index.js
                     pm2 start index.js
                     pm2 save
