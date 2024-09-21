@@ -8,36 +8,66 @@ on:
           branches: [ "master" ]
 
 jobs:
-     build:
-
-          runs-on: self-hosted
-
-          strategy:
+     #client module
+     client: 
+           runs-on: self-hosted
+           name: Building the client
+           strategy:
+                fail-fast: true
                 matrix: 
-                      node-version: [ 20.x ]
+                      node-version: [20.x]
+           defaults:
+                run:
+                      working-directory: client
+
+           steps:
+              - name: Client Repository
+                uses: actions/checkout@v4
+
+              - name: Setup Node.js ${{ matrix.node-version }}
+                uses: actions/setup-node@v4
+                with:
+                     node-version: ${{ matrix.node-version }}
+                     cache-dependency-path: "client"
+
+              - name: Install dependencies
+                run: npm i
+
+              - name: Create build
+                run: npm run build
+              - name: Move build folder to frontend stage
+                run: mv dist /home/frontend
+
+
+    #server module
+     server: 
+          runs-on: self-hosted
+          name: Building the server
+          strategy:
+                fail-fast: true
+                matrix: 
+                       node-version: [20.x]
+          defaults:
+                run: 
+                     working-directory: server
 
           steps:
-            - uses: actions/checkout@v4
-            - name: Use Node.js ${{ matrix.node-version }}
+            - name: Server Repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v4
               with:
                    node-version: ${{ matrix.node-version }}
-                   #cache: "npm"
-                   #cache-dependency-path: "/home/actions-runner/_work/Amari-Shop/Amari-Shop"
-            
-            #Run production build for the client
-            - run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/client
-            - run: npm install 
-            - run: npm run build
-            - run: sudo mv dist /home/frontend
+                   cache-dependency-path: "server"
 
-            #Run production build for the server
-            - run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/server
-            - run: npm install
-
+            - name: Install dependencies
+              run: npm ci 
+          
+  # create .env file for the server
      create-envfile:
         runs-on:  self-hosted
-        needs: build
+        needs: server
 
         steps:
            - run: |
@@ -53,7 +83,7 @@ jobs:
      deploy:
            
            runs-on:  self-hosted
-           needs: [ build, create-envfile ]
+           needs: [ client, server, create-envfile ]
            steps:
              - run: |
                     cd server
