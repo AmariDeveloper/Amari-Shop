@@ -34,7 +34,7 @@ jobs:
                 run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/client
     
               - name: Replace build folder
-                run:  sudo -S mv dist /home/frontend
+                run:  mv dist /home/frontend
 
     #server module
      server: 
