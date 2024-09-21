@@ -36,6 +36,8 @@ jobs:
                 run: rm -rf dist
               - name: "Go back to work folder"
                 run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/client
+              - name: Build for Production
+                run: npm run build
               - name: Replace build folder
                 run:  mv dist /home/frontend
                 
@@ -63,6 +65,8 @@ jobs:
                    node-version: ${{ matrix.node-version }}
                    cache-dependency-path: "server"
 
+            - name: Move to the server directory 
+              run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/server
             - name: Install dependencies
               run: npm install 
           
