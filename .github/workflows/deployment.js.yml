@@ -34,10 +34,12 @@ jobs:
                 run: cd /home/frontend
               - name: Remove current build folder
                 run: rm -rf dist
+              # - name: Install dependencies
+              #   run: npm install
               - name: "Go back to work folder"
                 run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/client
-              - name: Build for Production
-                run: npm run build
+              # - name: Build for Production
+              #   run: npm run build
               - name: Replace build folder
                 run:  mv dist /home/frontend
                 
