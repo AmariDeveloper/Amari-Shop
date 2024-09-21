@@ -34,6 +34,8 @@ jobs:
                 run: cd /home/frontend
               - name: Remove current build folder
                 run: rm -rf dist
+              - name: "Go back to work folder"
+                run: cd /home/actions-runner/_work/Amar-Shop/Amari-Shop
               - name: Replace build folder
                 run:  mv dist /home/frontend
                 
