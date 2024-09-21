@@ -1,0 +1,62 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Build and Deploy Amari Shop
+
+on: 
+     push: 
+          branches: [ "master" ]
+
+jobs:
+     build:
+
+          runs-on: self-hosted
+
+          strategy:
+                matrix: 
+                      node-version: [ 18.x, 20.x, 22.x]
+
+          steps:
+            - uses: actions/checkout@v4
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                   node-version: ${{ matrix.node-version }}
+                   cache: "npm"
+            
+            #Run production build for the client
+            - run: cd client
+            - run: npm install 
+            - run: npm run build
+            - run: sudo mv dist /home/frontend
+
+            #Run production build for the server
+            - run: cd server
+            - run: npm install
+
+     create-envfile:
+        runs-on:  self-hosted
+        needs: build
+
+        steps:
+           - run: |
+                  cd server
+                  touch .env
+                  echo SERVER_PORT=${{ secrets.SERVER_PORT }} >> .env
+                  echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env
+                  echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
+                  echo CLOUDINARY_NAME=${{ secrets.CLOUDINARY_NAME }} >> .env
+                  echo CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }} >> .env
+                  echo CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }} >> .env
+
+     deploy:
+           
+           runs-on:  self-hosted
+           needs: [ build, create-envfile ]
+           steps:
+             - run: |
+                    cd server
+                    sudo pm2 stop index.js
+                    sudo pm2 start index.js
+                    sudo pm2 save
+
