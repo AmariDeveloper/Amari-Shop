@@ -56,7 +56,7 @@ jobs:
             - name: Add SSH key to checkout a private Repository
               uses: webfactory/ssh-agent@v0.5.4
               with:
-                    ssh-private-key: ${{ secrets.REPO_SSK_KEY }}
+                    ssh-private-key: ${{ secrets.REPO_SSH_KEY }}
 
             - name: Server Repository
               uses: actions/checkout@v4
