@@ -30,11 +30,6 @@ jobs:
                      node-version: ${{ matrix.node-version }}
                      cache-dependency-path: "client"
 
-              - name: Install dependencies
-                run: npm install
-
-              - name: Create build
-                run: npm run build
               - name: Move build folder to frontend stage
                 run: mv dist /home/frontend
 
@@ -62,7 +57,7 @@ jobs:
                    cache-dependency-path: "server"
 
             - name: Install dependencies
-              run: npm install 
+              run: sudo npm install 
           
   # create .env file for the server
      create-envfile:
@@ -72,7 +67,7 @@ jobs:
         steps:
            - run: |
                   cd server
-                  touch .env
+                  sudo touch .env
                   echo SERVER_PORT=${{ secrets.SERVER_PORT }} >> .env
                   echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env
                   echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
