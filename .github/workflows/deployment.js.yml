@@ -39,7 +39,7 @@ jobs:
     
               - name: Replace build folder
                 run:  sudo mv dist /home/frontend
-
+                
     #server module
      server: 
           runs-on: self-hosted
