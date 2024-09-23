@@ -39,7 +39,7 @@ jobs:
     
               - name: Replace build folder
                 run:  sudo mv dist /home/frontend
-                
+
     #server module
      server: 
           runs-on: self-hosted
@@ -65,7 +65,7 @@ jobs:
             - name: Move to the server directory 
               run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/server
             - name: Install dependencies
-              run: npm i
+              run: sudo npm install
           
   # create .env file for the server
      create-envfile:

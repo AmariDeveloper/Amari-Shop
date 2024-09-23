@@ -10,7 +10,7 @@ const HeroSection = () => {
               <div className="hero-section-content">
                          <div className="hero-overlay-and-texts">
                                    <div className="hero-texts">
-                                              <h1>Empowering African brands to thrive online with scalable eCommerce solutions.</h1>
+                                              <h1>Empowering African Brands to Thrive online with scalable eCommerce Solutions.</h1>
                                               <Link to={"/"}>Browse Shop <span><CgArrowTopRight /></span></Link>
                                    </div>
                          </div>           
