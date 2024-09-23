@@ -64,8 +64,7 @@ jobs:
 
             - name: Move to the server directory 
               run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/server
-            - name: Remove package-lock.json file
-              run: sudo rm package-lock.json
+            
             - name: Install dependencies
               run: npm install
           
