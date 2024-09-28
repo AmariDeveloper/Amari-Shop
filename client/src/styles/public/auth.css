@@ -1,0 +1,136 @@
+.login-page-wrapper{
+      display: grid;
+      grid-template-columns: 1.5fr 3fr;
+      height: 100vh;
+}
+
+.login-page-wrapper .login-image{
+     height: inherit;
+}
+.login-page-wrapper .login-image img{
+     display: block;
+}
+
+.login-page-body{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+.login-page-body .login-page-inner{
+     width: 700px;
+}
+
+.login-page-body .logo{
+     width: 180px;
+     margin-bottom: 20px;
+     cursor: pointer;
+}
+
+.login-page-body h2{
+     font-size: 36px;
+     font-weight: 500;
+}
+
+.sign-in-with-google{
+      display: flex;
+      gap: 10px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border: 1px solid var(--light-gray);
+      width: 400px;
+      justify-content: center;
+      height: 55px;
+      align-items: center;
+      cursor: pointer;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+}
+.sign-in-with-google span{
+       display: flex;
+}
+.sign-in-with-google h4{
+      font-weight: 500;
+      font-size: 15px;
+}
+
+.switch-choice{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 400px;
+}
+.switch-choice span{
+     width: 40%;
+     height: 1px;
+     background: var(--line);
+     margin-top: 4px;
+}
+.switch-choice p{
+      font-size: 15px;
+      flex-shrink: 0;
+      font-weight: 300;
+      color: rgb(106, 106, 106);
+}
+
+.auth-form-content{
+    width: 400px;
+    margin-top: 20px;
+}
+.auth-form-row{
+     margin-bottom: 20px;
+}
+.auth-form-row label{
+     font-size: 16px;
+     font-weight: 400;
+     color: #333;
+     margin-bottom: 5px;
+     display: block;
+}
+
+.auth-form-content .redirect{
+      margin: 10px 0;
+      font-size: 15px;
+      text-align: center;
+      font-weight: 300;
+}
+
+.auth-form-content .redirect a,
+.auth-form-content .forgot{
+     text-decoration: underline;
+     color: #222;
+     font-weight: 400;
+}
+
+.auth-form-content .forgot{
+     text-align: right;
+     font-size: 15px;
+     font-weight: 400;
+     display: flex;
+     justify-content: flex-end;
+     margin: 5px;
+}
+
+@media(max-width: 1090px){
+     .login-page-wrapper{
+            grid-template-columns: 1fr;
+     }
+     .login-page-wrapper .login-image{
+           display: none;
+     }
+     .login-page-body .login-page-inner{
+           width: 400px;
+     }
+}
+
+@media(max-width: 550px){
+       .login-page-body .login-page-inner{
+             width: 80%;
+       }
+       .sign-in-with-google,
+       .switch-choice,
+       .auth-form-content{
+               width: 100%;
+       }
+}

@@ -1,5 +1,5 @@
 import logo from "../../../../assets/logo.png"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { GoSearch } from "react-icons/go";
@@ -18,6 +18,8 @@ const Header = () => {
  const dispatch = useDispatch();
 
  const openShoppingBasket = () => dispatch(openShoppingCartSidebar());
+
+ const navigate = useNavigate();
   return (
     <>
         <header>
@@ -48,7 +50,7 @@ const Header = () => {
                                               </nav>
                                    </div>
                                    <div className="right flex-item-column">
-                                            <div className="box account">
+                                            <div className="box account" onClick={() => navigate("/session/new")}>
                                                       <span><HiOutlineUserCircle /></span>
                                                       <h3>Sign In</h3>
                                             </div>

@@ -1,5 +1,6 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
 import './App.css'
+import "./styles/public/auth.css"
 import Home from './pages/public/Home'
 import Login from './pages/backend/Login'
 import Dashboard from './pages/backend/Dashboard'
@@ -15,6 +16,8 @@ import { useEffect } from 'react'
 import Checkout from './pages/public/Checkout'
 import BillingConfirmation from './pages/public/BillingConfirmation'
 import OrderComplete from './pages/public/OrderComplete'
+import LoginPage from './pages/public/auth/LoginPage'
+import SignUpPage from './pages/public/auth/SignUpPage'
 
 function App() {
   const location = useLocation();
@@ -26,6 +29,8 @@ function App() {
     <Routes>
              <Route path='/' element={<Home />} />
              <Route path='/auth/login' element={<Login />} />
+             <Route path="/session/new" element={<LoginPage />} />
+             <Route path="/signup/new" element={<SignUpPage />} />
              <Route path="/product/:name" element={<SingleProduct />} />
              <Route path='/cart' element={<Cart />} />
              <Route path="/checkout" element={<Checkout />} />
