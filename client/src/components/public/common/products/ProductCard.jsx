@@ -10,7 +10,7 @@ const ProductCard = ({ data }) => {
    const dispatch = useDispatch();
    const { shopping_cart } = useSelector(state => state.cart);
    const navigate = useNavigate();
-  console.log(data)
+  
    const isAlreadyInCart = shopping_cart.map(item => item._id).includes(data._id);
 
    const openQuickView = (product) => {

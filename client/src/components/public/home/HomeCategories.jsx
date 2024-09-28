@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 const HomeCategories = () => {
     const { categories } = useSelector(state => state.utils)
     const parent_categories = categories && categories.filter(item => item.parent === "None");
-    console.log(parent_categories)
+  
   return (
     <div className="home-categories">
              <div className="inner-row-2">
