@@ -35,7 +35,7 @@ jobs:
               - name: Remove existing client build
                 run: sudo rm -rf /home/frontend/dist
               - name: "Go to work folder"
-                run: cd /actions-runner/_work/Amari-Shop/Amari-Shop/client
+                run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/client
     
               - name: Replace build folder
                 run:  sudo mv dist /home/frontend
@@ -63,7 +63,7 @@ jobs:
                    cache-dependency-path: "server"
 
             - name: Move to the server directory 
-              run: cd /actions-runner/_work/Amari-Shop/Amari-Shop/server
+              run: cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/server
             
             - name: Install dependencies
               run: npm install
@@ -90,7 +90,7 @@ jobs:
            needs: [ client, server, create-envfile ]
            steps:
              - run: |
-                    cd /actions-runner/_work/Amari-Shop/Amari-Shop/server
+                    cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/server
                     sudo pm2 kill
                     sudo pm2 start index.js
                     sudo pm2 save
