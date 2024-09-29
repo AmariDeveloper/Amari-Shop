@@ -9,12 +9,12 @@ const LoginPage = () => {
     const [ status, setStatus ] = useState(false)
     const navigate = useNavigate();
   return (
-    <div className="login-page-wrapper">
-            <div className="login-image">
+    <div className="auth-page-wrapper">
+            <div className="auth-image">
                     <img src={loginImg} alt="" />
             </div>
-            <div className="login-page-body">
-                       <div className="login-page-inner">
+            <div className="auth-page-body">
+                       <div className="auth-page-inner">
                                   <img src={logo} className="logo" alt="Amari Logo" onClick={() => navigate("/")} />
 
                                   <h2>Sign in to Amari</h2>
@@ -50,7 +50,7 @@ const LoginPage = () => {
                                                       <button className="form-btn">Login</button>
                                             </form>
 
-                                            <p className="redirect">Don&apos;t have an account? <Link to={"/"}>Sign up</Link></p>
+                                            <p className="redirect">Don&apos;t have an account? <Link to={"/signup/new"}>Sign up</Link></p>
                                   </div>
 
 
