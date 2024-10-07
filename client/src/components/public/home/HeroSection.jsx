@@ -41,6 +41,7 @@ const HeroSection = () => {
                                                             </div>
                                                             <img src={suka} alt="" />
                                                  </div>
+                                                 
                                                  <div className="hero-grid">
                                                               <div className="hero-grid-texts">
                                                                       <h2>Fresh from the Farm: Savor Nature&apos;s Best Produce and Juices</h2>
