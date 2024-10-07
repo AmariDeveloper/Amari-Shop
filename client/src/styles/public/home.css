@@ -106,7 +106,7 @@ header{
 
 .categories-dropdown{
     position: absolute;
-    width: 180px;
+    width: 400px;
     top: 63px;
     left: 0;
     border-bottom: 1px solid var(--line);
@@ -130,6 +130,7 @@ header{
     -o-transition: all 0.75s ease;
     background: white;
     z-index: 90; 
+    padding: 10px;
 }
 .categories-dropdown.active{
       transform: scaleY(1);
@@ -139,12 +140,14 @@ header{
       -o-transform: scaleY(1);
 }
 .categories-dropdown ul{
-      flex-direction: column;
-      gap: 0px !important;
+      display: grid !important;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px !important;
 }
 .categories-dropdown ul li a{
       display: flex;
-      width: 100%
+      width: 100%;
+      padding: 15px 10px !important
 }
 
 
@@ -293,7 +296,7 @@ header{
       padding: 30px;
 }
 .hero-grid-texts h2{
-        font-size: 36px;
+        font-size: 26px;
         line-height: 1.2;
         font-weight: 600;
         margin-bottom: 20px;
@@ -338,6 +341,9 @@ header{
 .hero-grid:nth-child(2) .hero-grid-texts{
      width: 50%;
 }
+.hero-grid:nth-child(2) .hero-grid-texts h2{
+       font-size: 36px;
+}
 .hero-grid-texts h2 span{
      font-size: 20px;;
 }
@@ -372,7 +378,8 @@ header{
     justify-content: center;
 }
 .hero-grid:nth-child(3) .hero-grid-texts h2{
-     font-size: 30px;
+     font-size: 22px;
+     width: 90%;
 }
 
 .hero-grid:nth-child(4) .hero-grid-texts h2{

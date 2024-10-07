@@ -21,28 +21,29 @@ const HeroSection = () => {
                                    <div className="hero-grid-wrapper">
                                                  <div className="hero-grid">
                                                              <div className="hero-grid-texts">
-                                                                        <h2>Get 25% off in Black Friday Sale</h2>
+                                                                        <h2>Shop with Family in Mind: Discover Essentials for Every Generation!</h2>
                                                                         <Link to={"/"}>Explore</Link>
                                                              </div>
                                                              <img src={sales} alt="" />
                                                  </div>
                                                  <div className="hero-grid">
                                                             <div className="hero-grid-texts">
-                                                                      <h2>Enjoy Free Delivery on your Total Orders above <span>Ksh.</span>8,999</h2>
+                                                                      {/* <h2>Experience swift, secure, and hassle-free delivery with our efficient shipping services, designed to meet your needs with real-time updates and global reach.</h2> */}
+                                                                      <h2>Fast, reliable, and hassle-free shipping, tailored for your convenience.</h2>
                                                             </div>
                                                            <img src={van} alt="" />
                                                  </div>
                                                  <div className="hero-grid">
                                                            
                                                             <div className="hero-grid-texts">
-                                                                       <h2>Get Maasai Shukas with 20% off</h2>
+                                                                       <h2>Get Maasai Shukas: Vibrant Tradition Meets Modern Style!</h2>
                                                                        <Link to={"/"}>Explore</Link>
                                                             </div>
                                                             <img src={suka} alt="" />
                                                  </div>
                                                  <div className="hero-grid">
                                                               <div className="hero-grid-texts">
-                                                                      <h2>Refresh Your Day with Pure Fresh Juices. Buy One, Get One 50% off</h2>
+                                                                      <h2>Fresh from the Farm: Savor Nature&apos;s Best Produce and Juices</h2>
                                                                       <Link to={"/"}>Explore</Link>
                                                               </div>
                                                               <img src={juice} alt="" />
