@@ -4,16 +4,67 @@ import sales from "../../../assets/sales2.jpg"
 import van from "../../../assets/van.png"
 import suka from "../../../assets/shuka.jpg"
 import juice from "../../../assets/juice.jpg"
+import { Swiper, SwiperSlide } from "swiper/react"
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-creative';
+// import required modules
+import { EffectCreative, Autoplay } from 'swiper/modules';
+const hero_data = [
+      {
+          id: 1,
+          image: "one",
+          statement: "Empowering African Brands to Thrive with scalable eCommerce Solutions.",
+          link: "",
+          btnMsg: "Browse Shop"
+      },
+      {
+          id: 2,
+          image: "two",
+          statement: "Empowering African Suppliers to Access Worldwide Markets.",
+          link: "/",
+          btnMsg: "Register as Supplier"
+      }
+]
 const HeroSection = () => {
   return (
     <div className="hero-section">
               <div className="hero-section-content">
-                         <div className="hero-overlay-and-texts">
-                                   <div className="hero-texts">
-                                              <h1>Empowering African Brands to Thrive with scalable eCommerce Solutions.</h1>
-                                              <Link to={"/"}>Browse Shop <span><CgArrowTopRight /></span></Link>
-                                   </div>
-                         </div>           
+                         <Swiper
+                               slidesPerView={1}
+                               loop={true}
+                               speed={1000}
+                               effect={"creative"}
+                               autoplay={{
+                                     delay: 6500,
+                                     disableOnInteraction: false
+                               }}
+                               creativeEffect={{
+                                     prev: {
+                                           shadow: true,
+                                           translate: ["-20%", 0, -1]
+                                     },
+                                     next: {
+                                            translate: ["100%", 0, 0]
+                                     }
+                               }}
+                               modules={[ EffectCreative, Autoplay]}
+                         >
+                                  { hero_data.map(slide => 
+                                         <SwiperSlide key={slide.id}>
+                                                 { ({ isActive }) => (
+                                                         <div className={`hero-slide-moja ${slide.image}`}>
+                                                                    <div className={ isActive ? "hero-overlay-and-texts active" : "hero-overlay-and-texts"}>
+                                                                            <div className="hero-texts">
+                                                                                       <h1>{slide.statement}</h1>
+                                                                                       <Link to={"/"}>{slide.btnMsg}<span><CgArrowTopRight /></span></Link>
+                                                                            </div>
+                                                                  </div>   
+                                                         </div>
+                                                 )}
+                                         </SwiperSlide>
+                                  )}
+                         </Swiper>        
               </div>
 
               <div className="hero-section-grid">
@@ -41,7 +92,7 @@ const HeroSection = () => {
                                                             </div>
                                                             <img src={suka} alt="" />
                                                  </div>
-                                                 
+
                                                  <div className="hero-grid">
                                                               <div className="hero-grid-texts">
                                                                       <h2>Fresh from the Farm: Savor Nature&apos;s Best Produce and Juices</h2>

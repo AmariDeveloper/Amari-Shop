@@ -190,18 +190,55 @@ header{
 
 /* Hero Section */
 .hero-section-content{
+     
+      position: relative;
+      z-index: 10;
+}
+.hero-slide-moja.one{
       min-height: 90vh;
       background: linear-gradient(transparent, white), url("../../assets/hero1.jpg") no-repeat;
       background-size: cover;
       background-position:  40%;
-      position: relative;
-      z-index: 10;
+}
+.hero-slide-moja.two{
+      min-height: 90vh;
+      background: linear-gradient(transparent, white), url("../../assets/hero2.jpg") no-repeat;
+      background-size: cover;
+      background-position:  40%;
 }
 .hero-overlay-and-texts{
       width: 50%;
       background: linear-gradient(#139397b7, rgb(255, 255, 255));
       height: 100vh;
       clip-path: polygon(0 0, 100% 0, 75% 100%, 0% 100%);
+      transition: all 0.75s ease;
+      -webkit-transition: all 0.75s ease;
+      -moz-transition: all 0.75s ease;
+      -ms-transition: all 0.75s ease;
+      -o-transition: all 0.75s ease;
+      opacity: 0;
+}
+.hero-overlay-and-texts.active{
+      animation: slideIn 1s linear;
+      -webkit-animation: slideIn 1s linear;
+      opacity: 1;
+}
+
+@keyframes slideIn{
+      0%{
+             transform: translateX(-100%)      ;
+             -webkit-transform: translateX(-100%)      ;
+             -moz-transform: translateX(-100%)      ;
+             -ms-transform: translateX(-100%)      ;
+             -o-transform: translateX(-100%)      ;
+     }
+     100%{
+            transform: translateX(0) ;
+            -webkit-transform: translateX(0) ;
+            -moz-transform: translateX(0) ;
+            -ms-transform: translateX(0) ;
+            -o-transform: translateX(0) ;
+}
 }
 .hero-texts{
       width: 65%;
