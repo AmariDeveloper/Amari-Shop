@@ -8,6 +8,7 @@ import HomeProducts from "../../components/public/home/HomeProducts"
 import { useDispatch } from "react-redux"
 import { setAllPublishedProducts } from "../../redux/slices/public/clientSlice"
 import Footer from "../../components/public/common/Footer"
+import AppNotification from "../../components/backend/common/AppNotification"
 
 const Home = () => {
    const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const Home = () => {
            <HomeCategories />
            <HomeProducts />
            <Footer />
+           <AppNotification />
     </>
   )
 }

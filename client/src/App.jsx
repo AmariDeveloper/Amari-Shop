@@ -18,6 +18,7 @@ import BillingConfirmation from './pages/public/BillingConfirmation'
 import OrderComplete from './pages/public/OrderComplete'
 import LoginPage from './pages/public/auth/LoginPage'
 import SignUpPage from './pages/public/auth/SignUpPage'
+import AboutCompany from './pages/public/AboutCompany'
 
 function App() {
   const location = useLocation();
@@ -36,6 +37,7 @@ function App() {
              <Route path="/checkout" element={<Checkout />} />
              <Route path='/checkout/billing-confirmation' element={<BillingConfirmation />} />
              <Route path='/checkout/order-complete-confirmation' element={<OrderComplete />} />
+             <Route path='/about' element={<AboutCompany />} />
 
              {/* Protected Routes */}
               <Route element={<ProtectedRoutes />}>

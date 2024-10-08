@@ -131,8 +131,13 @@ p.redirect a,
 }
 .terms-acceptance{
       display: flex;
-      align-items: flex-start;
-      gap: 10px;
+      flex-direction: column;
+      margin-bottom: 20px;
+}
+.terms-acceptance .terms-column{
+     display: flex;
+     gap: 10px;
+     align-items: flex-start;
 }
 .terms-acceptance input{
       width: 25px;
@@ -140,8 +145,12 @@ p.redirect a,
       margin-top: 3px;
       accent-color: var(--main-color);
 }
-.terms-wrap p.terms,
 .terms-acceptance p{
+     font-size: 15px;
+     font-weight: 300;
+     line-height: 1.75;
+}
+.terms-wrap p.terms{
       font-size: 15px;
       font-weight: 300;
       line-height: 1.75;

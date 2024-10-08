@@ -191,7 +191,7 @@ const resetProductForm = () => {
                      resetProductForm();
                }
          } catch (error) {
-                console.log(error)
+                //console.log(error)
                 dispatch(setAppNotification({ status: true, message: error.data.message, type: "Error"}))
          }
     }

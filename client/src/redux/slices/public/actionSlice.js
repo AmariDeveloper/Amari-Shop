@@ -9,10 +9,25 @@ export const clientActionSlice = apiSlice.injectEndpoints({
                                method: "GET",
                        }),
                        providesTags: ["Products"]
+                }),
+
+
+
+
+
+
+                //Customer Auth
+                registerNewCustomerManually: builder.mutation({
+                         query: (payload) => ({
+                                 url: "v1/client/register-customer-manually",
+                                 method: "POST",
+                                 body: payload
+                         })
                 })
         })
 })
 
 export const {
-       useGetAllPublishedProductsQuery
+       useGetAllPublishedProductsQuery,
+       useRegisterNewCustomerManuallyMutation
 } = clientActionSlice

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
        all_published_products: localStorage.getItem("All Published Products") ? JSON.parse(localStorage.getItem("All Published Products")) : [],
        quick_view_modal: { status: false, data: null},
+       redirect: ""
 }
 
 const clientSlice = createSlice({
@@ -21,6 +22,12 @@ const clientSlice = createSlice({
                      state.quick_view_modal.status = false;
                      state.quick_view_modal.data = null
                },
+               saveRedirect: (state, action) => {
+                      state.redirect = action.payload
+               },
+               clearRedirect: (state) => {
+                    state.redirect = ""
+               } 
           }
 })
 
@@ -28,6 +35,8 @@ export const {
         setAllPublishedProducts,
         openQuickViewModal,
         closeQuickViewModal,
+        saveRedirect,
+        clearRedirect
 } = clientSlice.actions
 
 export default clientSlice.reducer;

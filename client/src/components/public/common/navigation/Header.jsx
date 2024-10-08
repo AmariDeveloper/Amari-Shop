@@ -1,5 +1,5 @@
 import logo from "../../../../assets/logo.png"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { GoSearch } from "react-icons/go";
@@ -10,16 +10,22 @@ import { CgMenuLeft } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import { openShoppingCartSidebar } from "../../../../redux/slices/public/cartSlice";
 import ShoppingCartModal from "../products/ShoppingCartModal";
+import { saveRedirect } from "../../../../redux/slices/public/clientSlice";
 
 
 const Header = () => {
   const [dropdownStatus, setDropdownStatus] = useState(false);
   const { shopping_cart } = useSelector(state => state.cart);
  const dispatch = useDispatch();
+ const { pathname } = useLocation();
 
  const openShoppingBasket = () => dispatch(openShoppingCartSidebar());
 
  const navigate = useNavigate();
+ const openLogin = () => {
+       navigate("/session/new");
+       dispatch(saveRedirect(pathname))
+ }
   return (
     <>
         <header>
@@ -44,13 +50,15 @@ const Header = () => {
                                                        </div>
                                                        <ul>
                                                                  <li><Link to={"/"}>Shop</Link></li>
+                                                                 <li><Link to={"/about"}>About</Link></li>
                                                                <li><Link to={"/"}>Deals</Link></li>
                                                                <li><Link to={"/"}>New & Featured</Link></li>
+                                                               
                                                        </ul>
                                               </nav>
                                    </div>
                                    <div className="right flex-item-column">
-                                            <div className="box account" onClick={() => navigate("/session/new")}>
+                                            <div className="box account" onClick={openLogin}>
                                                       <span><HiOutlineUserCircle /></span>
                                                       <h3>Sign In</h3>
                                             </div>

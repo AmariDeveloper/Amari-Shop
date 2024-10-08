@@ -1,3 +1,4 @@
+import AppNotification from "../../components/backend/common/AppNotification"
 import Footer from "../../components/public/common/Footer"
 import Navbar from "../../components/public/common/navigation/Navbar"
 import BillingConfirmationBody from "../../components/public/products/BillingConfirmationBody"
@@ -8,6 +9,7 @@ const BillingConfirmation = () => {
     <>
            <Navbar />
            <BillingConfirmationBody />
+           <AppNotification />
            <Footer />
     </>
   )
