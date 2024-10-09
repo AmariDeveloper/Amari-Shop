@@ -8,7 +8,7 @@ const AboutHero = () => {
                         <div className="about-hero-content">
                                     <div className="about-hero-column">
                                               <h3>Discover Amari</h3>
-                                              <h1>Your Gateway to Global Markets</h1>
+                                              <h1>Africa&apos;s Gateway to Global Markets</h1>
                                     </div>
                                     <p>Welcome to Amari, an online platform revolutionizing the way African-made products reach the world. Our mission is to empower African manufacturers by providing an all-in-one e-commerce solution that effortlessly takes your business global. With Amari, you get complete drop shipping service designed to simplify and amplify your success.</p>
                         </div>
