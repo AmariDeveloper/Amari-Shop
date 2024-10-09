@@ -1,5 +1,5 @@
 import logo from "../../../../assets/logo.png"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate, NavLink } from "react-router-dom"
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { GoSearch } from "react-icons/go";
@@ -50,7 +50,7 @@ const Header = () => {
                                                        </div>
                                                        <ul>
                                                                  <li><Link to={"/"}>Shop</Link></li>
-                                                                 <li><Link to={"/about"}>About</Link></li>
+                                                                 <li><NavLink to={"/about"}>About</NavLink></li>
                                                                <li><Link to={"/"}>Deals</Link></li>
                                                                <li><Link to={"/"}>New & Featured</Link></li>
                                                                

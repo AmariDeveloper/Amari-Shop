@@ -54,7 +54,8 @@ header{
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
-.flex-item-column nav ul li a:hover{
+.flex-item-column nav ul li a:hover,
+.flex-item-column nav ul li a.active{
     background: var(--light-gray);
 }
 .menu-btn{

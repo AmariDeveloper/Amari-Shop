@@ -8,6 +8,7 @@
 
 :root{
     --main-color: rgb(3, 223, 216);
+    --main-color-2: rgb(11, 213, 206);
     --regular-font: "Outfit", sans-serif;
     --line: rgba(227, 227, 227, 0.558);
     --light-gray: rgb(241, 243, 244);;
