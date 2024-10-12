@@ -22,7 +22,7 @@ const hero_data = [
           id: 2,
           image: "two",
           statement: "Empowering African Suppliers to Access Worldwide Markets.",
-          link: "/",
+          link: "/supplier/new",
           btnMsg: "Register as Supplier"
       }
 ]
@@ -57,7 +57,7 @@ const HeroSection = () => {
                                                                     <div className={ isActive ? "hero-overlay-and-texts active" : "hero-overlay-and-texts"}>
                                                                             <div className="hero-texts">
                                                                                        <h1>{slide.statement}</h1>
-                                                                                       <Link to={"/"}>{slide.btnMsg}<span><CgArrowTopRight /></span></Link>
+                                                                                       <Link to={slide.link}>{slide.btnMsg}<span><CgArrowTopRight /></span></Link>
                                                                             </div>
                                                                   </div>   
                                                          </div>

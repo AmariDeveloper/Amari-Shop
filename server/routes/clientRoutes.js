@@ -1,6 +1,8 @@
 import express from "express";
 import { GetAllPublishedProducts } from "../controllers/clientController.js";
 import { RegisterCustomerManually } from "../controllers/customerController.js";
+import { upload } from "../utils/multer.js";
+import { RegisterBusiness } from "../controllers/businessController.js";
 
 const router = express.Router();
 
@@ -9,6 +11,7 @@ router.get("/get-all-published-products", GetAllPublishedProducts);
 
 
 //customer
-router.post("/register-customer-manually", RegisterCustomerManually)
+router.post("/register-customer-manually", RegisterCustomerManually);
+router.post("/register-new-business", upload.single("business_cert"), RegisterBusiness);
 
 export default router;

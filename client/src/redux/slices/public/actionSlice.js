@@ -23,11 +23,21 @@ export const clientActionSlice = apiSlice.injectEndpoints({
                                  method: "POST",
                                  body: payload
                          })
+                }),
+
+                //Register new Supplier or Business
+                registerNewBusiness: builder.mutation({
+                        query: (payload) => ({
+                                url: "v1/client/register-new-business",
+                                method: "POST",
+                                body: payload
+                        })
                 })
         })
 })
 
 export const {
        useGetAllPublishedProductsQuery,
-       useRegisterNewCustomerManuallyMutation
+       useRegisterNewCustomerManuallyMutation,
+       useRegisterNewBusinessMutation
 } = clientActionSlice
