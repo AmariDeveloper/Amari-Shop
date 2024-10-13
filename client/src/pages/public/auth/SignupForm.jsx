@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRegisterNewCustomerManuallyMutation } from "../../../redux/slices/public/actionSlice";
 import { setAppNotification } from "../../../redux/slices/utilSlice";
 import Spinner1 from "../../../components/backend/common/Spinner1";
+import { clearRedirect } from "../../../redux/slices/public/clientSlice";
 
 const SignupForm = ({ func}) => {
   const [ status, setStatus ] = useState(false);
@@ -24,11 +25,16 @@ const SignupForm = ({ func}) => {
                    const res = await registerCustomer(data).unwrap();
 
                    if(res){
+                       //  console.log(res)
                          if(res.error){
                               dispatch(setAppNotification({ status: true, message: res.error.data.message, type: "Error"}))
                          }else{
                               dispatch(setAppNotification({ status: true, message: res.message, type: "Success"}))
                               navigate(`${redirect}`)
+
+                              setTimeout(() => {
+                                     dispatch(clearRedirect())
+                              }, 5000)
                          }
                    }
              } catch (error) {
@@ -42,6 +48,7 @@ const SignupForm = ({ func}) => {
                          <span><PiCaretLeftBold /></span>
                          <h2>Sign up to Amari</h2>
               </div>
+              { isLoading && <div className="loading-screen"></div> }
               <form className="adjust" onSubmit={handleSubmit(submitRegistrationForm)}>
                         <div className="auth-form-row split">
                                      <div className="auth-form-column">

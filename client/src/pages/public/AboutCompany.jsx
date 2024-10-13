@@ -1,3 +1,4 @@
+import AppNotification from "../../components/backend/common/AppNotification"
 import AboutAction from "../../components/public/about/AboutAction"
 import AboutBody from "../../components/public/about/AboutBody"
 import AboutHero from "../../components/public/about/AboutHero"
@@ -11,6 +12,7 @@ const AboutCompany = () => {
            <AboutHero />
            <AboutBody />
            <AboutAction />
+           <AppNotification />
            <Footer />
     </>
   )

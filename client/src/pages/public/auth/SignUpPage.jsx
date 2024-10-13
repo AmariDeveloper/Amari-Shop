@@ -4,6 +4,7 @@ import signupImg from "../../../assets/signup.jpg"
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import SignupForm from "./SignupForm";
+import AppNotification from "../../../components/backend/common/AppNotification";
 
 
 const SignUpPage = () => {
@@ -45,6 +46,8 @@ const SignUpPage = () => {
                                   <p className="redirect">Already have an account? <Link to={"/session/new"}>Sign in</Link></p>
                         </div>
               </div>
+
+              <AppNotification />
     </div>
   )
 }

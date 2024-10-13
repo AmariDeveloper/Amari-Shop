@@ -10,7 +10,7 @@ const CategoriesDropdown = ({ status, handleStatus }) => {
     const dispatch = useDispatch();
     const { categories } = useSelector(state => state.utils);
     const parentCategories = categories && categories.filter(item => item.parent === "None");
-    const handleOutsideClick = useCallback((e) => {
+    const handleOutsideProfClick = useCallback((e) => {
              if(dropdownRef.current && !dropdownRef.current.contains(e.target)){
                     handleStatus(false)
              }else{
@@ -19,8 +19,8 @@ const CategoriesDropdown = ({ status, handleStatus }) => {
     }, [handleStatus])
 
     useEffect(() => {
-           document.addEventListener("click", handleOutsideClick, true);
-    }, [handleOutsideClick])
+           document.addEventListener("click", handleOutsideProfClick, true);
+    }, [handleOutsideProfClick])
 
     const { data } = useGetCategoriesQuery({ refetchOnMountOrArgChange: true })
     useEffect(() => {

@@ -200,7 +200,6 @@ form .error{
      width: 350px;
      z-index: 9999;
      padding: 20px;
-     border: 1px solid;
      display: flex;
      align-items: center;
      gap: 10px;
@@ -221,7 +220,7 @@ form .error{
      -moz-transition: all 0.8s ease-in-out;
      -ms-transition: all 0.8s ease-in-out;
      -o-transition: all 0.8s ease-in-out;
-     background: rgba(168, 255, 252, 0.4);
+     background: rgba(14, 213, 220, 0.925);
 }
 .notification-pop.active{
       transform: translateX(0);
@@ -231,10 +230,10 @@ form .error{
       -o-transform: translateX(0);
 }
 .notification-pop.Success{
-     background: rgba(173, 255, 221, 0.421);
+     background: rgba(9, 225, 150, 0.925);
 }
 .notification-pop.Error{
-      background: rgb(255, 163, 163, 0.4)
+      background: rgba(226, 38, 38, 0.925)
 }
 .notification-pop h4{
       font-weight: 400;
@@ -243,10 +242,10 @@ form .error{
      color: var(--main-color);
 }
 .notification-pop.Success h4{
-    color: rgb(26, 208, 132);
+    color: rgb(255, 255, 255);
 }
 .notification-pop.Error h4{
-       color: rgb(255, 52, 52);
+       color: rgb(255, 255, 255);
 }
 .notification-pop span:not(.close-pop){
       width: 40px;
@@ -271,24 +270,30 @@ form .error{
 }
 
 .notification-pop p{
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 300;
-      color: var(--main-color);
+      color: whitesmoke;
 }
 .notification-pop.Success p{
-    color: rgb(26, 208, 132);
+    color: rgb(250, 250, 250);
 }
 .notification-pop.Error p{
-      color: rgb(255, 52, 52);
+      color: rgb(250, 250, 250);
+}
+.notification-pop.Success .close-pop{
+      color: white;
+}
+.notification-pop.Error .close-pop{
+     color: white;
 }
 .notification-pop .close-pop{
       position: absolute;
       right: 10px;
       top: 8px;
-      font-size: 13px;
+      font-size: 18px;
       width: 20px;
       height: 20px;
-      color: rgb(120, 120, 120);
+      color: rgb(246, 246, 246);
       display: flex;
       justify-content: flex-end;
       cursor: pointer;

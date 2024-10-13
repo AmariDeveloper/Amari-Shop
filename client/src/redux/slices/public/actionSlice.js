@@ -17,12 +17,27 @@ export const clientActionSlice = apiSlice.injectEndpoints({
 
 
                 //Customer Auth
+                loginCustomerManually: builder.mutation({
+                       query: (payload) => ({
+                               url: "v1/client/customer-login",
+                               method: "POST",
+                               body: payload
+                       })
+                }),
+
                 registerNewCustomerManually: builder.mutation({
                          query: (payload) => ({
                                  url: "v1/client/register-customer-manually",
                                  method: "POST",
                                  body: payload
                          })
+                }),
+
+                logoutCustomer: builder.mutation({
+                        query: () => ({
+                                url: "v1/client/customer-logout",
+                                method: "POST"
+                        })
                 }),
 
                 //Register new Supplier or Business
@@ -39,5 +54,7 @@ export const clientActionSlice = apiSlice.injectEndpoints({
 export const {
        useGetAllPublishedProductsQuery,
        useRegisterNewCustomerManuallyMutation,
-       useRegisterNewBusinessMutation
+       useRegisterNewBusinessMutation,
+       useLoginCustomerManuallyMutation,
+       useLogoutCustomerMutation
 } = clientActionSlice

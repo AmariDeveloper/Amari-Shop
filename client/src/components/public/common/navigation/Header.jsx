@@ -11,11 +11,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { openShoppingCartSidebar } from "../../../../redux/slices/public/cartSlice";
 import ShoppingCartModal from "../products/ShoppingCartModal";
 import { saveRedirect } from "../../../../redux/slices/public/clientSlice";
+import ProfileBar from "./ProfileBar";
 
 
 const Header = () => {
   const [dropdownStatus, setDropdownStatus] = useState(false);
   const { shopping_cart } = useSelector(state => state.cart);
+  const { session } = useSelector(state => state.client);
  const dispatch = useDispatch();
  const { pathname } = useLocation();
 
@@ -57,10 +59,14 @@ const Header = () => {
                                               </nav>
                                    </div>
                                    <div className="right flex-item-column">
-                                            <div className="box account" onClick={openLogin}>
-                                                      <span><HiOutlineUserCircle /></span>
-                                                      <h3>Sign In</h3>
-                                            </div>
+                                            { session.isLoggedIn ?
+                                                    <ProfileBar />
+                                                 :
+                                                 <div className="box account" onClick={openLogin}>
+                                                          <span><HiOutlineUserCircle /></span>
+                                                          <h3>Sign In</h3>
+                                                </div>
+                                              }
                                             <div className="box search">
                                                       <span><GoSearch /></span>
                                             </div>

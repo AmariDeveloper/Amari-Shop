@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
        all_published_products: localStorage.getItem("All Published Products") ? JSON.parse(localStorage.getItem("All Published Products")) : [],
        quick_view_modal: { status: false, data: null},
-       redirect: ""
+       redirect: "/",
+       session: localStorage.getItem("Session") ? JSON.parse(localStorage.getItem("Session")) : { isLoggedIn: false, profile: null }
 }
 
 const clientSlice = createSlice({
@@ -26,8 +27,19 @@ const clientSlice = createSlice({
                       state.redirect = action.payload
                },
                clearRedirect: (state) => {
-                    state.redirect = ""
-               } 
+                    state.redirect = "/"
+               },
+               setCustomerSession: (state, action) => {
+                      state.session.isLoggedIn = true;
+                      state.session.profile = {...action.payload};
+                      localStorage.setItem("Session", JSON.stringify(state.session))
+               },
+               clearCustomerSession: (state) => {
+                      state.session.isLoggedIn = false;
+                      state.session.profile = null;
+                      localStorage.removeItem("Session");
+               }
+
           }
 })
 
@@ -36,7 +48,9 @@ export const {
         openQuickViewModal,
         closeQuickViewModal,
         saveRedirect,
-        clearRedirect
+        clearRedirect,
+        setCustomerSession,
+        clearCustomerSession
 } = clientSlice.actions
 
 export default clientSlice.reducer;

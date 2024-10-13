@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Business from "../models/Business.js";
 import cloudinary from "../utils/cloudinary.js";
+import { sendSupplierRegistrationMail } from "../mail/actions/sendSupplierRegistrationMail.js";
 
 //Register New Supplier Business
 export const RegisterBusiness  = asyncHandler(async(req, res) => {
@@ -24,6 +25,9 @@ export const RegisterBusiness  = asyncHandler(async(req, res) => {
          } = JSON.parse(req.body.data);
 
          const userExists = await Business.findOne({ email });
+
+         const firstname = fullname.split(" ")[0]
+         const userEmailData = { name: firstname, email: email}
 
          if(userExists){
                     res.status(500).json({ message: "This business seems to be already registered. Contact our support center."});
@@ -55,6 +59,7 @@ export const RegisterBusiness  = asyncHandler(async(req, res) => {
                            })
 
                            if(new_business){
+                                  sendSupplierRegistrationMail(userEmailData);
                                   res.status(201).json({ message: "Registration Submitted Successfully!"})
                            }else{
                                res.status(500).json({ message: "Internal Server Error. We have taken a note and are fixing it. Please check back later."})

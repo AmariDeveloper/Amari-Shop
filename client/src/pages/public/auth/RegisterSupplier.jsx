@@ -40,7 +40,7 @@ const RegisterSupplier = () => {
         }
   }
 
-  setTimeout(() => () => {
+  setTimeout(() =>{
           navigate("/");
           setSuccessStatus(false)
   }, 120000)
@@ -55,7 +55,7 @@ const RegisterSupplier = () => {
                                                          <img src={congrats} alt="" />
 
                                                          <h2>Success! Thank you for Registering to Amari.</h2>
-                                                         <p>Kindly check on your email on the next steps. Our team is here to support you every step of the way. If you have any questions, feel free to reach out to support@amari.africa.</p>
+                                                         <p>Kindly check on your email on the next steps. Our team is here to support you every step of the way. If you have any questions, feel free to reach out to us at support@amari.africa.</p>
 
                                                          <Link to={"/"} onClick={() => setSuccessStatus(false)}>Back Home</Link>
                                             </div>
