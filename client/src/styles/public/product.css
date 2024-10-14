@@ -164,7 +164,8 @@
      -ms-border-radius: 7px;
      -o-border-radius: 7px;
 }
-.var-color-box{
+.var-color-box,
+.var-image-box img{
     cursor: pointer;
     display: inline-flex;
     width: 43px;
@@ -198,6 +199,9 @@
 }
 .var-color-box.active{
       border: 2px solid var(--main-color);
+}
+.var-image-box.active{
+    border: 3px solid var(--main-color);
 }
 .var-box-btn.active span{
     color: white;
@@ -233,6 +237,9 @@
     -ms-border-radius: 7px;
     -o-border-radius: 7px;
 }
+.variation-column .selected-product-box{
+    margin: 10px 0;
+}
 .selected-product-box .name-title{
       width: 45px;
       height: 45px;
@@ -247,7 +254,8 @@
       color: white;
       background: var(--main-color);
 }
-.selected-product-box .name-color-title{
+.selected-product-box .name-color-title,
+.selected-product-box .fabric-title img{
     width: 45px;
     height: 45px;
     display: flex;
@@ -431,7 +439,6 @@
 
 .cart-moja .variation-column{
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
@@ -709,6 +716,23 @@
       font-weight: 300;
       margin-top: 5px;
 }
+.variations-chosen .var-items-wrap{
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      margin-top: 5px;;
+}
+
+.variations-chosen .var-fabric-box img,
+.variations-chosen .var-color-box{
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      -ms-border-radius: 3px;
+      -o-border-radius: 3px;
+}
 .basket-product-moja .chosen-wrap{
        display: flex;
        flex-wrap: wrap;
@@ -717,9 +741,8 @@
 .basket-product-moja .chosen-wrap h6{
       font-size: 15px;
       font-weight: 500;
-      margin-top: 1px;
 }
-.chosen-wrap h6 span{
+.chosen-wrap  span{
      font-size: 12px;
 }
 

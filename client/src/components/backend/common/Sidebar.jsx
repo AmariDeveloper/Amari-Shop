@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate, useParams } from "react-router-dom"
+import { Link, NavLink, useLocation, useNavigate} from "react-router-dom"
 import { RxDashboard } from "react-icons/rx";
 import { HiOutlinePresentationChartLine } from "react-icons/hi2";
 import { CiBoxes } from "react-icons/ci";
@@ -48,7 +48,10 @@ const Sidebar = () => {
 
  //sanitize url switch and optionbox
 
- const { name } = useParams();
+ //const { name } = useParams();
+ const { pathname }  = useLocation();
+ const name = pathname.slice(21, pathname.length);
+ console.log(name)
  useEffect(() => {
        const product_options = ["categories", "brands", "variations", "tags"];
         if(product_options.includes(name)){

@@ -27,7 +27,8 @@ export const RegisterCustomerManually = asyncHandler(async(req, res) => {
                            info: {
                                   name: result.name,
                                   email: result.name,
-                                  id: result._id
+                                  id: result._id,
+                                  profileImage: result.profileImage
                           }
                    })
                }else{

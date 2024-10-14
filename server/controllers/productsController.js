@@ -83,6 +83,7 @@ export const CreateNewProduct = asyncHandler(async(req, res) => {
 export const EditProduct = asyncHandler(async(req, res) => {
         const productMainImage = req.files["mainImage"] && req.files['mainImage'][0];
         const otherProductImages = req.files["galleryImages"] && req.files["galleryImages"];
+        console.log(otherProductImages)
         
         const { general, categories, variations, tags } = JSON.parse(req.body.data);
 
@@ -122,6 +123,7 @@ export const EditProduct = asyncHandler(async(req, res) => {
         }else{
               other_image_urls.push(...currentProduct.product_imagery.product_gallery)
         }
+
       
        //initiate editing
        const editedProduct = await Product.findOneAndUpdate({ product_title: product_title}, {

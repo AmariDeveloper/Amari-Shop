@@ -49,7 +49,21 @@ const OrderCompleteBody = () => {
                                                                                                             <div className="vars-wrapper">
                                                                                                                          {item.variations.map(vr => 
                                                                                                                                <div className="vr-box" key={vr.id}>
-                                                                                                                                         <h6>{vr.name} <span>x{vr.quantity}</span></h6>
+                                                                                                                                        { vr.name.startsWith("#") ? 
+                                                                                                                                               <div className="vr-inner">
+                                                                                                                                                        <span style={{ background: `${vr.name}`}}></span>
+                                                                                                                                                        <span>x{vr.quantity}</span>
+                                                                                                                                               </div>
+                                                                                                                                               :
+                                                                                                                                               vr.name.startsWith("https") ?
+                                                                                                                                               <div className="vr-inner">
+                                                                                                                                                         <img src={vr.name} alt="/" />
+                                                                                                                                                         <span>x{vr.quantity}</span>
+                                                                                                                                               </div>
+                                                                                                                                               :
+                                                                                                                                               <h6>{vr.name} <span>x{vr.quantity}</span></h6>
+                                                                                                                                          }
+                                                                                                                                         
                                                                                                                                </div>
                                                                                                                           )}
                                                                                                             </div>

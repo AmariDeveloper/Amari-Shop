@@ -101,7 +101,13 @@ const ProductsBody = () => {
                                                                                         <span key={v.id} style={{ background: `${v.name}`}} title={v.name}></span>
                                                                                  )}
                                                                        </div>
-                                                                      :
+                                                                      :  product.product_variations.product_variation_name === "fabric" ?
+                                                                        <div className="v-list-fabric">
+                                                                                  { product.product_variations.product_selected_variations.map(v => 
+                                                                                        <img src={v.name} key={v.id} alt="fabric-color"/>
+                                                                                  )}
+                                                                        </div>
+                                                                        :
                                                                       <div className="option-results">
                                                                         { product.product_variations.product_selected_variations.length > 0 ? 
                                                                               <>
@@ -128,6 +134,7 @@ const ProductsBody = () => {
                                                                             <span>4.2(182)</span>
                                                                 </div>
                                                        </td>
+                                                       
                                                        <td>
                                                                <div className="p-actions">
                                                                           <span onClick={() => openEditModal(product)}>Edit</span>

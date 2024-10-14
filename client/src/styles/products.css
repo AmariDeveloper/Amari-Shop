@@ -560,7 +560,8 @@
       gap: 10px;
 }
  .v-list,
-.v-list-colors{
+.v-list-colors,
+.v-list-fabric{
       display: flex;
       gap: 5px;
       flex-wrap: wrap;
@@ -579,11 +580,13 @@
       -ms-border-radius: 5px;
       -o-border-radius: 5px;
 }
-.v-list-colors .type-box{
-       width: 20px;
-       height: 20px;
+.v-list-colors .type-box,
+.v-list-fabric img{
+       width: 30px;
+       height: 30px;
        display: flex;
 }
+
  .v-list-colors span{
       width: 20px;
       height: 20px;
@@ -594,7 +597,17 @@
       -o-border-radius:4px;
       border: 1px solid ghostwhite;
 }
-
+.v-list-fabric img{
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+      cursor: pointer;
+}
+.v-list-fabric img.active{
+       border: 3px solid var(--main-color);
+}
 .c-actions span{
        display: flex;
        width: 25px;

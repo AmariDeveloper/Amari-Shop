@@ -24,6 +24,10 @@ const SelectedProductBox = ({ data, product_id }) => {
                                                   <div className="name-color-title">
                                                            <span style={{ background: `${data.name}`}}></span>
                                                   </div>
+                                                 : data.name.startsWith("https") ?
+                                                 <div className="fabric-title">
+                                                           <img src={data.name} alt="" />
+                                                 </div>
                                                  :
                                                  <div className="name-title">
                                                            {data.name}
@@ -44,7 +48,11 @@ const SelectedProductBox = ({ data, product_id }) => {
                                     <div className="name-color-title">
                                              <span style={{ background: `${data.name}`}}></span>
                                     </div>
-                                   :
+                                   : data.name.startsWith("https") ?
+                                      <div className="fabric-title">
+                                                <img src={data.name} alt="" />
+                                      </div>
+                                      :
                                    <div className="name-title">
                                              {data.name}
                                    </div>

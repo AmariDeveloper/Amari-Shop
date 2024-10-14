@@ -15,6 +15,7 @@ import { useCreateNewProductMutation } from "../../../redux/slices/productSlice"
 //import {CKEditor} from '@ckeditor/ckeditor5-react';
 //import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Spinner1 from "../common/Spinner1";
+import FabricMoja from "./utils/FabricMoja";
 
 const NewProductModal = () => {
     const { productModal, categories, variations } = useSelector(state => state.utils)
@@ -155,11 +156,13 @@ const NewProductModal = () => {
 const resetProductForm = () => {
        dispatch(closeCreateProductModal());
        reset();
-       setSelectedCategories([]);
+       setSelectedCategories([])
        selectCategory("");
        switchVariationType("");
        setTags([]);
        setGalleryImages([]);
+       setOtherProductImages([]);
+       setProductImage([])
        setGalleryStatus(false);
        setStatus(false);
        dispatch(clearSelectedVariation())
@@ -369,7 +372,11 @@ const resetProductForm = () => {
                                                                                      <div className="v-list-colors">
                                                                                              { variations && variations.length > 0 && variations.find(item => item.name === "color").components.map(c => <div className="type-box" onClick={() => addVariation(c)} key={c.id}><ScMoja key={c.id} c={c} /></div>)}
                                                                                      </div>
-                                                                                     :
+                                                                                     : variationType === "fabric" ?
+                                                                                      <div className="v-list-fabric">
+                                                                                               { variations && variations.length > 0 && variations.find(item => item.name === "fabric").components.map(c => <div className="type-box" key={c.id} onClick={() => addVariation(c)}><FabricMoja c={c} /></div>)}
+                                                                                      </div>
+                                                                                      :
                                                                                      <div className="v-list">
                                                                                              { variations && variations.length > 0 && variations.find(item => item.name === variationType).components.map(c => <div onClick={() => addVariation(c)} className="type-box" key={c.id}>
                                                                                                             <SMoja key={c.id} c={c}    />

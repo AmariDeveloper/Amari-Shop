@@ -73,6 +73,13 @@ const ProductInfoBox = ({ product }) => {
                                                    </div>
                                              )
                                              :
+                                             product.product_variations.product_variation_name === "fabric" ?
+                                                   product.product_variations.product_selected_variations.map(variation => 
+                                                          <div className={selected.map(item => item.id).includes(variation.id) ? "var-image-box active" : "var-image-box"} key={variation.id} onClick={() => handleSelected(variation)}>
+                                                                    <img src={variation.name} alt="fabric image" />
+                                                          </div>
+                                                   )
+                                             :
                                           product.product_variations.product_selected_variations.map(variation => 
                                                 <div onClick={() => handleSelected(variation)} className={selected.map(item =>item.id).includes(variation.id) ? "var-box-btn active" : "var-box-btn"} key={variation.id}>
                                                            <span>{variation.name}</span>

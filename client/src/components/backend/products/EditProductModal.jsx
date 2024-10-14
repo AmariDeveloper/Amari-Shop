@@ -13,6 +13,7 @@ import ScMoja from "./utils/ScMoja";
 import Spinner1 from "../common/Spinner1";
 import { useEditProductMutation } from "../../../redux/slices/productSlice";
 import { setAppNotification } from "../../../redux/slices/utilSlice";
+import FabricMoja from "./utils/FabricMoja";
 
 
 const EditProductModal = () => {
@@ -166,6 +167,7 @@ const EditProductModal = () => {
             setOtherProductImages(updated_other_images_list)
      }
 
+     console.log(galleryImages)
         //add categories
     const selectCategory = (e) =>{
        console.log(e.target.value)
@@ -420,6 +422,10 @@ const submitEditForm = async(form_data) => {
                                                                                      <div className="v-list-colors">
                                                                                              { variations && variations.length > 0 && variations.find(item => item.name === "color").components.map(c => <div className="type-box" onClick={() => addVariation(c)} key={c.id}><ScMoja key={c.id} c={c} /></div>)}
                                                                                      </div>
+                                                                                     : variationType === "fabric" ?
+                                                                                     <div className="v-list-fabric">
+                                                                                              { variations && variations.length > 0 && variations.find(item => item.name === "fabric").components.map(c => <div className="type-box" key={c.id} onClick={() => addVariation(c)}><FabricMoja c={c} /></div>)}
+                                                                                     </div>
                                                                                      :
                                                                                      <div className="v-list">
                                                                                              { variations && variations.length > 0 && variations.find(item => item.name === variationType).components.map(c => <div onClick={() => addVariation(c)} className="type-box" key={c.id}>
@@ -450,7 +456,7 @@ const submitEditForm = async(form_data) => {
 
                                                        
                                                        <div className="form-row btn">
-                                                                     <button>{ isLoading ? <Spinner1 /> : <span>Create Product</span>}</button>
+                                                                     <button>{ isLoading ? <Spinner1 /> : <span>Edit Product</span>}</button>
                                                        </div>
                                               </div>
                                    </div>

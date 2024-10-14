@@ -42,6 +42,11 @@ const VariationList = () => {
                                                                                  { item.components.map(v => <span key={v.id} style={{ background: `${v.name}`}} title={v.name}></span>)}
                                                                         </div>
                                                                         :
+                                                                      item.name === "fabric" ?
+                                                                            <div className="v-list-fabric">
+                                                                                    { item.components.map(v => <img src={v.name} key={v.id} alt="fabric-color"/>)}
+                                                                            </div>
+                                                                        :
                                                                     <div className="v-list">
                                                                               { item.components.map(v => <span key={v.id}>{v.name}</span>)}
                                                                     </div>

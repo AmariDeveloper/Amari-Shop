@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRegisterNewCustomerManuallyMutation } from "../../../redux/slices/public/actionSlice";
 import { setAppNotification } from "../../../redux/slices/utilSlice";
 import Spinner1 from "../../../components/backend/common/Spinner1";
-import { clearRedirect } from "../../../redux/slices/public/clientSlice";
+import { clearRedirect, setCustomerSession } from "../../../redux/slices/public/clientSlice";
 
 const SignupForm = ({ func}) => {
   const [ status, setStatus ] = useState(false);
@@ -31,6 +31,9 @@ const SignupForm = ({ func}) => {
                          }else{
                               dispatch(setAppNotification({ status: true, message: res.message, type: "Success"}))
                               navigate(`${redirect}`)
+
+                              //set customer session
+                              dispatch(setCustomerSession(res.info))
 
                               setTimeout(() => {
                                      dispatch(clearRedirect())
