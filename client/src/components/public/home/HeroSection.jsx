@@ -79,7 +79,6 @@ const HeroSection = () => {
                                                  </div>
                                                  <div className="hero-grid">
                                                             <div className="hero-grid-texts">
-                                                                      {/* <h2>Experience swift, secure, and hassle-free delivery with our efficient shipping services, designed to meet your needs with real-time updates and global reach.</h2> */}
                                                                       <h2>Fast, reliable, and hassle-free shipping, tailored for your convenience.</h2>
                                                             </div>
                                                            <img src={van} alt="" />
@@ -96,6 +95,7 @@ const HeroSection = () => {
                                                  <div className="hero-grid">
                                                               <div className="hero-grid-texts">
                                                                       <h2>From Farm to Table: Shop Nature&apos;s Best Produce.</h2>
+                                                                      
                                                                       <Link to={"/"}>Explore</Link>
                                                               </div>
                                                               <img src={juice} alt="" />
