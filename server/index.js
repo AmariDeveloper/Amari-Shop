@@ -23,7 +23,6 @@ const corsConfig = {
 }
 app.use(cors(corsConfig))
 
-
 //Routes
 app.use("/api/v1/user", UserRoutes);
 app.use("/api/v1/product", ProductRoutes);

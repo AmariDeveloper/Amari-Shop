@@ -50,7 +50,7 @@ const ProfileBar = () => {
                                   <p>{session && session.profile.email}</p>
                        </div>
                         <ul>
-                                <li><Link to={"/"}><span><HiOutlineUserCircle /></span>Account</Link></li>
+                                <li><Link to={`/${firstname.toLowerCase()}/my-account`}><span><HiOutlineUserCircle /></span>Account</Link></li>
                                 <li><Link to={"/"}><span><HiOutlineHeart /></span>Wishlist</Link></li>
                                 <li><Link to={"/"}><span><IoHelpBuoyOutline /></span>Help & Support</Link></li>
                         </ul>

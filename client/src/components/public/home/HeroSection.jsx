@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { CgArrowTopRight } from "react-icons/cg";
-import sales from "../../../assets/sales2.jpg"
+import sales from "../../../assets/sales3.jpg"
 import van from "../../../assets/van.png"
 import suka from "../../../assets/shuka.jpg"
 import juice from "../../../assets/juice.jpg"
@@ -72,7 +72,7 @@ const HeroSection = () => {
                                    <div className="hero-grid-wrapper">
                                                  <div className="hero-grid">
                                                              <div className="hero-grid-texts">
-                                                                        <h2>Shop with Family in Mind: Discover Essentials for Every Generation!</h2>
+                                                                        <h2>Shop African Fashion: Discover Essentials for Every Generation.</h2>
                                                                         <Link to={"/"}>Explore</Link>
                                                              </div>
                                                              <img src={sales} alt="" />
@@ -87,7 +87,7 @@ const HeroSection = () => {
                                                  <div className="hero-grid">
                                                            
                                                             <div className="hero-grid-texts">
-                                                                       <h2>Get Maasai Shukas: Vibrant Tradition Meets Modern Style!</h2>
+                                                                       <h2>Get Maasai Shukas: Vibrant Tradition Meets Modern Style.</h2>
                                                                        <Link to={"/"}>Explore</Link>
                                                             </div>
                                                             <img src={suka} alt="" />
@@ -95,7 +95,7 @@ const HeroSection = () => {
 
                                                  <div className="hero-grid">
                                                               <div className="hero-grid-texts">
-                                                                      <h2>Fresh from the Farm: Savor Nature&apos;s Best Produce and Juices</h2>
+                                                                      <h2>From Farm to Table: Shop Nature&apos;s Best Produce.</h2>
                                                                       <Link to={"/"}>Explore</Link>
                                                               </div>
                                                               <img src={juice} alt="" />

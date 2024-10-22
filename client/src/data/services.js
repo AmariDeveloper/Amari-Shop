@@ -8,7 +8,7 @@ export const services = [
     {
         id: 1,
         name: "Order Management",
-        description: "Let us take the stress out handling orders. Our streamlined system notifies you of new sales, tracks progress, and keeps everything organized so you can focus on creating outstanding products.",
+        description: "Take the stress out of handling orders. Our streamlined system keeps everything organised so you can focus on creating outstanding products.",
         icon: "/order-management.png"
     },
     {

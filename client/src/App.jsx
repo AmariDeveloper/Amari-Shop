@@ -20,6 +20,7 @@ import LoginPage from './pages/public/auth/LoginPage'
 import SignUpPage from './pages/public/auth/SignUpPage'
 import AboutCompany from './pages/public/AboutCompany'
 import RegisterSupplier from './pages/public/auth/RegisterSupplier'
+import MyAccount from './pages/public/customer/MyAccount'
 
 function App() {
   const location = useLocation();
@@ -40,6 +41,7 @@ function App() {
              <Route path='/checkout/order-complete-confirmation' element={<OrderComplete />} />
              <Route path='/about' element={<AboutCompany />} />
              <Route path="/supplier/new" element={<RegisterSupplier />} />
+             <Route path="/:id/my-account" element={<MyAccount />} />
 
              {/* Protected Routes */}
               <Route element={<ProtectedRoutes />}>
