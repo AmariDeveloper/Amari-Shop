@@ -81,8 +81,8 @@ const EditProductModal = () => {
                 product_selling_price: editProductModal.data ? editProductModal.data.product_pricing.product_selling_price : "",
                 product_additional_info: editProductModal.data ? editProductModal.data.product_short_description : "",
                 published_status: editProductModal.data ? editProductModal.data.product_publish_status : "",
-                product_categories: editProductModal.data ? editProductModal.data.product_categories[0].name : "",
-                product_variations: editProductModal.data ? editProductModal.data.product_variations.product_variation_name : "",
+                product_categories: editProductModal.data && editProductModal.data.product_categories.length ? editProductModal.data.product_categories[0].name : "",
+                product_variations: editProductModal.data && editProductModal.data.product_variations.length ? editProductModal.data.product_variations.product_variation_name : "",
                 brand: editProductModal.data ? editProductModal.data.product_brand : ""
             }
           reset(defaults);
@@ -167,10 +167,8 @@ const EditProductModal = () => {
             setOtherProductImages(updated_other_images_list)
      }
 
-     console.log(galleryImages)
         //add categories
     const selectCategory = (e) =>{
-       console.log(e.target.value)
         if(selectedCategories.map(item => item.name).includes(e.target.value)){
              return;
         }
@@ -215,6 +213,12 @@ const removeTag = (val) => {
       setTags(tags.filter(item => item.name !==val));
 }
 
+const clearEditFormRemnants = () => {
+         setSelectedCategories([]);
+         setTags([]);
+         setOtherProductImages([]);
+         removeProductMainImage();
+}
 
 //submit edit form
 const [ editProduct, { isLoading }] = useEditProductMutation();
@@ -230,10 +234,14 @@ const submitEditForm = async(form_data) => {
        formData.append("data", JSON.stringify(data));
        productImage.length > 0 && formData.append("mainImage", form_data["product-main-image"][0]);
        if(otherProductImages.length > 0){
+                 formData.append("NewImagesArray", JSON.stringify(galleryImages))
                   for(let file of otherProductImages){
                          formData.append("galleryImages", file);
                   }
+        }else{
+              formData.append("NewImagesArray", JSON.stringify(galleryImages))
         }
+       
        try{
               const res = await editProduct(formData).unwrap();
               if(res.error){
@@ -241,6 +249,7 @@ const submitEditForm = async(form_data) => {
               }else{
                     dispatch(setAppNotification({ status: true, message: res.message, type: "Success"}));
                     dispatch(closeEditProductModal());
+                    clearEditFormRemnants();
               }
        }catch(error){
             //console.log(error)
@@ -393,7 +402,7 @@ const submitEditForm = async(form_data) => {
                                                        </div>
                                                        <div className="form-row">
                                                                    <label htmlFor="product categories">Product Category</label>
-                                                                   <select className="input-control" {...register("product_categories", {required: "Please add atleast one category", onChange: selectCategory})}>
+                                                                   <select className="input-control" {...register("product_categories", { onChange: selectCategory})}>
                                                                           <option value="">Select category</option>
                                                                                 { categories && categories.length > 0 && categories.map(item =>
                                                                                       <option key={item._id} value={item.name}>{item.name}</option>

@@ -47,7 +47,7 @@ const Login = () => {
                                   </div>
                                   <div className="login-form-col">
                                              <div className="login-intro">
-                                                      <div className="logo">
+                                                      <div className="logo" onClick={() => navigate("/")}>
                                                                 <img src={logo} alt="logo" />
                                                       </div>
                                                       <h2>Welcome Back</h2>

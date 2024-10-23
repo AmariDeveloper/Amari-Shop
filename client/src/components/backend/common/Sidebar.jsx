@@ -51,7 +51,6 @@ const Sidebar = () => {
  //const { name } = useParams();
  const { pathname }  = useLocation();
  const name = pathname.slice(21, pathname.length);
- console.log(name)
  useEffect(() => {
        const product_options = ["categories", "brands", "variations", "tags"];
         if(product_options.includes(name)){

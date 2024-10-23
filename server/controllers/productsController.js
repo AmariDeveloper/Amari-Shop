@@ -83,10 +83,12 @@ export const CreateNewProduct = asyncHandler(async(req, res) => {
 export const EditProduct = asyncHandler(async(req, res) => {
         const productMainImage = req.files["mainImage"] && req.files['mainImage'][0];
         const otherProductImages = req.files["galleryImages"] && req.files["galleryImages"];
-        console.log(otherProductImages)
         
         const { general, categories, variations, tags } = JSON.parse(req.body.data);
 
+        const newImagesArray = JSON.parse(req.body.NewImagesArray);
+        const sanitizedImages = newImagesArray.map(item => item.path);
+        
         const {
               product_title,
               product_short_description,
@@ -112,8 +114,8 @@ export const EditProduct = asyncHandler(async(req, res) => {
               main_image = currentProduct.product_imagery.product_main_image;
         }
         
-        if(otherProductImages){
-              other_image_urls.push(...currentProduct.product_imagery.product_gallery);
+        if(otherProductImages && otherProductImages.length > 0){
+              other_image_urls.push(...sanitizedImages);
               for(let file of otherProductImages){
                      const cloudinary_other_image = await cloudinary.uploader.upload(file.path, { folder: "Product Images"});
                      if(cloudinary_other_image){
@@ -121,7 +123,7 @@ export const EditProduct = asyncHandler(async(req, res) => {
                      }
               }
         }else{
-              other_image_urls.push(...currentProduct.product_imagery.product_gallery)
+              other_image_urls.push(...sanitizedImages)
         }
 
       
