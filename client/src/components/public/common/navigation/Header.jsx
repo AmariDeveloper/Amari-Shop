@@ -5,16 +5,19 @@ import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { GoSearch } from "react-icons/go";
 import { HiChevronDown } from "react-icons/hi2";
 import CategoriesDropdown from "./CategoriesDropdown";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CgMenuLeft } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import { openShoppingCartSidebar } from "../../../../redux/slices/public/cartSlice";
 import ShoppingCartModal from "../products/ShoppingCartModal";
 import { saveRedirect } from "../../../../redux/slices/public/clientSlice";
 import ProfileBar from "./ProfileBar";
+import { publicSidebarContext } from "./publicnavcontext";
 
 
 const Header = () => {
+  // eslint-disable-next-line no-unused-vars
+  const [sidebarStatus, setSidebarStatus ] = useContext(publicSidebarContext);
   const [dropdownStatus, setDropdownStatus] = useState(false);
   const { shopping_cart } = useSelector(state => state.cart);
   const { session } = useSelector(state => state.client);
@@ -34,7 +37,7 @@ const Header = () => {
             <div className="inner-row-2">
                         <div className="header-content">
                                     <div className="mobile-menu-btn">
-                                                <span className="menu-btn"><CgMenuLeft /></span>
+                                                <span className="menu-btn" onClick={() => setSidebarStatus(true)}><CgMenuLeft /></span>
                                                 <span className="spacer"></span>
                                     </div>
                                    <div className="flex-item-column">
@@ -42,7 +45,7 @@ const Header = () => {
                                                      <img src={logo} alt="" className="logo" />
                                               </Link>
                                               <nav>
-                                                        <span className="menu-btn"><CgMenuLeft /></span>
+                                                        <span onClick={() => setSidebarStatus(true)} className="menu-btn"><CgMenuLeft /></span>
                                                        <div className="head-categories">
                                                                 <div className={dropdownStatus ? "head-categories-wrap active" : "head-categories-wrap"} onClick={() => setDropdownStatus(!dropdownStatus)}>
                                                                         Categories 
