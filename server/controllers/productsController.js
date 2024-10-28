@@ -83,8 +83,9 @@ export const CreateNewProduct = asyncHandler(async(req, res) => {
 export const EditProduct = asyncHandler(async(req, res) => {
         const productMainImage = req.files["mainImage"] && req.files['mainImage'][0];
         const otherProductImages = req.files["galleryImages"] && req.files["galleryImages"];
+
         
-        const { general, categories, variations, tags } = JSON.parse(req.body.data);
+        const { general, categories, variations, tags, id } = JSON.parse(req.body.data);
 
         const newImagesArray = JSON.parse(req.body.NewImagesArray);
         const sanitizedImages = newImagesArray.map(item => item.path);
@@ -103,7 +104,7 @@ export const EditProduct = asyncHandler(async(req, res) => {
               brand
          } = general;
 
-         const currentProduct = await Product.findOne({ product_title })
+         const currentProduct = await Product.findById(id);
        
          /* Upload images to cloudinary if uploaded */
          let main_image, other_image_urls = [];
@@ -128,7 +129,7 @@ export const EditProduct = asyncHandler(async(req, res) => {
 
       
        //initiate editing
-       const editedProduct = await Product.findOneAndUpdate({ product_title: product_title}, {
+       const editedProduct = await Product.findByIdAndUpdate(id, {
               product_title: product_title,
               product_slug: product_title.replaceAll(" ", "-"),
               product_short_description: product_short_description,

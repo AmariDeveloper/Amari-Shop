@@ -10,7 +10,7 @@ const HomeCategories = () => {
                         <div className="home-categories-content">
                                     <h2 className="section-title">Explore Popular Categories</h2>
 
-                                    <div className="home-categories-row">
+                                    <div className="categories-wrap-row">
                                               { categories && parent_categories.map(category => 
                                                      <div className="category-moja" key={category._id}>
                                                                  <img src={category.thumbnail} alt="" />

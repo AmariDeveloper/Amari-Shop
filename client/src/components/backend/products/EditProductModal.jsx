@@ -228,7 +228,8 @@ const submitEditForm = async(form_data) => {
                 general: form_data,
                 categories: selectedCategories,
                 variations: { variationName: variationType, selected: selectedVariation },
-                tags: tags
+                tags: tags,
+                id: editProductModal.data && editProductModal.data._id
         }
        //prepare data for upload
        formData.append("data", JSON.stringify(data));
