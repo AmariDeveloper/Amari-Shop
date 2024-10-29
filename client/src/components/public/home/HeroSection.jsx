@@ -21,7 +21,7 @@ const hero_data = [
       {
           id: 2,
           image: "two",
-          statement: "Empowering African Suppliers to Access Worldwide Markets.",
+          statement: "Empowering African Suppliers to Access Global Markets.",
           link: "/supplier/new",
           btnMsg: "Register as Supplier"
       }
@@ -79,14 +79,14 @@ const HeroSection = () => {
                                                  </div>
                                                  <div className="hero-grid">
                                                             <div className="hero-grid-texts">
-                                                                      <h2>Fast, reliable, and hassle-free shipping, tailored for your convenience.</h2>
+                                                                      <h2>Fast, reliable, and hassle-free shipping.</h2>
                                                             </div>
                                                            <img src={van} alt="" />
                                                  </div>
                                                  <div className="hero-grid">
                                                            
                                                             <div className="hero-grid-texts">
-                                                                       <h2>Get Maasai Shukas: Vibrant Tradition Meets Modern Style.</h2>
+                                                                       <h2>Discover African Fabrics: Vibrant Tradition Meets Modern Style.</h2>
                                                                        <Link to={"/"}>Explore</Link>
                                                             </div>
                                                             <img src={suka} alt="" />

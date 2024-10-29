@@ -1,16 +1,20 @@
-import { useContext, useRef, useEffect } from "react";
+import { useContext, useRef, useEffect, useState } from "react";
 import {CgClose} from "react-icons/cg"
-import { LuChevronRight } from "react-icons/lu";
+import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { useSelector } from "react-redux";
 import { publicSidebarContext } from "./publicnavcontext";
 import gsap from "gsap"
+import { Link } from "react-router-dom"
 
 const Sidebar = () => {
     const [ sidebarStatus, setSidebarStatus ] = useContext(publicSidebarContext);
     const { categories } = useSelector(state => state.utils);
+    const [sidebarTitle, setSidebarTitle] = useState("Menu");
+    const [ tabStatus, setTabStatus ] = useState(false)
     const parent_categories = categories && categories.filter(item => item.parent === "None");
     const sidebarRef = useRef();
     const closeSidebar = () => setSidebarStatus(false);
+
 
     useEffect(() => {
       if(sidebarStatus){
@@ -31,17 +35,29 @@ const Sidebar = () => {
                }, 1200)
       }
 }, [sidebarStatus])
+
+//view all categories and change title
+const openMoreCategories = () => {
+       setTabStatus(true);
+       setSidebarTitle("Categories");
+}
+
+//close all categories tab and change title
+const closeMoreCategories = () => {
+      setTabStatus(false);
+      setSidebarTitle("Menu")
+}
   return (
     <div ref={sidebarRef} className="sidebar-section">
               <div className="sidebar-content">
                         <div className="sidebar-header">
-                                 <h3>Menu</h3>
+                                 <h3><span onClick={closeMoreCategories} className={tabStatus ? "active" : ""}><LuChevronLeft /></span> {sidebarTitle}</h3>
                                  <span onClick={closeSidebar}><CgClose /></span>
                         </div>
 
                         <div className="sidebar-menu">
                                    <div className="categories-wrap">
-                                             <h4>Categories <span><LuChevronRight /></span></h4>
+                                             <h4 onClick={openMoreCategories}>Categories <span><LuChevronRight /></span></h4>
 
                                              <div className="sidebar-categories-row">
                                                         { categories && parent_categories.slice(0, 8).map(category => 
@@ -52,8 +68,27 @@ const Sidebar = () => {
                                                         )}
                                              </div>
                                    </div>
+
+                                   <div className={ tabStatus ? "all-categories-list active" : "all-categories-list"}>
+                                             <h4>All Categories</h4>
+                                             <ul>
+                                                       { parent_categories.map(parent_category => 
+                                                              <li key={parent_category._id}>
+                                                                        <Link to={"/"}>{parent_category.name}</Link>
+                                                                         <ul>
+                                                                                  { categories.filter(item => item.parent === parent_category.name).map(sub =>
+                                                                                        <li key={sub._id}>
+                                                                                                 <Link to={"/"}>{sub.name}</Link>
+                                                                                        </li>
+                                                                                  )}
+                                                                         </ul>
+                                                              </li>
+                                                       )}
+                                             </ul>
+                                   </div>
                         </div>
                         
+
               </div>
     </div>
   )

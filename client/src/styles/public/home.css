@@ -221,6 +221,9 @@ header{
 .sidebar-header h3{
         font-size: 22px;
         font-weight: 450;
+        display: flex;
+        align-items: center;
+        gap: 5px;
 }
 .sidebar-header span{
       width: 40px;
@@ -236,12 +239,22 @@ header{
       justify-content: center;
       cursor: pointer;
 }
+.sidebar-header h3 span{
+      display: none;
+}
+.sidebar-header h3 span.active{
+      display: flex;
+}
 
 .sidebar-menu{
       margin: 10px 0;
+      overflow: hidden;
+      position: relative;
+      height: 85vh;
 }
 
-.categories-wrap h4{
+.categories-wrap h4,
+.all-categories-list h4{
        display: flex;
        justify-content: space-between;
        align-items: center;
@@ -277,6 +290,31 @@ header{
 }
 
 
+.all-categories-list{
+      position: absolute;
+      top: 0;
+      background: white;
+      height: 100%;
+      border: 1px solid red;
+      width: 100%;
+      transform: translateX(100%);
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transition: all 0.5s ease;
+      -webkit-transition: all 0.5s ease;
+      -moz-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+}
+.all-categories-list.active{
+      transform: translateX(0);
+      -webkit-transform: translateX(0);
+      -moz-transform: translateX(0);
+      -ms-transform: translateX(0);
+      -o-transform: translateX(0);
+}
 
 
 
