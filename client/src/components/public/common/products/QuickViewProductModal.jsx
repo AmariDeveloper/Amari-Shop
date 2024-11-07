@@ -51,7 +51,7 @@ const QuickViewProductModal = () => {
                                                          <span><RxStarFilled /></span>
                                                          <span><RxStar /></span>
                                                </div>
-                                               <p>3 reviews</p>
+                                               <p>4.0</p>
                                     </div>
                                     <div className="price-row">
                                                <h4>Price</h4>
@@ -82,14 +82,13 @@ const QuickViewProductModal = () => {
                                                <div className="categories">
                                                        <h4>Categories: </h4>
                                                        <ul>
-                                                               { product && product.product_categories.map(category => <li key={category._id}><Link to={""}>{category.name}</Link></li>)}
-                                        
+                                                               { product && product.product_categories.map(category => <li key={category._id}><Link to={""}>{category.name},</Link></li>)}                                   
                                                        </ul>
                                                </div>
                                                <div className="tags">
-                                                        <h4>Tags: </h4>
+                                                        { product && product.product_tags.length > 0 && <h4>Tags: </h4> }
                                                         <ul>
-                                                              { product && product.product_tags.map(tag => <li key={tag._id}><Link to={"/"}>{tag.name}</Link></li> )}
+                                                              { product && product.product_tags.map(tag => <li key={tag._id}><Link to={"/"}>{tag.name},</Link></li> )}
                                                         </ul>
                                                </div>
                                                {/* <div className="socials">

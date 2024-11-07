@@ -299,8 +299,16 @@ form .error{
       cursor: pointer;
 }
 
-.footer-public.copyright{
+.footer-public{
       padding: 20px 0;
+      text-align: center;
+      border-top: 1px solid var(--line);
+      background: rgba(238, 245, 244, 0.29);
+}
+.footer-public p{
+    font-size: 13px;
+      color: rgb(120, 120, 120);
+      font-weight: 300;
 }
 
 @media(max-width: 1280px){

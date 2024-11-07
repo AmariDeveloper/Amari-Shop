@@ -24,7 +24,7 @@ const Home = () => {
            <Navbar />
            <HeroSection />
            <HomeCategories />
-           <HomeProducts />
+            <HomeProducts />
            <Footer />
            <AppNotification />
     </>

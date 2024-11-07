@@ -3,10 +3,11 @@ import { GoChevronRight } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import SelectedProductBox from "./SelectedProductBox";
 import { AiOutlineDelete } from "react-icons/ai";
-import { removeVariationFromShoppingCart, setShippingFee } from "../../../redux/slices/public/cartSlice";
+import { decrementSimpleProductQuantity, incrementSimpleProductQuantity, removeSimpleProductFromShoppingCart, removeVariationFromShoppingCart, setShippingFee } from "../../../redux/slices/public/cartSlice";
 import emptyCart from "../../../assets/abandoned-cart.png"
 import { shipping } from "../../../data/shipping";
 import { useEffect, useState } from "react";
+import { RxMinus, RxPlus  } from "react-icons/rx";
 
 const CartBody = () => {
     const { shopping_cart, shipping_fee } = useSelector(state => state.cart);
@@ -49,7 +50,17 @@ const CartBody = () => {
             }else{
                 setCartError("Please select shipping area to proceed.")
             }
+    }
 
+    const incrementQuantity = (data) => {
+          dispatch(incrementSimpleProductQuantity(data))
+    }
+    const decrementQuantity = (data) => {
+         dispatch(decrementSimpleProductQuantity(data))
+    }
+
+    const removeProductFromCart = (data) => {
+          dispatch(removeSimpleProductFromShoppingCart(data))
     }
   return (
     <div className="single-product-body">
@@ -98,17 +109,29 @@ const CartBody = () => {
                                                                                        <div className="variations-row">
                                                                                                     <div className="empty-div"></div>
                                                                                                     <div className="variation-type">
-                                                                                                                <h4>Variation: {product.product_variations.product_variation_name}</h4>
+                                                                                                                {product.product_variations.length > 0 && <h4>Variation: { product.product_variations.product_variation_name}</h4> }
                                                                                                     </div>
-                                                                                                    <div className="chosen-variations">
-                                                                                                                <h4>Chosen Variations:</h4>
-                                                                                                                { product.variations.map(item => 
-                                                                                                                        <div className="variation-column" key={item.id}>
-                                                                                                                                    <SelectedProductBox  data={item} product_id={product._id} key={item.id}/>
-
-                                                                                                                                    <span onClick={() => removeVariation(item, product._id)} className="delete"><AiOutlineDelete /></span>
+                                                                                                    <div className="chosen-variations">                                                 
+                                                                                                                { product.product_variations.length > 0 && <h4>Chosen Variations:</h4>}
+                                                                                                                { product.product_variations.length > 0 ?  
+                                                                                                                       <>
+                                                                                                                           { product.variations.map(item => 
+                                                                                                                                  <div className="variation-column" key={item.id}>
+                                                                                                                                              <SelectedProductBox  data={item} product_id={product._id} key={item.id}/>
+                                                                                                                                              <span onClick={() => removeVariation(item, product._id)} className="delete"><AiOutlineDelete /></span>
+                                                                                                                                  </div>
+                                                                                                                              )}
+                                                                                                                       </>
+                                                                                                                          :
+                                                                                                                        <div className="adjust-column">
+                                                                                                                                   <div className="quantity-ranger">
+                                                                                                                                             <span onClick={() => decrementQuantity(product)}><RxMinus /></span>
+                                                                                                                                             <figure>{product.quantity}</figure>
+                                                                                                                                             <span onClick={() => incrementQuantity(product)}><RxPlus /></span>
+                                                                                                                                   </div>
+                                                                                                                                   <span className="delete" onClick={() => removeProductFromCart(product)}><AiOutlineDelete /></span>
                                                                                                                         </div>
-                                                                                                                )}
+                                                                                                                }
                                                                                                     </div>
                                                                                                      <div className="empty-div"></div>
                                                                                        </div>

@@ -23,11 +23,18 @@ const SingleProductBody = () => {
                                             <span><GoChevronRight /></span>
                                             <Link to={"/"} className="product-link">{product.product_title}</Link>
                                    </div>
-                                   <div className="single-product-data">
-                                              <GallerSection />
-                                              <ProductInfoBox product={product}  />
-                                              <BasketSection product={product} />
-                                   </div>
+                                   { product && product.product_variations.product_selected_variations.length > 0 ?
+                                        <div className="single-product-data">
+                                                   <GallerSection />
+                                                   <ProductInfoBox product={product}  />
+                                                   <BasketSection product={product} />
+                                        </div>
+                                        :
+                                          <div className="simple-product-data">
+                                                     <GallerSection />
+                                                     <ProductInfoBox product={product} />
+                                          </div>
+                                     }
                          </div>
               </div>
     </div>

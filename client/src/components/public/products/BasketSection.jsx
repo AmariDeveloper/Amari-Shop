@@ -24,7 +24,7 @@ const BasketSection = ({ product }) => {
               
                { selectedProductVariations.length > 0 ? 
                       selectedProductVariations.map(vr => <SelectedProductBox data={vr}  key={vr.id}/>)
-                 :
+                     :
                      <p className="no-product">No products selected</p>
               }
               <div className="basket-action-btn">

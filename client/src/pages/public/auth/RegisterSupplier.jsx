@@ -34,16 +34,18 @@ const RegisterSupplier = () => {
                      reset();
                      window.scrollTo(0,0);
                      dispatch(setAppNotification({ status: true, message: res.message, type: "Success"}))
+
+                     setTimeout(() =>{
+                            navigate("/");
+                            setSuccessStatus(false)
+                    }, 300000)
               }
         } catch (error) {
               dispatch(setAppNotification({ status: true, message: error.data.message, type: "Error"}))
         }
   }
 
-  setTimeout(() =>{
-          navigate("/");
-          setSuccessStatus(false)
-  }, 120000)
+
 
   return (
     <>

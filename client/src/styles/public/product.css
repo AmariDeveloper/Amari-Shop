@@ -40,6 +40,12 @@
       gap: 30px;
       margin-top: 30px;
 }
+.simple-product-data{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 30px;
+}
 .product-gallery-section{
     overflow: hidden;  /* NEW */
     min-width: 0; 
@@ -51,7 +57,7 @@
     -ms-border-radius: 15px;
     -o-border-radius: 15px;
     overflow: hidden;
-    height: 450px;
+    height: 500px;
 }
 .product-gallery-section .product-main-image img{
      object-fit: cover;
@@ -133,9 +139,21 @@
     border-bottom: 1px solid var(--line);
     padding-bottom: 10px;
 }
+.product-info-section .pricing-box.no-line{
+      border-bottom: none;
+}
 .pricing-box h3{
       font-size: 32px;
       font-weight: 500;
+}
+.product-info-section .product-quick-cart-options{
+        justify-content: flex-start;
+        gap: 20px;
+}
+.extra-product-stuff{
+     border-top: 1px solid var(--line);
+     margin-top: 20px;
+     padding-top: 10px;
 }
 
 .product-info-section .variation-wrapper h4 span{
@@ -206,6 +224,9 @@
 .var-box-btn.active span{
     color: white;
 }
+
+
+
 
 
 .basket-section{
@@ -441,8 +462,15 @@
     display: flex;
     align-items: center;
 }
-
-.cart-moja .variation-column span.delete{
+.cart-moja .adjust-column{
+       margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 80%;
+}
+.cart-moja .variation-column span.delete,
+.cart-moja .adjust-column span.delete{
       width: 30px;
       height: 30px;
       display: flex;

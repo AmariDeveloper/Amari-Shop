@@ -79,7 +79,7 @@ const EditProductModal = () => {
                 product_sold_individually: editProductModal.data ? editProductModal.data.product_inventory.is_product_sold_individually : false,
                 product_price: editProductModal.data ? editProductModal.data.product_pricing.product_regular_price : "",
                 product_selling_price: editProductModal.data ? editProductModal.data.product_pricing.product_selling_price : "",
-                product_additional_info: editProductModal.data ? editProductModal.data.product_short_description : "",
+                product_additional_info: editProductModal.data ? editProductModal.data.product_additional_info : "",
                 published_status: editProductModal.data ? editProductModal.data.product_publish_status : "",
                 product_categories: editProductModal.data && editProductModal.data.product_categories.length ? editProductModal.data.product_categories[0].name : "",
                 product_variations: editProductModal.data && editProductModal.data.product_variations.length ? editProductModal.data.product_variations.product_variation_name : "",

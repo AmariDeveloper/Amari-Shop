@@ -1,15 +1,18 @@
 /* eslint-disable react/prop-types */
 import { TiStar } from "react-icons/ti";
+import { RxMinus, RxPlus  } from "react-icons/rx";
 import { LuCircleDotDashed } from "react-icons/lu";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addVariationToCartList, removeVariationFromCartList, resetVariationQuantityList } from "../../../redux/slices/public/cartSlice";
-
+import { Link, useNavigate } from "react-router-dom";
+import { addVariationToCartList, removeVariationFromCartList, resetVariationQuantityList, addProductToShoppingCartFromQuickView } from "../../../redux/slices/public/cartSlice";
 
 const ProductInfoBox = ({ product }) => {
     const [selected, setSelected ] = useState([]);
     const [ basketOpen, setBasketOpen ] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [ cartValue, setCartValue ] = useState(1);
      
     const handleSelected = (item) => {
              setBasketOpen(true)
@@ -39,6 +42,23 @@ const ProductInfoBox = ({ product }) => {
             }
     }, [setSelected, product, dispatch])
     
+
+    const increamentCartValue = () => setCartValue(prev => prev + 1);
+    const decreamentCartValue = () => {
+            if(cartValue === 1){
+                  setCartValue(1)
+            }else{
+                 setCartValue(prev => prev - 1)
+            }
+    }
+
+      //Add product to shopping cart
+  const addProductToCart = (data) => {
+      const payload = { data: data, quantity: cartValue}
+      dispatch(addProductToShoppingCartFromQuickView(payload))
+      navigate("/cart")
+      setCartValue(1)
+}
   return (
     <div className="product-info-section">
             <h2>{product.product_title}</h2>
@@ -49,7 +69,7 @@ const ProductInfoBox = ({ product }) => {
                     </div>
                     <div className="wrap-box">
                          <span><LuCircleDotDashed /></span>
-                          <p>2.3k+ Reviews</p>
+                          <p>20+ Reviews</p>
                     </div>
             </div>
      
@@ -57,12 +77,12 @@ const ProductInfoBox = ({ product }) => {
                        <p>{product.product_short_description}</p>
             </div>
 
-           <div className="pricing-box">
+           <div className={product.product_variations.product_selected_variations.length > 0  ? "pricing-box" : "pricing-box no-line"}>
                     <p>Price: </p>
                     <h3><span className="ksh">ksh.</span>{product.product_pricing.product_regular_price.toLocaleString()}</h3>
            </div>
 
-          { product.product_variations.product_selected_variations.length > 0 && 
+          { product.product_variations.product_selected_variations.length > 0 ?
                     <div className="variation-wrapper">
                                <h4>Choose <span>{product.product_variations.product_variation_name}</span>:</h4>
                             <div className="variation-list">
@@ -87,8 +107,41 @@ const ProductInfoBox = ({ product }) => {
                                           )
                                     }
                             </div>
+                  </div> 
+                  :
+                  <div className="product-quick-cart-options">
+                               <div className="cart-number-adjustments">
+                                     <div className="adjust minus" onClick={decreamentCartValue}>
+                                                   <span><RxMinus /></span>
+                                          </div>
+                                          <div className="adjust-showcase">
+                                                  <h3>{cartValue}</h3>
+                                          </div>
+                                          <div className="adjust plus" onClick={increamentCartValue}>
+                                                     <span><RxPlus /></span>
+                                          </div>
+                              </div>
+                              <div className="add-to-cart-btn" onClick={() => addProductToCart(product)}>
+                                          <h4>Add to Cart</h4>
+                              </div>
                   </div>
              }
+
+
+             <div className="extra-product-stuff">
+                     <div className="categories">
+                               <h4>Categories: </h4>
+                               <ul>
+                                      { product && product.product_categories.map(category => <li key={category._id}><Link to={""}>{category.name},</Link></li>)}                                   
+                               </ul>
+                    </div>
+                   <div className="tags">
+                           { product && product.product_tags.length > 0 && <h4>Tags: </h4> }
+                           <ul>
+                                 { product && product.product_tags.map(tag => <li key={tag._id}><Link to={"/"}>{tag.name},</Link></li> )}
+                           </ul>
+                   </div>
+             </div>
 </div>
   )
 }

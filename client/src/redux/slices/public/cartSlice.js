@@ -115,6 +115,28 @@ const cartSlice = createSlice({
                               }
                       }
                },
+
+               //increment simple product quantity
+               incrementSimpleProductQuantity: (state, action) => {
+                     const currentItem = state.shopping_cart.find(item => item._id === action.payload._id);
+                     if(currentItem){
+                            currentItem.quantity++
+                     }
+                     localStorage.setItem("Shopping Cart", JSON.stringify(state.shopping_cart))
+               },
+               //decrease simple product quantity
+               decrementSimpleProductQuantity: (state, action) => {
+                    const currentItem = state.shopping_cart.find(item => item._id === action.payload._id);
+                    if(currentItem){
+                           if(currentItem.quantity <= 1){
+                                 currentItem.quantity = 1
+                           }else{
+                                 currentItem.quantity--
+                           }
+                    }
+                    localStorage.setItem("Shopping Cart", JSON.stringify(state.shopping_cart))
+               },
+
               resetVariationQuantityList: (state) => {
                         state.selectedProductVariations = []
               },
@@ -139,6 +161,10 @@ const cartSlice = createSlice({
 
                             localStorage.setItem("Shopping Cart", JSON.stringify(state.shopping_cart));
                       }
+               },
+               removeSimpleProductFromShoppingCart: (state, action) => {
+                       state.shopping_cart = state.shopping_cart.filter(item => item._id !== action.payload._id);
+                       localStorage.setItem("Shopping Cart", JSON.stringify(state.shopping_cart))
                },
 
                setShippingFee: (state, action) => {
@@ -168,8 +194,11 @@ export const {
     incrementVariationQuantityinShoppingCart,
     decrementVariationQuantityInShoppingCart,
     removeVariationFromShoppingCart,
+    incrementSimpleProductQuantity,
+    decrementSimpleProductQuantity,
     setShippingFee,
-    clearShoppingCart
+    clearShoppingCart,
+    removeSimpleProductFromShoppingCart
 } = cartSlice.actions
 
 export default cartSlice.reducer
