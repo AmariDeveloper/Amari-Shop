@@ -142,21 +142,28 @@ const PurchaseCompletion = () => {
                                                                                 <div className="product-detail-texts">
                                                                                             <h5>{product.product_title.slice(0, 16)}...</h5>
                                                                                             <div className="variations-chosen">
-                                                                                                        <p>Variations Chosen</p>
-                                                                                                        <div className="chosen-wrap">
-                                                                                                                                                  { product.variations.map(item => 
-                                                                                                                                                       <div className="var-items-wrap" key={item.id}>{
-                                                                                                                                                           item.name.startsWith("#") ? <div className="var-color-box">
-                                                                                                                                                                  <span style={{ background: `${item.name}`}}></span>
-                                                                                                                                                           </div>:
-                                                                                                                                                           item.name.startsWith("https") ? <div className="var-fabric-box">
-                                                                                                                                                                     <img src={item.name} alt="" />
-                                                                                                                                                           </div>
-                                                                                                                                                           :
-                                                                                                                                                           <h6>{item.name}</h6>
-                                                                                                                                                       }<span>Qty: {item.quantity}</span>{product.variations.length > 1 ? ",": ""}</div>
-                                                                                                                                                 )}
-                                                                                                                                        </div>
+                                                                                                    { product.variations && product.variations.length > 0 && <p>Variations Chosen</p> }
+                                                                                                      { product.variations && product.variations.length > 0 ?
+                                                                                                           <div className="chosen-wrap">
+                                                                                                             { product.variations.map(item => 
+                                                                                                                            <div className="var-items-wrap" key={item.id}>
+                                                                                                                                {  item.name.startsWith("#") ? <div className="var-color-box">
+                                                                                                                                    <span style={{ background: `${item.name}`}}></span>
+                                                                                                                             </div>:
+                                                                                                                             item.name.startsWith("https") ? 
+                                                                                                                              <div className="var-fabric-box">
+                                                                                                                                         <img src={item.name} alt="" />
+                                                                                                                                  </div>
+                                                                                                                            :
+                                                                                                                            <h6>{item.name}</h6>
+                                                                                                                           }<span>Qty: {item.quantity}</span>{product.variations.length > 1 ? ",": ""}</div>
+                                                                                                                         )}
+                                                                                                                </div>
+                                                                                                                 :
+                                                                                                                <div className="simple-wrap">
+                                                                                                                          <span>Qty: {product.quantity}</span>
+                                                                                                                </div>
+                                                                                                        }
                                                                                             </div>
                                                                                 </div>
                                                                     </div>

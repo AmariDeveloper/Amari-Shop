@@ -355,7 +355,8 @@
      font-size: 15px;
      font-weight: 450;
 }
-.vars-wrapper .vr-box span{
+.vars-wrapper .vr-box span,
+.simple-vars-wrapper span{
       font-weight: 400;
       font-size: 13px;
 }

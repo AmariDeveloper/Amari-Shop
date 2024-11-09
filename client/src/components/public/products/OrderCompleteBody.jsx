@@ -45,8 +45,9 @@ const OrderCompleteBody = () => {
                                                                                        <div className="order-deets">
                                                                                                  <h5>{item.title}</h5>
                                                                                                  <div className="order-deets-vars">
-                                                                                                         <figure>Variations:</figure>
-                                                                                                            <div className="vars-wrapper">
+                                                                                                         { item.variations && item.variations.length > 0 && <figure>Variations:</figure>}
+                                                                                                          { item.variations && item.variations.length > 0 ? 
+                                                                                                                   <div className="vars-wrapper">
                                                                                                                          {item.variations.map(vr => 
                                                                                                                                <div className="vr-box" key={vr.id}>
                                                                                                                                         { vr.name.startsWith("#") ? 
@@ -67,6 +68,11 @@ const OrderCompleteBody = () => {
                                                                                                                                </div>
                                                                                                                           )}
                                                                                                             </div>
+                                                                                                            :
+                                                                                                             <div className="simple-vars-wrapper">
+                                                                                                                    <span>Qty: {item.total_quantity}</span>
+                                                                                                             </div>
+                                                                                                          }
                                                                                                  </div>
                                                                                        </div>
                                                                             </div>

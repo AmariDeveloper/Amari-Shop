@@ -1,0 +1,97 @@
+.shop-body{
+    padding: 20px 0;
+    background: rgba(238, 245, 244, 0.29);
+    min-height: 100vh;
+}
+.shop-body-content{
+    padding-bottom: 80px;
+}
+.breadcrumb{
+    margin: 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+}
+
+.breadcrumb h2{
+     font-size: 40px;
+     font-weight: 450;
+}
+.breadcrumb p{
+    font-size: 17px;
+    color: #222;
+    margin: 5px 0;
+    font-weight: 340;
+}
+
+.action-bar{
+     width: 360px;
+     position: fixed;
+     background: white;
+     bottom: 30px;
+     right: 10px;
+     border: 1px solid var(--line);
+     z-index: 99;
+     display: flex;
+     justify-content: flex-start;
+     gap: 10px;
+     align-items: center;
+     padding: 10px 15px;
+     border-radius: 7px;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     -ms-border-radius: 7px;
+     -o-border-radius: 7px;
+     justify-content: space-between;
+     transition: all 0.8s ease;
+     -webkit-transition: all 0.8s ease;
+     -moz-transition: all 0.8s ease;
+     -ms-transition: all 0.8s ease;
+     -o-transition: all 0.8s ease;
+     transform: translateX(110%);
+     -webkit-transform: translateX(110%);
+     -moz-transform: translateX(110%);
+     -ms-transform: translateX(110%);
+     -o-transform: translateX(110%);
+}
+.action-bar.active{
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+}
+.action-bar .left-bar{
+     display: flex;
+     align-items: center;
+     gap: 10px;
+}
+
+.action-bar .product-image img{
+      width: 50px;
+      height: 50px;
+}
+.action-bar h5{
+    font-size: 15px;
+    font-weight: 400;
+}
+.action-bar p{
+     font-size: 14px;
+     margin: 5px 0;
+     font-weight: 300;
+     color:  var(--main-color);
+}
+
+.action-bar span{
+     width: 40px;
+     height: 40px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background-color: var(--main-color);
+     border-radius: 7px;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     -ms-border-radius: 7px;
+     -o-border-radius: 7px;
+     color: white;
+}

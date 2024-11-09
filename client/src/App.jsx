@@ -21,6 +21,7 @@ import SignUpPage from './pages/public/auth/SignUpPage'
 import AboutCompany from './pages/public/AboutCompany'
 import RegisterSupplier from './pages/public/auth/RegisterSupplier'
 import MyAccount from './pages/public/customer/MyAccount'
+import Shop from './pages/public/Shop'
 
 function App() {
   const location = useLocation();
@@ -35,6 +36,7 @@ function App() {
              <Route path="/session/new" element={<LoginPage />} />
              <Route path="/signup/new" element={<SignUpPage />} />
              <Route path="/product/:name" element={<SingleProduct />} />
+             <Route path="/shop" element={<Shop />} />
              <Route path='/cart' element={<Cart />} />
              <Route path="/checkout" element={<Checkout />} />
              <Route path='/checkout/billing-confirmation' element={<BillingConfirmation />} />

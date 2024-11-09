@@ -770,7 +770,8 @@
       font-size: 15px;
       font-weight: 500;
 }
-.chosen-wrap  span{
+.chosen-wrap  span,
+.simple-wrap span{
      font-size: 12px;
 }
 

@@ -4,7 +4,8 @@ const initialState = {
        all_published_products: localStorage.getItem("All Published Products") ? JSON.parse(localStorage.getItem("All Published Products")) : [],
        quick_view_modal: { status: false, data: null},
        redirect: "/",
-       session: localStorage.getItem("Session") ? JSON.parse(localStorage.getItem("Session")) : { isLoggedIn: false, profile: null }
+       session: localStorage.getItem("Session") ? JSON.parse(localStorage.getItem("Session")) : { isLoggedIn: false, profile: null },
+       
 }
 
 const clientSlice = createSlice({
@@ -38,8 +39,8 @@ const clientSlice = createSlice({
                       state.session.isLoggedIn = false;
                       state.session.profile = null;
                       localStorage.removeItem("Session");
-               }
-
+               },
+              
           }
 })
 

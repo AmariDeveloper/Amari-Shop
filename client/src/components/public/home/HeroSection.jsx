@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { CgArrowTopRight } from "react-icons/cg";
 import sales from "../../../assets/sales3.jpg"
-import van from "../../../assets/van.png"
+//import van from "../../../assets/van.png"
 import suka from "../../../assets/shuka.jpg"
 import juice from "../../../assets/juice.jpg"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -77,12 +77,12 @@ const HeroSection = () => {
                                                              </div>
                                                              <img src={sales} alt="" />
                                                  </div>
-                                                 <div className="hero-grid">
+                                                 {/* <div className="hero-grid">
                                                             <div className="hero-grid-texts">
                                                                       <h2>Fast, reliable, and hassle-free shipping.</h2>
                                                             </div>
                                                            <img src={van} alt="" />
-                                                 </div>
+                                                 </div> */}
                                                  <div className="hero-grid">
                                                            
                                                             <div className="hero-grid-texts">
