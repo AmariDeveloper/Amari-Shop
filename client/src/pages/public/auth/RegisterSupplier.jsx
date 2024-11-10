@@ -45,8 +45,6 @@ const RegisterSupplier = () => {
         }
   }
 
-
-
   return (
     <>
               <Navbar />
@@ -144,14 +142,14 @@ const RegisterSupplier = () => {
                                                                    <span className="error">{errors.business_cert && errors.business_cert.message}</span>
                                                        </div>
 
-                                                       <h3>Service Plan</h3>
+                                                       {/* <h3>Service Plan</h3>
                                                        <div className="form-row">
                                                                   <label htmlFor="subcription">Subscription Plan <span>*</span></label>
                                                                   <select className="input-control" {...register("service_plan", { required: "This input is required"})}>
                                                                           <option value="">Select service plan</option>
                                                                           <option value="Professional">Professional</option>
                                                                   </select> 
-                                                       </div>
+                                                       </div> */}
 
                                                        <h3>Addition Information</h3>
                                                        <div className="form-row split">

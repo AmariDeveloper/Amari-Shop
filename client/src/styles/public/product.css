@@ -1,6 +1,6 @@
 .single-product-body,
 .order-completion-body{
-    padding: 20px 0;
+    padding: 20px 0 60px 0px;
     background: rgba(238, 245, 244, 0.29);
     min-height: 100vh;
 }
@@ -356,8 +356,22 @@
       background: var(--main-color);
 }
 
-
-
+.additionals{
+     margin-top: 50px;
+}
+.additionals h3{
+     font-size: 30px;
+     font-weight: 400;
+     padding-bottom: 5px;
+     border-bottom: 1px solid var(--line);
+     margin-bottom: 10px;
+}
+.additionals p{
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 340;
+    color: #333;
+}
 /* Cart Styles */
 .cart-body-content{
     margin-top: 20px;
