@@ -1,4 +1,5 @@
-.shop-body{
+.shop-body,
+.shop-category-body{
     padding: 20px 0;
     background: rgba(238, 245, 244, 0.29);
     min-height: 100vh;
@@ -11,10 +12,13 @@
     padding-bottom: 10px;
     border-bottom: 1px solid var(--line);
 }
-
+.product-link.capitalize{
+     text-transform: capitalize;
+}
 .breadcrumb h2{
      font-size: 40px;
      font-weight: 450;
+     text-transform: capitalize;
 }
 .breadcrumb p{
     font-size: 17px;

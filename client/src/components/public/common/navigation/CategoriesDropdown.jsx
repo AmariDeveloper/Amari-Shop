@@ -32,7 +32,7 @@ const CategoriesDropdown = ({ status, handleStatus }) => {
     <div ref={dropdownRef} className={ status ? "categories-dropdown active" : "categories-dropdown"}>
             <ul>
                     { categories && parentCategories.map(category => 
-                           <li key={category._id}><Link to={"/"}>{category.name}</Link></li>
+                           <li key={category._id}><Link to={`/shop/${category.name.replaceAll(" ", "-").toLowerCase()}`}>{category.name}</Link></li>
                     )}
             </ul>
     </div>

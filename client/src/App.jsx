@@ -22,6 +22,7 @@ import AboutCompany from './pages/public/AboutCompany'
 import RegisterSupplier from './pages/public/auth/RegisterSupplier'
 import MyAccount from './pages/public/customer/MyAccount'
 import Shop from './pages/public/Shop'
+import ShopCategory from './pages/public/ShopCategory'
 
 function App() {
   const location = useLocation();
@@ -44,6 +45,7 @@ function App() {
              <Route path='/about' element={<AboutCompany />} />
              <Route path="/supplier/new" element={<RegisterSupplier />} />
              <Route path="/:id/my-account" element={<MyAccount />} />
+             <Route path='/shop/:category' element={<ShopCategory />} />
 
              {/* Protected Routes */}
               <Route element={<ProtectedRoutes />}>

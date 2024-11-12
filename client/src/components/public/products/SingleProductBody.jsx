@@ -19,7 +19,7 @@ const SingleProductBody = () => {
                                    <div className="quick-links-strip">
                                             <Link to={"/"}>Home</Link>
                                             <span><GoChevronRight /></span>
-                                            <Link to={`/category/${product.product_categories[0].name.replaceAll(" ", "-").toLowerCase()}`}>{product.product_categories[0].name}</Link>
+                                            <Link to={`/shop/${product.product_categories[0].name.replaceAll(" ", "-").toLowerCase()}`}>{product.product_categories[0].name}</Link>
                                             <span><GoChevronRight /></span>
                                             <Link to={"/"} className="product-link">{product.product_title}</Link>
                                    </div>
