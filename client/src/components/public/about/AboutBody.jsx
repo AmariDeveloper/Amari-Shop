@@ -28,7 +28,7 @@ const AboutBody = () => {
                                     <div className="about-benefits-row">
                                                   <div className="benefit-moja">
                                                              <h3>Access to Global Markets</h3>
-                                                             <p>Forget the hassles of logistics. We handle shipping, ensuring that your products get to customers worldwide, on time, every time.</p>
+                                                             <p>Forget the hassles of logistics. We handle shipping, ensuring that your products get to customers, on time, every time.</p>
                                                   </div>
                                                   <div className="benefit-moja">
                                                             <h3>All-in-One Convenience</h3>

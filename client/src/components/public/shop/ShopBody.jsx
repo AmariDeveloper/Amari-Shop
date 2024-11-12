@@ -19,7 +19,7 @@ const ShopBody = () => {
                                </div>
                                <div className="breadcrumb">
                                       <h2>Shop</h2>
-                                      <p>Browse all products in Amari Store.</p>
+                                      <p>Browse all Products.</p>
                                </div>
                                <div className="products-row">
                                            { all_published_products.length > 0 ? 

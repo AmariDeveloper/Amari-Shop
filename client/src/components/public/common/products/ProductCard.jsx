@@ -21,7 +21,7 @@ const ProductCard = ({ data }) => {
           dispatch(addProductToShoppingCart(product))
    }
   return (
-    <div className="client-product-card">
+    <div className="client-product-card" onClick={() => navigate(`/product/${data.product_slug}`)}>
               <div className="image-wrapper">
                        { data.product_variations.product_selected_variations.length == 0  && 
                         <div className="add-to-cart-box" >

@@ -20,7 +20,7 @@ export const services = [
     {
         id: 3,
         name: "Shipping Made Simple",
-        description: "Forget the hassles of logistics. We handle shipping, ensuring that your products get to customers worldwide, on time, every time.",
+        description: "Forget the hassles of logistics. We handle shipping, ensuring that your products get to customers, on time, every time.",
         icon: "/shipping.png"
     },
     {

@@ -10,25 +10,27 @@ import 'swiper/css';
 import 'swiper/css/effect-creative';
 // import required modules
 import { EffectCreative, Autoplay } from 'swiper/modules';
+
 const hero_data = [
-      {
-          id: 1,
-          image: "one",
-          statement: "Empowering African Brands to Thrive with scalable eCommerce Solutions.",
-          link: "",
-          btnMsg: "Browse Shop"
-      },
-      {
-          id: 2,
-          image: "two",
-          statement: "Empowering African Suppliers to Access Global Markets.",
-          link: "/supplier/new",
-          btnMsg: "Register as Supplier"
-      }
+    {
+        id: 1,
+        image: "one",
+        statement: "Empowering African Brands to Thrive with scalable eCommerce Solutions.",
+        link: "",
+        btnMsg: "Browse Shop"
+    },
+    {
+        id: 2,
+        image: "two",
+        statement: "Empowering African Suppliers to Access Global Markets.",
+        link: "/supplier/new",
+        btnMsg: "Register as Supplier"
+    }
 ]
-const HeroSection = () => {
+
+const HeroSection2 = () => {
   return (
-    <div className="hero-section">
+        <div className="hero-section">
               <div className="hero-section-content">
                          <Swiper
                                slidesPerView={1}
@@ -70,7 +72,7 @@ const HeroSection = () => {
               <div className="hero-section-grid">
                        <div className="inner-row-2">
                                    <div className="hero-grid-wrapper">
-                                                 <div className="hero-grid">
+                                                 <div className="hero-grid-2">
                                                              <div className="hero-grid-texts">
                                                                         <h2>Shop African Fashion: Discover Essentials for Every Generation.</h2>
                                                                         <Link to={"/"}>Explore</Link>
@@ -83,7 +85,7 @@ const HeroSection = () => {
                                                             </div>
                                                            <img src={van} alt="" />
                                                  </div> */}
-                                                 <div className="hero-grid">                                             
+                                                 <div className="hero-grid-2">                                             
                                                             <div className="hero-grid-texts">
                                                                        <h2>Discover African Fabrics: Vibrant Tradition Meets Modern Style.</h2>
                                                                        <Link to={"/"}>Explore</Link>
@@ -91,7 +93,7 @@ const HeroSection = () => {
                                                             <img src={suka} alt="" />
                                                  </div>
 
-                                                 <div className="hero-grid">
+                                                 <div className="hero-grid-2">
                                                               <div className="hero-grid-texts">
                                                                       <h2>From Farm to Table: Shop Nature&apos;s Best Produce.</h2>
                                                                       
@@ -106,4 +108,4 @@ const HeroSection = () => {
   )
 }
 
-export default HeroSection
+export default HeroSection2

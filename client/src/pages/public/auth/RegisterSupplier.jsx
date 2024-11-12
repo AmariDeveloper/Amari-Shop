@@ -62,7 +62,7 @@ const RegisterSupplier = () => {
                                             :
                                             <>
                                                     <div className="registration-intro">
-                                                              <h1>Sign up to Showcase your Products with Amari.</h1>
+                                                              <h1>Sign up to Showcase your Made-in-Africa Products with Amari.</h1>
                                                               <p>Fill out the form below to start your journey with Amari and reach customers around the world.</p>
                                                   </div>
                                                   { isLoading && <div className="loading-screen"></div> }
