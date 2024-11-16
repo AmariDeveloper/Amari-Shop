@@ -1,9 +1,8 @@
 import asyncHandler from "express-async-handler";
 import Customer from "../models/Customer.js";
-import generateToken from "../utils/generateToken.js";
 import cloudinary from "../utils/cloudinary.js";
 import { sendCustomerRegistrationMail } from "../mail/actions/sendCustomerRegistrationMail.js";
-
+import { generateTokenForCustomers } from "../utils/generateToken.js";
 //Register Customer manually
 export const RegisterCustomerManually = asyncHandler(async(req, res) => {
        const { firstname, lastname, email, password } = req.body;
@@ -47,7 +46,7 @@ export const LoginCustomerManually = asyncHandler(async(req, res) => {
          }
 
          if(user && (await user.matchPasswords(password))){
-                generateToken(res, user._id);
+                generateTokenForCustomers(res, user._id);
 
                 res.status(201).json({
                       message: "Login Successful",

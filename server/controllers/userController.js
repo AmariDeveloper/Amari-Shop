@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler"
 import User from "../models/User.js"
-import generateToken from "../utils/generateToken.js";
 import cloudinary from "../utils/cloudinary.js"
+import { generateTokenForManagers } from "../utils/generateToken.js";
 
 //Register User
 export const RegisterUser = asyncHandler(async(req, res) => {
@@ -46,7 +46,7 @@ export const LoginUser = asyncHandler(async(req, res) => {
          }
 
          if(user && (await user.matchPasswords(password))){
-                  generateToken(res, user._id);
+                  generateTokenForManagers(res, user._id);
 
                   res.status(201).json({
                        message: "Login Successful",
