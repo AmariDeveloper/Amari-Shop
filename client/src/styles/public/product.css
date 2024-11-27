@@ -832,3 +832,24 @@
     background: var(--line);
     bottom: -4px
 }
+
+
+@media(max-width: 1090px){
+      .cart-body-row{
+           grid-template-columns: 1fr;
+      }
+}
+@media(max-width: 850px){
+      .simple-product-data{
+           grid-template-columns: 1fr;
+      }
+}
+
+@media(max-width: 768px){
+     .cart-body-content{
+           overflow-x: scroll;
+     }
+      .cart-body-row:not(.n-adjust){
+            width: 530px;
+      }
+}

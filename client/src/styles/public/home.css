@@ -253,7 +253,13 @@ header{
       height: 85vh;
 }
 
-.categories-wrap h4,
+.categories-wrap h4{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 20px;
+      font-weight: 400;
+}
 .all-categories-list h4{
        display: flex;
        justify-content: space-between;

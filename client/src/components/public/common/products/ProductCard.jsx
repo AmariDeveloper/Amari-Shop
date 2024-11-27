@@ -21,13 +21,13 @@ const ProductCard = ({ data }) => {
           dispatch(addProductToShoppingCart(product))
    }
   return (
-    <div className="client-product-card" onClick={() => navigate(`/product/${data.product_slug}`)}>
+    <div className="client-product-card">
               <div className="image-wrapper">
                        { data.product_variations.product_selected_variations.length == 0  && 
                         <div className="add-to-cart-box" >
                                   { isAlreadyInCart ?  <span className="checked"><PiCheckLight /></span> : <span onClick={() => addToShoppingCart(data)} ><HiOutlineShoppingCart /></span> }
                         </div> }
-                       <img src={data.product_imagery.product_main_image} alt="" />
+                       <img src={data.product_imagery.product_main_image} alt="" onClick={() => navigate(`/product/${data.product_slug}`)} />
                         {  data.product_variations.product_selected_variations.length > 0 || isAlreadyInCart  ? "" :  <button onClick={() => openQuickView(data)}>Quick View</button> }
                       
               </div>

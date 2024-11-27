@@ -22,7 +22,6 @@ const NewProductModal = () => {
     const { selectedVariation } = useSelector(state => state.productUtils);
     const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    const closeProductModal = () => dispatch(closeCreateProductModal());
     const productModalRef = useRef();
     const [ productImage, setProductImage] = useState([]);
     const [ productImageUrl, setProductImageUrl] = useState([]);
@@ -167,6 +166,12 @@ const resetProductForm = () => {
        setStatus(false);
        dispatch(clearSelectedVariation())
 }
+
+const closeProductModal = () => {
+       resetProductForm();
+}
+
+
     //POST request to create product
     const [ createNewProduct, { isLoading }] = useCreateNewProductMutation();
 

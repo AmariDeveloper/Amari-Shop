@@ -72,19 +72,19 @@ const openLogin = () => {
                                    <div className="categories-wrap">
                                              <h4 onClick={openMoreCategories}>Categories <span><LuChevronRight /></span></h4>
 
-                                             <div className="sidebar-categories-row">
+                                             {/* <div className="sidebar-categories-row">
                                                         { categories && parent_categories && parent_categories.slice(0, 8).map(category => 
                                                                <div className="category-moja" key={category._id}>
                                                                         <img src={category.thumbnail} alt="" />
                                                                         <h3>{category.name}</h3>
                                                                </div>
                                                         )}
-                                             </div>
+                                             </div> */}
                                    </div>
                                    <div className="sidebar-links">
                                              <ul>
-                                                        <li><Link to={"/"}>Shop</Link></li>
-                                                        <li><Link to={"/"}>About</Link></li>
+                                                        <li><Link to={"/shop"}>Shop</Link></li>
+                                                        <li><Link to={"/about"}>About</Link></li>
                                                         <li><Link to={"/supplier/new"}>Supplier Registration</Link></li>
                                              </ul>
                                    </div>

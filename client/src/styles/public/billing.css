@@ -423,4 +423,7 @@
        .completion-box{
              width: 90%;
        }
+       .billing-confirmation-body{
+            grid-template-columns: 1fr;
+       }
 }

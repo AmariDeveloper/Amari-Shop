@@ -35,11 +35,16 @@ const SingleProductBody = () => {
                                                      <ProductInfoBox product={product} />
                                           </div>
                                      }
-
-                                     <div className="additionals">
-                                                 <h3>Additional Information</h3>
-                                                 <p>{product.product_additional_info}</p>
-                                     </div>
+                                     {
+                                          product.product_additional_info !== "" ? 
+                                            <div className="additionals">
+                                                    <h3>Additional Information</h3>
+                                                     <p>{product.product_additional_info}</p>
+                                           </div>
+                                          :
+                                          ""
+                                     }
+                                    
                          </div>
               </div>
     </div>

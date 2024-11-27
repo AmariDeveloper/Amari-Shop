@@ -21,7 +21,7 @@ const EditProductModal = () => {
     const { editProductModal, selectedVariation } = useSelector(state => state.productUtils)
     const { categories, variations } = useSelector(state => state.utils)
     const dispatch = useDispatch();
-    const closeEditModal = () => dispatch(closeEditProductModal());
+    
     const { register, handleSubmit, formState: { errors }, reset} = useForm({
              defaultValues: {
                      product_title: "",
@@ -218,6 +218,11 @@ const clearEditFormRemnants = () => {
          setTags([]);
          setOtherProductImages([]);
          removeProductMainImage();
+}
+
+const closeEditModal = () => {
+       dispatch(closeEditProductModal());
+       clearEditFormRemnants();
 }
 
 //submit edit form

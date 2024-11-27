@@ -16,7 +16,7 @@ const hero_data = [
         id: 1,
         image: "one",
         statement: "Empowering African Brands to Thrive with scalable eCommerce Solutions.",
-        link: "",
+        link: "/shop",
         btnMsg: "Browse Shop"
     },
     {
@@ -75,7 +75,7 @@ const HeroSection2 = () => {
                                                  <div className="hero-grid-2">
                                                              <div className="hero-grid-texts">
                                                                         <h2>Shop African Fashion: Discover Essentials for Every Generation.</h2>
-                                                                        <Link to={"/"}>Explore</Link>
+                                                                        <Link to={"/shop/textiles"}>Explore</Link>
                                                              </div>
                                                              <img src={sales} alt="" />
                                                  </div>
@@ -88,7 +88,7 @@ const HeroSection2 = () => {
                                                  <div className="hero-grid-2">                                             
                                                             <div className="hero-grid-texts">
                                                                        <h2>Discover African Fabrics: Vibrant Tradition Meets Modern Style.</h2>
-                                                                       <Link to={"/"}>Explore</Link>
+                                                                       <Link to={"/shop/textiles"}>Explore</Link>
                                                             </div>
                                                             <img src={suka} alt="" />
                                                  </div>
@@ -97,7 +97,7 @@ const HeroSection2 = () => {
                                                               <div className="hero-grid-texts">
                                                                       <h2>From Farm to Table: Shop Nature&apos;s Best Produce.</h2>
                                                                       
-                                                                      <Link to={"/"}>Explore</Link>
+                                                                      <Link to={"/shop/food-&-beverage"}>Explore</Link>
                                                               </div>
                                                               <img src={juice} alt="" />
                                                  </div>

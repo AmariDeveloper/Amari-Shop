@@ -64,7 +64,7 @@ const CheckoutBody = () => {
                                                 <p className="login-init">Are you a returning customer? <span>Click here to login</span></p>
                                                 <h2 className="billing">Billing Details</h2>
                                                 <form onSubmit={handleSubmit(SaveDetails)}>
-                                                     <div className="cart-body-row">
+                                                     <div className="cart-body-row n-adjust">
                                                            <div className="cart-body-column">
                                                                       <div className="cart-billing-form">
                                                                                <h4>Contact Information</h4>
