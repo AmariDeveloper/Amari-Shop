@@ -9,14 +9,13 @@ const ProtectedRoutes = () => {
       const dispatch = useDispatch();
       const navigate = useNavigate();
       const cookie = document.cookie.split(';').some(item => item.startsWith("mimic"));
-      const [ Logout ] = useLogoutUserMutation();
+      //const [ Logout ] = useLogoutUserMutation();
 
        const handleLogout = useCallback(() => {
             dispatch(clearCredentials());
             dispatch(clearUserProfile());
-            Logout();
             navigate("/auth/login")
-       }, [dispatch, Logout, navigate])
+       }, [dispatch, navigate])
       
        useEffect(() => {
               if(!cookie){
