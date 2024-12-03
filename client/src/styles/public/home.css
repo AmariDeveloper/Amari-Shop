@@ -339,7 +339,16 @@ header{
       display: flex;
       color: #222;
       font-size: 16px;
+      transition: all 0.7s ease;
+      -webkit-transition: all 0.7s ease;
+      -moz-transition: all 0.7s ease;
+      -ms-transition: all 0.7s ease;
+      -o-transition: all 0.7s ease;
 }
+.all-categories-list ul li a:hover{
+       color: var(--main-color);
+}
+
 
 .sidebar-links{
       margin-top: 20px;

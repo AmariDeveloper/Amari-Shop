@@ -13,10 +13,11 @@ const billingSlice = createSlice({
                     state.details = {...action.payload}
                     localStorage.setItem("Billing Info", JSON.stringify(action.payload))
               },
+             
               saveOrderInformation: (state, action) => {
                       state.order = action.payload
                       localStorage.setItem("Order Billing", JSON.stringify(action.payload))
-              }
+              },
        }
 })
 

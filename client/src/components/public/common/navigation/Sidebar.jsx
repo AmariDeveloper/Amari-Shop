@@ -104,14 +104,14 @@ const openLogin = () => {
                                              <ul>
                                                        { parent_categories && parent_categories.map(parent_category => 
                                                               <li key={parent_category._id}>
-                                                                        <Link to={"/"}>{parent_category.name}</Link>
-                                                                         <ul>
+                                                                        <Link to={`/shop/${parent_category.name.replaceAll(" ", "-").toLowerCase()}`}>{parent_category.name}</Link>
+                                                                         {/* <ul>
                                                                                   { categories.filter(item => item.parent === parent_category.name).map(sub =>
                                                                                         <li key={sub._id}>
                                                                                                  <Link to={"/"}>{sub.name}</Link>
                                                                                         </li>
                                                                                   )}
-                                                                         </ul>
+                                                                         </ul> */}
                                                               </li>
                                                        )}
                                              </ul>

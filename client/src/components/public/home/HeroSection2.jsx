@@ -75,7 +75,7 @@ const HeroSection2 = () => {
                                                  <div className="hero-grid-2">
                                                              <div className="hero-grid-texts">
                                                                         <h2>Shop African Fashion: Discover Essentials for Every Generation.</h2>
-                                                                        <Link to={"/shop/textiles"}>Explore</Link>
+                                                                        <Link to={"/shop/fashion"}>Explore</Link>
                                                              </div>
                                                              <img src={sales} alt="" />
                                                  </div>

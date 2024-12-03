@@ -846,10 +846,14 @@
 }
 
 @media(max-width: 768px){
-     .cart-body-content{
+     .cart-body-column{
            overflow-x: scroll;
      }
-      .cart-body-row:not(.n-adjust){
+      .shopping-cart-wrapper{
             width: 530px;
+      }
+      .product-name h4{
+            font-size: 16px;
+            font-weight: 450;
       }
 }

@@ -9,6 +9,7 @@ import { setShippingFee } from "../../../redux/slices/public/cartSlice"
 const CheckoutBody = () => {
     const { shopping_cart, shipping_fee } = useSelector(state => state.cart);
     const { details } = useSelector(state => state.billing);
+    const { session } = useSelector(state => state.client)
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors }, reset} = useForm({
@@ -31,8 +32,20 @@ const CheckoutBody = () => {
                     subcounty: details ? details.subcounty : shipping_fee.subcounty,
                     street: details ? details.street : ""
              }
-             reset(defaults)
-    }, [details, reset, shipping_fee])
+             const session_defaults = session.profile ? {
+                      firstname: session.profile ? session.profile.name.split(" ")[0] : "",
+                      lastname: session.profile ? session.profile.name.split(" ")[1] : "",
+                      email: session.profile ? session.profile.email : "",
+                      phone: session.profile ? session.profile.phone : "",
+                      subcounty: session.profile ? session.profile.subcounty : shipping_fee.subcounty,
+                      street: session.profile ? session.profile.street: ""
+              } : ""
+              if(session.profile){
+                      reset(session_defaults)
+              }else{
+                     reset(defaults)
+              }
+    }, [details, session, reset, shipping_fee])
 
     const totalCostPlusShipping = () => {
           const count = shopping_cart.reduce((acc, curr) => acc+(curr.product_pricing.product_regular_price * curr.quantity), 0)
@@ -41,6 +54,7 @@ const CheckoutBody = () => {
 
     const SaveDetails = (data) => {
            dispatch(saveBillingInformation(data));
+           console.log(data)
            navigate("/checkout/billing-confirmation");
     }
 
@@ -61,7 +75,7 @@ const CheckoutBody = () => {
                                    </div>
 
                                     <div className="cart-body-content">
-                                                <p className="login-init">Are you a returning customer? <span>Click here to login</span></p>
+                                                <p className="login-init">Are you a returning customer? <span onClick={() => navigate("/session/new")}>Click here to login</span></p>
                                                 <h2 className="billing">Billing Details</h2>
                                                 <form onSubmit={handleSubmit(SaveDetails)}>
                                                      <div className="cart-body-row n-adjust">

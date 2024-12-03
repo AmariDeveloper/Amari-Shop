@@ -21,9 +21,11 @@
     overflow: hidden;
 }
 .login-left-col h2{
-    font-size: 40px;
-    font-weight: 600;
+    font-size: 36px;
+    font-weight: 500;
     margin-bottom: 10px;
+    line-height: 1.35;
+    color: rgb(255, 255, 255);
 }
 .login-left-col p{
      font-weight: 400;
@@ -133,4 +135,22 @@
      color: white;
      cursor: pointer;
      font-size: 16px;
+}
+
+@media(max-width: 1090px){
+       .login-content{
+             grid-template-columns: 1fr;
+       }
+       .login-left-col{
+              display: none;
+       }
+}
+
+@media(max-width: 768px){
+       .login-intro h2{
+             font-size: 32px;
+       }
+       .login-intro p{
+             font-size: 15px;
+       }
 }

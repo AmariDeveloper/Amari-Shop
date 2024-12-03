@@ -35,6 +35,7 @@ const LoginPage = () => {
                            
                              //set customer session
                              dispatch(setCustomerSession(res.info));
+                             
 
                              setTimeout(() => { dispatch(clearRedirect())}, 5000)
                        }

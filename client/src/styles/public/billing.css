@@ -124,7 +124,7 @@
 }
 .billing-method h3{
       font-size: 18px;
-      font-weight: 450;
+      font-weight: 400;
       margin-bottom: 10px;;
 }
 
@@ -198,7 +198,7 @@
      -o-transition: all 0.75 ease;
 }
 .billing-method-moja.active .billing-method-details{
-      max-height: 200px;
+      max-height: 500px;
 }
 .billing-method-details .billing-method-inner{
       padding: 20px;
@@ -250,6 +250,141 @@
       width: 250px;
       margin-top: 30px;
 }
+
+.billing-form-row{
+      display: block;
+      position: relative;
+      margin-bottom: 20px;
+}
+.billing-form-row.split{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+}
+.billing-form-row label{
+     font-size: 15px;
+     font-weight: 350;
+     margin-bottom: 5px;
+     display: block;
+}
+.billing-form-row .billing-input{
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     width: 100%;
+     gap: 20px;
+}
+.billing-input input{
+      width: 500px;
+      height: 55px;
+      padding: 0 10px;
+      outline: none;
+      border: 1px solid var(--line);
+      background: transparent;
+      border-radius: 6px;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      -ms-border-radius: 6px;
+      -o-border-radius: 6px;
+}
+.billing-form-column input{
+     width: 100%;
+     height: 55px;
+     padding: 0 10px;
+     outline: none;
+     border: 1px solid var(--line);
+     background: transparent;
+     border-radius: 6px;
+     -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+     -ms-border-radius: 6px;
+}
+
+.card-type .empty-card{
+      width: 100px;
+      height: 50px;
+      background: var(--light-gray);
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+}
+.card-type img{
+      width: 90px;
+      height: 35px;
+      object-fit: contain;
+      display: block;
+}
+.date-input-row{
+      display: flex;
+      gap: 5px;
+      align-items: center;
+}
+.date-input-row input{
+      width: 45px;
+      height: 45px;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /** Order Completion Body */
