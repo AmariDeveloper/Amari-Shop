@@ -1,8 +1,33 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
+import complete from "../../../assets/purchased.png"
+import billingImg from "../../../assets/receipt.png"
+import { useVerifyTransactionMutation } from "../../../redux/slices/public/actionSlice";
 
 const OrderCompleteBody = () => {
     const { details, order } = useSelector(state => state.billing);
+    const [ status, setStatus ] = useState(true)
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const transaction_id = urlParams.get("TransID");
+    const transaction_token = urlParams.get("TransactionToken");
+    const [ verifyPayment ] = useVerifyTransactionMutation();
+
+   useEffect(() => {
+         try {
+              verifyPayment({ transaction_id, transaction_token}).then(res => {
+                      if(res.message === "Payment complete"){
+                              setStatus(false)
+                      }else{
+                             navigate("/checkout/billing-confirmation")
+                      }
+              })
+         } catch (error) {
+              console.log(error)
+         }
+   }, [verifyPayment, transaction_id, transaction_token, navigate])
+
     const navigate = useNavigate();
  
     const calculateTotal = () => {
@@ -13,10 +38,19 @@ const OrderCompleteBody = () => {
     }
   return (
     <div className="order-completion-body">
+             <div className={ status ? "order-verification active" : "order-verification"}>
+                    <div className="billing-circle">
+                              <div className="billing-loader-wrap"></div>
+                              <img src={billingImg} alt="" />
+                     </div>
+                     <div className="billing-loader-texts">
+                              <h3>Verifying Payment...Please wait.</h3>
+                     </div>
+             </div>
              <div className="inner-row-2">
                         <div className="completion-box">
                                     <div className="completion-icon">
-                                               
+                                               <img src={complete} alt="" />
                                     </div>
                                     <h3>Thanks for your Order!</h3>
                                     <p>The order confirmation has been sent to {details.email}</p>
@@ -37,7 +71,7 @@ const OrderCompleteBody = () => {
                                     </div>
                                     <div className="order-details">
                                                 <h4>Your Order</h4>
-                                                <div className="order-details-row">
+                                                {/* <div className="order-details-row">
                                                             { order.basket.map(item => 
                                                                   <div className="order-detail-moja" key={item.id}>
                                                                             <div className="left-column">
@@ -79,7 +113,7 @@ const OrderCompleteBody = () => {
                                                                             <h2><span className="ksh">ksh.</span>{item.price.toLocaleString()}</h2>
                                                                   </div>
                                                             )}
-                                                </div>
+                                                </div> */}
                                     </div>
 
                                     <div className="order-subtotal">

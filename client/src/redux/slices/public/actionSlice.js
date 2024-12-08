@@ -57,6 +57,15 @@ export const clientActionSlice = apiSlice.injectEndpoints({
                                   method: "POST",
                                   body: payload
                          })
+                }),
+
+                //Verify transaction
+                verifyTransaction: builder.mutation({
+                        query: (payload) => ({
+                                 url: "v1/client/verify-transaction",
+                                 method: "POST",
+                                 body: payload
+                        })
                 })
         })
 })
@@ -67,5 +76,6 @@ export const {
        useRegisterNewBusinessMutation,
        useLoginCustomerManuallyMutation,
        useLogoutCustomerMutation,
-       useProcessPaymentsMutation
+       useProcessPaymentsMutation,
+       useVerifyTransactionMutation
 } = clientActionSlice

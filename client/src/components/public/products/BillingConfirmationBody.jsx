@@ -1,26 +1,30 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, } from "react-router-dom"
 import { GoChevronRight } from "react-icons/go"
 import { LiaUserEditSolid } from "react-icons/lia";
 import { useDispatch, useSelector } from "react-redux";
+import billingImg from "../../../assets/receipt.png"
 //import mpesalogo from "../../../assets/mpesa.png"
-import visa from "../../../assets/visa.png"
-import mastercard from "../../../assets/mastercard.png"
-import { GoChevronDown } from "react-icons/go";
-import {  useState } from "react";
-import { clearShoppingCart } from "../../../redux/slices/public/cartSlice";
+// import visa from "../../../assets/visa.png"
+// import mastercard from "../../../assets/mastercard.png"
+// import { GoChevronDown } from "react-icons/go";
+// import {  useState } from "react";
+// import { clearShoppingCart } from "../../../redux/slices/public/cartSlice";
 import { saveOrderInformation } from "../../../redux/slices/public/billingSlice";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import { useProcessPaymentsMutation } from "../../../redux/slices/public/actionSlice";
+import { setAppNotification } from "../../../redux/slices/utilSlice";
+import { useState } from "react";
 const BillingConfirmationBody = () => {
   const { details } = useSelector(state => state.billing)
   const { shopping_cart, shipping_fee } = useSelector(state => state.cart);
- const [ activePaymentMethod, setActivePaymentMethod ] = useState(0);
- const { register, handleSubmit, formState: { errors }} = useForm();
- const [ cardType, setCardType ] = useState("");
- const [ cardError, setCardError ] = useState("");
- const [cvcError, setCVCError] = useState("");
- const [ dateError, setDateError ] = useState("")
+//  const [ activePaymentMethod, setActivePaymentMethod ] = useState(0);
+//  const { register, handleSubmit, formState: { errors }} = useForm();
+//  const [ cardType, setCardType ] = useState("");
+//  const [ cardError, setCardError ] = useState("");
+//  const [cvcError, setCVCError] = useState("");
+//  const [ dateError, setDateError ] = useState("")
  //const inputRef = useRef();
+ const [payStatus, setPayStatus] = useState(false)
  const navigate = useNavigate();
  const dispatch = useDispatch();
 
@@ -32,64 +36,64 @@ const BillingConfirmationBody = () => {
 //        inputRef.current.value = details.phone
 // }
 
-const normalizeCardNumber = (val) => {
-     if(val.startsWith(4)){
-           setCardType("Visa");
-           setCardError("")
-     }else if(val.startsWith(5)){
-           setCardType("Mastercard");
-           setCardError("")
-     }else{
-           setCardType("")
-           setCardError("Invalid  visa or mastercard number.")
-     }
-     return val.replace(/\s/g, "").match(/.{1,4}/g)?.join("  ").substring(0, 22) || ''
-}
+// const normalizeCardNumber = (val) => {
+//      if(val.startsWith(4)){
+//            setCardType("Visa");
+//            setCardError("")
+//      }else if(val.startsWith(5)){
+//            setCardType("Mastercard");
+//            setCardError("")
+//      }else{
+//            setCardType("")
+//            setCardError("Invalid  visa or mastercard number.")
+//      }
+//      return val.replace(/\s/g, "").match(/.{1,4}/g)?.join("  ").substring(0, 22) || ''
+// }
 
-const normalizeMonthExpiryDate = (val) => {
-        const monthArray = ["01", "02", "03", "04", "05", "06", "07", "08", "09","10",
-                                                 "1", "2", "3", "4", "5", "6", "7", "8", "9", 
-                                                 "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
-                                                 "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
-        if(monthArray.includes(val)){
-                setDateError("")
-        } else{
-                setDateError("Invalid month date");
-        }
+// const normalizeMonthExpiryDate = (val) => {
+//         const monthArray = ["01", "02", "03", "04", "05", "06", "07", "08", "09","10",
+//                                                  "1", "2", "3", "4", "5", "6", "7", "8", "9", 
+//                                                  "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+//                                                  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
+//         if(monthArray.includes(val)){
+//                 setDateError("")
+//         } else{
+//                 setDateError("Invalid month date");
+//         }
 
-        return val.substring(0, 2);
-}
+//         return val.substring(0, 2);
+// }
 
-const normalizeYearExpiryDate = (val) => {
-         if(val > 24 && val < 40){
-                setDateError("")
-         }else{
-                 setDateError("Invalid year entered")
-         }
+// const normalizeYearExpiryDate = (val) => {
+//          if(val > 24 && val < 40){
+//                 setDateError("")
+//          }else{
+//                  setDateError("Invalid year entered")
+//          }
 
-         return val.substring(0, 2)
-}
+//          return val.substring(0, 2)
+// }
 
-const normalizeCVCValue = (val) => {
-        if(val.length < 3){
-                setCVCError("Please input correct security code!")
-        }else{
-                setCVCError("")
-        }
-        if(isNaN(val)){
-                setCVCError("Incorrect code format")
-        }else{
-                setCVCError('')
-        }
+// const normalizeCVCValue = (val) => {
+//         if(val.length < 3){
+//                 setCVCError("Please input correct security code!")
+//         }else{
+//                 setCVCError("")
+//         }
+//         if(isNaN(val)){
+//                 setCVCError("Incorrect code format")
+//         }else{
+//                 setCVCError('')
+//         }
 
-        return val.substring(0, 3)
-}
+//         return val.substring(0, 3)
+// }
 
 
-const [ HandlePayment, { isLoading }] = useProcessPaymentsMutation();
+const [ HandlePayment] = useProcessPaymentsMutation();
 
-const PurchaseCompletion = async(data) => {
-        
+const PurchaseCompletion = async() => {
+        setPayStatus(true)
         const basketOrder = shopping_cart.map(product => {
                 const order_details = {
                         title: product.product_title,
@@ -105,18 +109,23 @@ const PurchaseCompletion = async(data) => {
                 basket: basketOrder,
                 ...details,
                 shipping: shipping_fee.cost,
-                grandTotal: totalCostPlusShipping(),
-                card: data
+                grandTotal: totalCostPlusShipping()+shipping_fee.cost,
         }
 
         try {
                 const res = await HandlePayment(payload).unwrap();
-                
+                if(res.error){
+                     dispatch(setAppNotification({ status: true, message: res.error.data.message, type: "Error"}))
+                }else{
+                       setTimeout(() => {
+                            window.location.href = `https://secure.3gdirectpay.com/payv3.php?ID=${res.message}`
+                       }, 1000)
+                       dispatch(saveOrderInformation(payload))
+                }
         } catch (error) {
                 console.log(error)
         }
 
-        // dispatch(saveOrderInformation(payload))
         // navigate("/checkout/order-complete-confirmation")
         // dispatch(clearShoppingCart());
 }
@@ -135,6 +144,16 @@ const PurchaseCompletion = async(data) => {
                               <Link to={"/checkout/billing-confirmation"}>Billing Confirmation</Link>
                     </div>
 
+                     <div className={payStatus ? "billing-loader active" : "billing-loader"}>
+                                  <div className="billing-circle">
+                                            <div className="billing-loader-wrap"></div>
+                                            <img src={billingImg} alt="" />
+                                  </div>
+                                 <div className="billing-loader-texts">
+                                            <h3>Payment Process has been Initiated!</h3>
+                                            <p>You will be redirected shortly to DPO Pay page to complete payment. Thank you.</p>
+                                 </div>
+                     </div>
                     <div className="billing-confirmation-body">
                               <div className="billing-confirmation-column">
                                         <h2>Review your billing and cart details to continue</h2>
@@ -178,12 +197,14 @@ const PurchaseCompletion = async(data) => {
                                          <div className="billing-header-2">
                                                 <h3>Payment Details</h3>
                                                 <p>Complete your purchase by providing your payment details.</p>
+
+                                                <button className="proceed-btn complete" onClick={PurchaseCompletion}>Complete Purchase</button>
                                         </div>
-                                        <div className="billing-method">
-                                                   {/* <h3>Select Payment Method</h3> */}
+                                        {/* <div className="billing-method">
+                                                   <h3>Select Payment Method</h3>
                                                    <h3>Available payment option</h3>
                                                    <div className="billing-method-row">
-                                                               {/* <div className={activePaymentMethod === 0  ? "billing-method-moja active" : "billing-method-moja"}>
+                                                               <div className={activePaymentMethod === 0  ? "billing-method-moja active" : "billing-method-moja"}>
                                                                          <div className="billing-method-header" onClick={() => setActivePaymentMethod(0)}>
                                                                                   <h4>Pay with M-Pesa</h4>
                                                                                   <span><GoChevronDown /></span>
@@ -197,7 +218,7 @@ const PurchaseCompletion = async(data) => {
                                                                                                </div>
                                                                                    </div>
                                                                          </div>
-                                                               </div> */}
+                                                               </div>
                                                                <div className={ activePaymentMethod === 1 ? "billing-method-moja active" : "billing-method-moja"} onClick={() => setActivePaymentMethod(1)}>
                                                                         <div className="billing-method-header">
                                                                                   <h4>Pay with Card</h4>
@@ -285,6 +306,11 @@ const PurchaseCompletion = async(data) => {
                                                                                                                                 <span className="error">{cvcError}</span>
                                                                                                                   </div>
                                                                                                       </div>
+                                                                                                      <div className="billing-form-column">
+                                                                                                                 <label htmlFor="card name">Name on the Card</label>
+                                                                                                                 <input type="text" {...register("card_name", {required: "The name on the card is required"})} placeholder="John Doe"  />
+                                                                                                                 <span className="error">{errors.card_name && errors.card_name.message}</span>
+                                                                                                      </div>
 
 
                                                                                                       <button className="proceed-btn complete">Complete Purchase</button>
@@ -293,9 +319,7 @@ const PurchaseCompletion = async(data) => {
                                                                          </div>
                                                                </div>
                                                    </div>
-
-                                                
-                                        </div>
+                                        </div> */}
                               </div>
                               <div className="billing-payment">
                                      <div className="cart-order-sticky">
