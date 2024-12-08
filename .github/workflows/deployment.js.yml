@@ -85,6 +85,10 @@ jobs:
                   echo CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }} >> .env
                   echo EMAIL=${{secrets.EMAIL}} >> .env
                   echo PASSWORD=${{secrets.PASSWORD}} >> .env
+                  echo DPO_ENDPOINT_URL=${{secrets.DPO_ENDPOINT_URL}} >> .env
+                  echo DPO_COMPANY_TOKEN=${{secrets.DPO_COMPANY_TOKEN}} >> .env
+                  echo DPO_SERVICE_TYPE=${{secrets.DPO_SERVICE_TYPE}} >> .env
+                  echo DPO_SERVICE_PRODUCT=${{secrets.DPO_SERVICE_PRODUCT}} >> .env
 
      deploy:
            
