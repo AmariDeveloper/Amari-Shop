@@ -97,7 +97,7 @@ jobs:
            steps:
              - run: |
                     cd /home/actions-runner/_work/Amari-Shop/Amari-Shop/server
-                    sudo pm2 kill
+                    sudo pm2 delete all
                     sudo pm2 start index.js
                     sudo pm2 save
 

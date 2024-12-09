@@ -41,11 +41,9 @@ export const InitiatePaymentWithCard = asyncHandler(async(req, res) => {
 export const verifyPayment = asyncHandler(async(req, res) => {
        const { token} = req.body.payload;
 
-       console.log(token)
        try {
              const result = await verifyDPOTransaction(token);
              const status = result.API3G.Result._text;
-             console.log(status);
              if(status === "000"){
                      res.status(201).json({ message: "Payment complete"})
              } else{

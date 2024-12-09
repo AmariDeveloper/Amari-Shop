@@ -10,6 +10,9 @@ const OrderCompleteBody = () => {
     const [ status, setStatus ] = useState(true)
     const urlParams = new URLSearchParams(window.location.search);
 
+    console.log(details)
+    console.log(order)
+
     const transaction_token = urlParams.get("TransactionToken");
     const navigate = useNavigate();
     const [ verifyPayment ] = useVerifyTransactionMutation();
@@ -23,12 +26,11 @@ const OrderCompleteBody = () => {
               verifyPayment({payload}).then(res => {
                       if(res.message === "Payment complete"){
                               setStatus(false)
-                      }else{
-                             navigate("/checkout/billing-confirmation")
                       }
               })
          } catch (error) {
               console.log(error)
+              navigate("/checkout/billing-confirmation")
          }
    }, [verifyPayment, payload, navigate])
 
