@@ -8,6 +8,7 @@ import { Link } from "react-router-dom"
 
 const ShoppingCartModal = () => {
     const { isSidebarCartOpen, shopping_cart } = useSelector(state => state.cart);
+    const { session } = useSelector(state => state.client)
     const cartRef = useRef();
     const cartChildRef = useRef();
     const dispatch = useDispatch();
@@ -106,7 +107,8 @@ const ShoppingCartModal = () => {
                                                                                 <h5><span className="ksh">ksh.</span>{subtotal.toLocaleString()}</h5>
                                                                     </div>
                                                                     <div className="basket-buttons">
-                                                                             <Link to={"/checkout"} onClick={closeShoppingBasket}>Checkout</Link>
+                                                                              { session.isLoggedIn ? <Link to={"/checkout"} onClick={closeShoppingBasket}>Checkout</Link> : ""}
+                                                                             
                                                                              <Link to={"/cart"} onClick={closeShoppingBasket}>View Cart</Link>
                                                                     </div>
                                                         </div>
