@@ -1,20 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import complete from "../../../assets/purchased.png"
 import billingImg from "../../../assets/receipt.png"
 import { useVerifyTransactionMutation } from "../../../redux/slices/public/actionSlice";
+import { clearShoppingCart } from "../../../redux/slices/public/cartSlice";
 
 const OrderCompleteBody = () => {
     const { details, order } = useSelector(state => state.billing);
     const [ status, setStatus ] = useState(true)
     const urlParams = new URLSearchParams(window.location.search);
 
-    console.log(details)
-    console.log(order)
-
     const transaction_token = urlParams.get("TransactionToken");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [ verifyPayment ] = useVerifyTransactionMutation();
 
    const payload = useMemo(() => {
@@ -24,15 +23,17 @@ const OrderCompleteBody = () => {
    useEffect(() => {
          try {
               verifyPayment({payload}).then(res => {
-                      if(res.message === "Payment complete"){
-                              setStatus(false)
+                     console.log(res)
+                      if(res.message == "Payment complete"){
+                              setStatus(false);
+                              dispatch(clearShoppingCart());
                       }
               })
          } catch (error) {
               console.log(error)
               navigate("/checkout/billing-confirmation")
          }
-   }, [verifyPayment, payload, navigate])
+   }, [verifyPayment, payload, navigate, dispatch])
 
 
  
@@ -77,7 +78,7 @@ const OrderCompleteBody = () => {
                                     </div>
                                     <div className="order-details">
                                                 <h4>Your Order</h4>
-                                                {/* <div className="order-details-row">
+                                                <div className="order-details-row">
                                                             { order.basket.map(item => 
                                                                   <div className="order-detail-moja" key={item.id}>
                                                                             <div className="left-column">
@@ -119,7 +120,7 @@ const OrderCompleteBody = () => {
                                                                             <h2><span className="ksh">ksh.</span>{item.price.toLocaleString()}</h2>
                                                                   </div>
                                                             )}
-                                                </div> */}
+                                                </div>
                                     </div>
 
                                     <div className="order-subtotal">
