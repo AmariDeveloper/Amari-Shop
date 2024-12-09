@@ -23,14 +23,15 @@ const OrderCompleteBody = () => {
    useEffect(() => {
          try {
               verifyPayment({payload}).then(res => {
-                     console.log(res)
-                      if(res.message == "Payment complete"){
+                      if(res.data.message == "Payment complete"){
                               setStatus(false);
                               dispatch(clearShoppingCart());
+                      }else{
+                            navigate("/checkout/billing-confirmation")
                       }
               })
          } catch (error) {
-              console.log(error)
+              //console.log(error)
               navigate("/checkout/billing-confirmation")
          }
    }, [verifyPayment, payload, navigate, dispatch])
