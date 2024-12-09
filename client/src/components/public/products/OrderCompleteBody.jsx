@@ -12,6 +12,9 @@ const OrderCompleteBody = () => {
 
     const transaction_id = urlParams.get("TransID");
     const transaction_token = urlParams.get("TransactionToken");
+
+    console.log(transaction_id);
+    console.log(transaction_token);
     const [ verifyPayment ] = useVerifyTransactionMutation();
 
    useEffect(() => {
