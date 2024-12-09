@@ -66,11 +66,11 @@ const OrderCompleteBody = () => {
                                     <div className="extra-details">
                                                 <div className="extra-detail-row">
                                                            <h4>Transaction Date</h4>
-                                                           <h5>Thursday, November 18, 2024</h5>
+                                                           <h5>TBD, 2024</h5>
                                                 </div>
                                                 <div className="extra-detail-row">
                                                            <h4>Payment Method</h4>
-                                                           <h5>M-Pesa xxxxxxx345</h5>
+                                                           <h5>Card</h5>
                                                 </div>
                                                 <div className="extra-detail-row">
                                                            <h4>Shipping Method</h4>
