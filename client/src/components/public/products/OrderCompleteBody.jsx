@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import complete from "../../../assets/purchased.png"
@@ -10,16 +10,17 @@ const OrderCompleteBody = () => {
     const [ status, setStatus ] = useState(true)
     const urlParams = new URLSearchParams(window.location.search);
 
-    const transaction_id = urlParams.get("TransID");
     const transaction_token = urlParams.get("TransactionToken");
-
-    console.log(transaction_id);
-    console.log(transaction_token);
+    const navigate = useNavigate();
     const [ verifyPayment ] = useVerifyTransactionMutation();
+
+   const payload = useMemo(() => {
+          return { token : transaction_token}
+   }, [transaction_token])
 
    useEffect(() => {
          try {
-              verifyPayment({ transaction_id, transaction_token}).then(res => {
+              verifyPayment({payload}).then(res => {
                       if(res.message === "Payment complete"){
                               setStatus(false)
                       }else{
@@ -29,9 +30,9 @@ const OrderCompleteBody = () => {
          } catch (error) {
               console.log(error)
          }
-   }, [verifyPayment, transaction_id, transaction_token, navigate])
+   }, [verifyPayment, payload, navigate])
 
-    const navigate = useNavigate();
+
  
     const calculateTotal = () => {
            const count = order.basket.reduce((acc, curr) => acc+curr.price, 0)
