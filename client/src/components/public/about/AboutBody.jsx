@@ -26,18 +26,18 @@ const AboutBody = () => {
                                     <h2>Why Choose Amari?</h2>
 
                                     <div className="about-benefits-row">
-                                                  <div className="benefit-moja">
+                                                  {/* <div className="benefit-moja">
                                                              <h3>Access to Global Markets</h3>
                                                              <p>Forget the hassles of logistics. We handle shipping, ensuring that your products get to customers, on time, every time.</p>
-                                                  </div>
+                                                  </div> */}
                                                   <div className="benefit-moja">
                                                             <h3>All-in-One Convenience</h3>
                                                             <p>Focus on what you do best - creating quality products. We take care of the rest, from listing to shipping, payments, and customer service.</p>
                                                   </div>
-                                                  <div className="benefit-moja">
+                                                  {/* <div className="benefit-moja">
                                                             <h3>Affordable Subscription</h3>
                                                             <p>Amari provides all these services for a simple monthly subscription fee. No surprise costs - just a clear path to success.</p>
-                                                  </div>
+                                                  </div> */}
                                     </div>
                        </div>
              </div>
