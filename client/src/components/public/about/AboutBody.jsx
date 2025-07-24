@@ -32,7 +32,7 @@ const AboutBody = () => {
                                                   </div> */}
                                                   <div className="benefit-moja">
                                                             <h3>All-in-One Convenience</h3>
-                                                            <p>Focus on what you do best - creating quality products. We take care of the rest, from listing to shipping, payments, and customer service.</p>
+                                                            <p>Focus on what you do best - creating quality products. We take care of the rest, from listing to marketing, payments, shipping, and customer service.</p>
                                                   </div>
                                                   {/* <div className="benefit-moja">
                                                             <h3>Affordable Subscription</h3>
