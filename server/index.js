@@ -17,11 +17,26 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use(cookieParser());
-const corsConfig = {
+
+const allowedOrigins = [
+       "http://localhost:5173",
+       "http://localhost:5174",
+       "http://localhost:5175",
+       "https://amari.africa"
+]
+
+const corsOptions = {
+       origin: function(origin, callback) {
+              if(allowedOrigins.indexOf(origin) !== -1 || !origin){
+                     callback(null, true); //allow the request
+              }else{
+                     callback(new Error("Not allowed by CORS")); //block the request
+              }
+       },
        credentials: true,
-       origin: `${process.env.CLIENT_APP_URL}`,
 }
-app.use(cors(corsConfig))
+
+app.use(cors(corsOptions))
 
 //Routes
 app.use("/api/v1/user", UserRoutes);
