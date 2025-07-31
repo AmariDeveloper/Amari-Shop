@@ -1,5 +1,10 @@
 export const shipping = [
       {
+            id: 84849,
+            subcounty: "Free Shipping",
+            shipping_cost: 0  
+      },
+      {
           id: 0,
           subcounty: "Westlands",
           shipping_cost: 350,
