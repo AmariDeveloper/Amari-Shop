@@ -32,7 +32,7 @@ export const createDPOToken = async(grandTotal, firstname, lastname, email, cust
                        <Service>
                              <ServiceType>${process.env.DPO_SERVICE_TYPE}</ServiceType>
                              <ServiceDescription>Product Purchase from Amari Shop</ServiceDescription>
-                             <ServiceDate>2024/12/5 20:00</ServiceDate>
+                             <ServiceDate>2025/12/8 20:00</ServiceDate>
                        </Service>
                  </Services>
         </API3G>
