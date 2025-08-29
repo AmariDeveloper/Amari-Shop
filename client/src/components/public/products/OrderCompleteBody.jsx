@@ -9,7 +9,8 @@ import { clearOrderId } from "../../../redux/slices/public/billingSlice";
 
 const OrderCompleteBody = () => {
     const { details, order, orderId } = useSelector(state => state.billing);
-    const [ status, setStatus ] = useState(true)
+    const [ status, setStatus ] = useState(true);
+    const [ responseData, setResponseData ] = useState();
     const urlParams = new URLSearchParams(window.location.search);
 
     const transaction_token = urlParams.get("TransactionToken");
@@ -18,7 +19,7 @@ const OrderCompleteBody = () => {
     const [ verifyPayment ] = useVerifyTransactionMutation();
 
    const payload = useMemo(() => {
-          return { token : transaction_token}
+          return { token : transaction_token }
    }, [transaction_token])
 
    useEffect(() => {
@@ -26,6 +27,7 @@ const OrderCompleteBody = () => {
               verifyPayment({...payload, orderId}).then(res => {
                       if(res.data.message == "Payment complete"){
                               setStatus(false);
+                              setResponseData({...res.data.orderData})
                               dispatch(clearOrderId());
                               dispatch(clearShoppingCart());
                       }else{
@@ -36,7 +38,7 @@ const OrderCompleteBody = () => {
               //console.log(error)
               navigate("/checkout/billing-confirmation")
          }
-   }, [verifyPayment, payload, navigate, dispatch])
+   }, [verifyPayment, payload, navigate, dispatch, orderId])
 
 
  
@@ -68,11 +70,11 @@ const OrderCompleteBody = () => {
                                     <div className="extra-details">
                                                 <div className="extra-detail-row">
                                                            <h4>Transaction Date</h4>
-                                                           <h5>TBD, 2024</h5>
+                                                           <h5>{ responseData && responseData.settlementDate}</h5>
                                                 </div>
                                                 <div className="extra-detail-row">
                                                            <h4>Payment Method</h4>
-                                                           <h5>Card</h5>
+                                                           <h5>{ responseData && responseData.method}</h5>
                                                 </div>
                                                 <div className="extra-detail-row">
                                                            <h4>Shipping Method</h4>

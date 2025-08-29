@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import Customer from "../models/Customer.js";
 import dotenv from "dotenv";
 import { createDPOToken, verifyDPOTransaction } from "../config/dpoConfig.js";
+import { confirmPurchase } from "../services/customerservices.js";
 
 //initialize .env file
 dotenv.config();
@@ -33,9 +34,7 @@ export const InitiatePayment = asyncHandler(async(req, res) => {
 
 
 export const verifyPayment = asyncHandler(async(req, res) => {
-       const { token, orderId} = req.body.payload;
-
-       console.log(orderId)
+       const { token, orderId} = req.body;
 
        try {
              const result = await verifyDPOTransaction(token);
@@ -50,10 +49,19 @@ export const verifyPayment = asyncHandler(async(req, res) => {
                      settlementDate:result.API3G.TransactionSettlementDate._text
              }
              console.log(payload)
-             if(status === "000"){
-                     res.status(201).json({ message: "Payment complete"})
-             } else{
-                  res.status(501).json({ message: "Transaction verification failed."})
+             const updatePayment = await confirmPurchase(payload);
+
+             if(status === "000" && updatePayment){
+                     res.status(201).json({ 
+                        message: "Payment Complete",
+                        orderData: {
+                               settlementDate: updatePayment.paymentInfo.settlementDate,
+                               method: updatePayment.paymentInfo.method
+                        }
+                  })
+             }
+             if(status !== "000" && !updatePayment){
+                   res.status(501).json({ message: "Transaction verification failed."})
              }
        } catch (error) {
               //console.log(error);
