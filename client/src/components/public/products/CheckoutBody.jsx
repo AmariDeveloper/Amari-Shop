@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { useEffect } from "react"
 import { saveBillingInformation } from "../../../redux/slices/public/billingSlice"
 import { setShippingFee } from "../../../redux/slices/public/cartSlice"
+
 const CheckoutBody = () => {
     const { shopping_cart, shipping_fee } = useSelector(state => state.cart);
     const { details } = useSelector(state => state.billing);
@@ -54,7 +55,7 @@ const CheckoutBody = () => {
 
     const SaveDetails = (data) => {
            dispatch(saveBillingInformation(data));
-           console.log(data)
+           //console.log(data)
            navigate("/checkout/billing-confirmation");
     }
 
@@ -182,7 +183,7 @@ const CheckoutBody = () => {
                                                                                           </div>
                                                                                           <div className="calculation-column">
                                                                                                        <h5>Shipping fee</h5>
-                                                                                                       <h2><span className="ksh">ksh.</span>{shipping_fee.cost}</h2>
+                                                                                                       <h2><span className="ksh">ksh.</span>{shipping_fee &&shipping_fee.cost}</h2>
                                                                                           </div>
 
                                                                                           <div className="total-calculation-column">

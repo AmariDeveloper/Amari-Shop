@@ -3,7 +3,7 @@ import { createSlice} from "@reduxjs/toolkit";
 const initialState = {
       shopping_cart: localStorage.getItem("Shopping Cart") ? JSON.parse(localStorage.getItem("Shopping Cart")) : [],
       isSidebarCartOpen: false,
-      shipping_fee: localStorage.getItem("Shipping Fee") ? JSON.parse(localStorage.getItem("Shipping Fee")) : null,
+      shipping_fee: localStorage.getItem("Shipping Fee") ? JSON.parse(localStorage.getItem("Shipping Fee")) : 250,
       selectedProductVariations: [],
       actionBar: { status: false, data: null }
 }

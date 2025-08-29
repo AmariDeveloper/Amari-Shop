@@ -25,11 +25,14 @@ const CustomerAccountBody = () => {
                                         <div className="customer-account-row">          
                                                        <div className="customer-account-header">
                                                                 <div className="account-image">
-                                                                         <img src={profileImg} alt="" />
+                                                                         { session && session.profile ? 
+                                                                               <img src={session.profile.profileImage} alt="Customer Image" /> :
+                                                                               <img src={profileImg} alt="" />
+                                                                          }
                                                                 </div>
                                                                 <div className="account-customer-details">
-                                                                         <h4>James Gardner</h4>
-                                                                         <p>okundistar2030@gmail.com</p>
+                                                                         <h4>{ session && session.profile.name}</h4>
+                                                                         <p>{session && session.profile.email}</p>
                                                                 </div>
                                                        </div>
                                                        <div className="customer-account-summary">

@@ -6,7 +6,7 @@ import { createDPOToken, verifyDPOTransaction } from "../config/dpoConfig.js";
 //initialize .env file
 dotenv.config();
 
-export const InitiatePaymentWithCard = asyncHandler(async(req, res) => {
+export const InitiatePayment = asyncHandler(async(req, res) => {
       const {
             basket,
             firstname,
@@ -33,10 +33,11 @@ export const InitiatePaymentWithCard = asyncHandler(async(req, res) => {
             }
            
       } catch (error) {
-            //console.log(error)
+            console.log(error)
             res.status(500).json({ message: "Error. Transaction unsuccessful!"})
       }
 })
+
 
 export const verifyPayment = asyncHandler(async(req, res) => {
        const { token} = req.body.payload;
@@ -44,6 +45,7 @@ export const verifyPayment = asyncHandler(async(req, res) => {
        try {
              const result = await verifyDPOTransaction(token);
              const status = result.API3G.Result._text;
+             console.log(result)
              if(status === "000"){
                      res.status(201).json({ message: "Payment complete"})
              } else{
