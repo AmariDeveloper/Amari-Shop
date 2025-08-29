@@ -43,7 +43,6 @@ export const createDPOToken = async(grandTotal, firstname, lastname, email, phon
 
     try {
         const result = await axios.post(process.env.DPO_ENDPOINT_URL, xmlCreateToken, config);
-        console.log(result)
           if(result){
                    const xmlResult = convert.xml2js(result.data, { compact: true})
 

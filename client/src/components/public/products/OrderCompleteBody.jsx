@@ -18,12 +18,12 @@ const OrderCompleteBody = () => {
     const [ verifyPayment ] = useVerifyTransactionMutation();
 
    const payload = useMemo(() => {
-          return { token : transaction_token, order_id: orderId}
-   }, [transaction_token, orderId])
+          return { token : transaction_token}
+   }, [transaction_token])
 
    useEffect(() => {
          try {
-              verifyPayment({payload}).then(res => {
+              verifyPayment({...payload, orderId}).then(res => {
                       if(res.data.message == "Payment complete"){
                               setStatus(false);
                               dispatch(clearOrderId());

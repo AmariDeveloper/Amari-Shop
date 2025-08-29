@@ -33,13 +33,15 @@ export const InitiatePayment = asyncHandler(async(req, res) => {
 
 
 export const verifyPayment = asyncHandler(async(req, res) => {
-       const { token, order_id} = req.body.payload;
+       const { token, orderId} = req.body.payload;
+
+       console.log(orderId)
 
        try {
              const result = await verifyDPOTransaction(token);
              const status = result.API3G.Result._text;
              const payload = {
-                     orderId: order_id,
+                     orderId: orderId,
                      explanation: result.API3G.ResultExplanation._text,
                      method: result.API3G.CustomerCreditType._text,
                      transactionId: result.API3G.TransactionApproval._text,
