@@ -8,6 +8,7 @@ import emptyCart from "../../../assets/abandoned-cart.png"
 import { shipping } from "../../../data/shipping";
 import { useEffect, useState } from "react";
 import { RxMinus, RxPlus  } from "react-icons/rx";
+import { clearOrderId } from "../../../redux/slices/public/billingSlice";
 
 const CartBody = () => {
     const { shopping_cart, shipping_fee } = useSelector(state => state.cart);
@@ -23,6 +24,13 @@ const CartBody = () => {
                 setShippingResult(shipping_fee)
            }
     }, [shipping_fee])
+
+    //clear order id if cart is empty
+    useEffect(() => {
+           if(shopping_cart && shopping_cart.length === 0){
+                  dispatch(clearOrderId());
+           }
+    }, [dispatch, shopping_cart])
 
     const removeVariation = (data, id) => {
             const payload = { data: data, id: id }

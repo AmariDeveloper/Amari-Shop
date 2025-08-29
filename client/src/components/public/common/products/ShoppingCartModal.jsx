@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { closeShoppingCartSidebar, removeProductFromShoppingCart } from "../../../../redux/slices/public/cartSlice";
 import { IoCloseOutline } from "react-icons/io5";
 import { Link } from "react-router-dom"
+import { clearOrderId } from "../../../../redux/slices/public/billingSlice";
 
 const ShoppingCartModal = () => {
     const { isSidebarCartOpen, shopping_cart } = useSelector(state => state.cart);
@@ -52,6 +53,13 @@ const ShoppingCartModal = () => {
           dispatch(removeProductFromShoppingCart(id))
     }
 
+    //Clear Order Id
+    useEffect(() => {
+          if(shopping_cart && shopping_cart.length === 0){
+                dispatch(clearOrderId())
+          }
+    }, [dispatch, shopping_cart])
+
     //calculate subtotal
     useEffect(() => {
             if(shopping_cart && shopping_cart.length > 0){
@@ -68,6 +76,8 @@ const ShoppingCartModal = () => {
                   setSubtotal(total)
             }
     }, [shopping_cart])
+
+    
   return (
     <div ref={cartRef} className="shopping-cart-modal">
               <div ref={cartChildRef} className="shopping-cart-modal-content">
