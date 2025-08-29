@@ -23,10 +23,9 @@ const customerSchema = mongoose.Schema({
       address: {
              country: { type: String},
              city: { type: String },
-             subcounty: { type: String },
+             town: { type: String },
              street: { type: String}
       },
-      order_no: { type: String}
 }, { timestamps: true})
 
 customerSchema.pre("save", async function (next) {

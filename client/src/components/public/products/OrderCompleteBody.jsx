@@ -5,9 +5,10 @@ import complete from "../../../assets/purchased.png"
 import billingImg from "../../../assets/receipt.png"
 import { useVerifyTransactionMutation } from "../../../redux/slices/public/actionSlice";
 import { clearShoppingCart } from "../../../redux/slices/public/cartSlice";
+import { clearOrderId } from "../../../redux/slices/public/billingSlice";
 
 const OrderCompleteBody = () => {
-    const { details, order } = useSelector(state => state.billing);
+    const { details, order, orderId } = useSelector(state => state.billing);
     const [ status, setStatus ] = useState(true)
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -17,14 +18,15 @@ const OrderCompleteBody = () => {
     const [ verifyPayment ] = useVerifyTransactionMutation();
 
    const payload = useMemo(() => {
-          return { token : transaction_token}
-   }, [transaction_token])
+          return { token : transaction_token, order_id: orderId}
+   }, [transaction_token, orderId])
 
    useEffect(() => {
          try {
               verifyPayment({payload}).then(res => {
                       if(res.data.message == "Payment complete"){
                               setStatus(false);
+                              dispatch(clearOrderId());
                               dispatch(clearShoppingCart());
                       }else{
                             navigate("/checkout/billing-confirmation")
@@ -60,7 +62,7 @@ const OrderCompleteBody = () => {
                                     <div className="completion-icon">
                                                <img src={complete} alt="" />
                                     </div>
-                                    <h3>Thanks for your Order!</h3>
+                                    <h3>Thank you for your Order!</h3>
                                     <p>The order confirmation has been sent to {details.email}</p>
 
                                     <div className="extra-details">

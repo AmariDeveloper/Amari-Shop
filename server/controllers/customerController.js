@@ -12,7 +12,7 @@ export const RegisterCustomerManually = asyncHandler(async(req, res) => {
        if(userExists){
               res.status(500).json({ message: "Customer account already exists. Try login in."});
        }else{
-             const profileImage = "https://res.cloudinary.com/dyru8nefb/image/upload/v1728383986/dummy-profile_mns0ls.jpg";
+             const profileImage = "https://files.pazalab.com/amari/images/avatar.jpg";
 
              const name = `${firstname} ${lastname}`;
  

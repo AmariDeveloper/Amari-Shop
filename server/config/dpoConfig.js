@@ -5,7 +5,7 @@ import convert from "xml-js";
 //initialize .env file
 dotenv.config();
 
-export const createDPOToken = async(grandTotal, firstname, lastname, email, customer_phone) => {
+export const createDPOToken = async(grandTotal, firstname, lastname, email, phone, orderDate) => {
     const xmlCreateToken = `
     <?xml version="1.0" encoding="utf-8"?>
             <API3G>
@@ -24,7 +24,7 @@ export const createDPOToken = async(grandTotal, firstname, lastname, email, cust
                         <customerZip>254</customerZip>
                         <customerCity>Nairobi</customerCity>
                         <customerCountry>KE</customerCountry>
-                        <customerPhone>${customer_phone}</customerPhone>
+                        <customerPhone>${phone}</customerPhone>
                         <customerEmail>${email}</customerEmail>
                         <DefaultPayment>CC</DefaultPayment>
                  </Transaction>
@@ -32,7 +32,7 @@ export const createDPOToken = async(grandTotal, firstname, lastname, email, cust
                        <Service>
                              <ServiceType>${process.env.DPO_SERVICE_TYPE}</ServiceType>
                              <ServiceDescription>Product Purchase from Amari Shop</ServiceDescription>
-                             <ServiceDate>2025/12/8 20:00</ServiceDate>
+                             <ServiceDate>${orderDate}</ServiceDate>
                        </Service>
                  </Services>
         </API3G>
@@ -43,6 +43,7 @@ export const createDPOToken = async(grandTotal, firstname, lastname, email, cust
 
     try {
         const result = await axios.post(process.env.DPO_ENDPOINT_URL, xmlCreateToken, config);
+        console.log(result)
           if(result){
                    const xmlResult = convert.xml2js(result.data, { compact: true})
 
@@ -81,3 +82,40 @@ export const verifyDPOTransaction = async(transaction_token) => {
              console.log(error)
        }
 }
+
+
+
+/**
+ * DPO PAYMENT RESULT
+ * 
+ * {
+  _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
+  API3G: {
+    Result: { _text: '000' },
+    ResultExplanation: { _text: 'Transaction Paid' },
+    CustomerName: { _text: 'Bruno Banter' },
+    CustomerCredit: {},
+    CustomerCreditType: { _text: 'Mobile' },
+    TransactionApproval: { _text: 'THT0GNVR1W' },
+    TransactionCurrency: { _text: 'KES' },
+    TransactionAmount: { _text: '2.00' },
+    FraudAlert: { _text: '001' },
+    FraudExplnation: { _text: 'Low Risk (Not checked)' },
+    TransactionNetAmount: { _text: '0.00' },
+    TransactionSettlementDate: { _text: '2025/08/29' },
+    TransactionRollingReserveAmount: { _text: '0.00' },
+    TransactionRollingReserveDate: {},
+    CustomerPhone: { _text: '2345678' },
+    CustomerCountry: { _text: 'Kenya' },
+    CustomerAddress: { _text: 'Kahawa' },
+    CustomerCity: { _text: 'Nairobi' },
+    CustomerZip: { _text: '254712362' },
+    MobilePaymentRequest: { _text: 'Paid' },
+    AccRef: {},
+    TransactionFinalCurrency: { _text: 'KES' },
+    TransactionFinalAmount: { _text: '2.00' }
+  }
+}
+ * 
+ * 
+ */

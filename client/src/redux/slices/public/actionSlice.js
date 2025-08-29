@@ -48,12 +48,20 @@ export const clientActionSlice = apiSlice.injectEndpoints({
                                 body: payload
                         })
                 }),
-
+                 //create a new order
+                createNewOrder: builder.mutation({
+                        query: (payload) => ({
+                                url: "v1/client/orders",
+                                method: "POST",
+                                body: payload
+                        })
+                })
+                 ,
 
                 //process payments for customers
                 processPayments: builder.mutation({
                          query: (payload) => ({
-                                  url: "v1/client/process-payment",
+                                  url: "v1/client/orders/payment",
                                   method: "POST",
                                   body: payload
                          })
@@ -76,6 +84,7 @@ export const {
        useRegisterNewBusinessMutation,
        useLoginCustomerManuallyMutation,
        useLogoutCustomerMutation,
+       useCreateNewOrderMutation,
        useProcessPaymentsMutation,
        useVerifyTransactionMutation
 } = clientActionSlice

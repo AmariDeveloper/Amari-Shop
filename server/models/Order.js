@@ -5,10 +5,12 @@ const orderSchema = mongoose.Schema({
             type: Schema.Types.ObjectId, 
             ref: "Customer"
       },
+      orderId: { type: String, required: true, unique: true },
       orderDate: String,
       orderStatus: String,
       products: [
-           { title: String, 
+           { 
+              title: String, 
               id: { type: Schema.Types.ObjectId , ref: "Product"},
               price: Number, 
               quantity: Number, 
@@ -18,7 +20,7 @@ const orderSchema = mongoose.Schema({
       phone: String,
       shippingAddress: {
              street: String,
-             subcounty: String,
+             town: String,
              city: String,
              country: String
       },
@@ -27,8 +29,9 @@ const orderSchema = mongoose.Schema({
             transactionId: String,
             isPaid: { type: Boolean, default: false},
             amountPaid: Number,
+            currency: String,
+            settlementDate: String
       },
-      notes: String
 }, {  timestamps: true });
 
 const Order = mongoose.model("Order", orderSchema);

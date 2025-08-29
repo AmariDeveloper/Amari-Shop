@@ -4,12 +4,13 @@ import { shipping } from "../../../data/shipping"
 import { useDispatch, useSelector } from "react-redux"
 import { useForm } from "react-hook-form"
 import { useEffect } from "react"
-import { saveBillingInformation } from "../../../redux/slices/public/billingSlice"
+import { persistOrderId, saveBillingInformation } from "../../../redux/slices/public/billingSlice"
 import { setShippingFee } from "../../../redux/slices/public/cartSlice"
+import { generateUID } from "../../../utils/extensions"
 
 const CheckoutBody = () => {
     const { shopping_cart, shipping_fee } = useSelector(state => state.cart);
-    const { details } = useSelector(state => state.billing);
+    const { details, orderId } = useSelector(state => state.billing);
     const { session } = useSelector(state => state.client)
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -55,7 +56,10 @@ const CheckoutBody = () => {
 
     const SaveDetails = (data) => {
            dispatch(saveBillingInformation(data));
-           //console.log(data)
+           if(!orderId){
+                  const code = generateUID();
+                 dispatch(persistOrderId(code));
+           }
            navigate("/checkout/billing-confirmation");
     }
 
@@ -191,7 +195,7 @@ const CheckoutBody = () => {
                                                                                                       <h2><span className="ksh">ksh.</span>{(totalCostPlusShipping()+shipping_fee.cost).toLocaleString()}</h2>
                                                                                           </div>
 
-                                                                                          <button type="submit" className="proceed-btn">Proceed to Payment</button>
+                                                                                          <button type="submit" className="proceed-btn">Proceed to Place an Order</button>
                                                                                </div>
                                                                       </div>
                                                            </div>
