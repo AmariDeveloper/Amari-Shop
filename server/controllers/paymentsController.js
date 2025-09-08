@@ -33,8 +33,8 @@ export const InitiatePayment = asyncHandler(async(req, res) => {
 })
 
 
-export const verifyPayment = asyncHandler(async(req, res) => {
-       const { token, orderId} = req.body;
+export const VerifyPayment = asyncHandler(async(req, res) => {
+       const { token, orderId } = req.body;
 
        try {
              const result = await verifyDPOTransaction(token);
@@ -48,10 +48,14 @@ export const verifyPayment = asyncHandler(async(req, res) => {
                      amountPaid: result.API3G.TransactionFinalAmount._text,
                      settlementDate:result.API3G.TransactionSettlementDate._text
              }
-             console.log(payload)
-             const updatePayment = await confirmPurchase(payload);
+           
+             if(status !== "000" || !updatePayment){
+                   res.status(501).json({ message: "Transaction verification failed."})
+             }
 
-             if(status === "000" && updatePayment){
+             if(status === "000"){
+                    const updatePayment = await confirmPurchase(payload);
+
                      res.status(201).json({ 
                         message: "Payment Complete",
                         orderData: {
@@ -60,9 +64,7 @@ export const verifyPayment = asyncHandler(async(req, res) => {
                         }
                   })
              }
-             if(status !== "000" && !updatePayment){
-                   res.status(501).json({ message: "Transaction verification failed."})
-             }
+
        } catch (error) {
               //console.log(error);
               res.status(500).json({ message: "Error. Payment not verified. Please contact Amari support for help and clarification!"})

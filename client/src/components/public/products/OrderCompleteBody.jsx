@@ -5,7 +5,7 @@ import complete from "../../../assets/purchased.png"
 import billingImg from "../../../assets/receipt.png"
 import { useVerifyTransactionMutation } from "../../../redux/slices/public/actionSlice";
 import { clearShoppingCart } from "../../../redux/slices/public/cartSlice";
-import { clearOrderId } from "../../../redux/slices/public/billingSlice";
+import { clearOrderId, clearOrderInformation } from "../../../redux/slices/public/billingSlice";
 
 const OrderCompleteBody = () => {
     const { details, order, orderId } = useSelector(state => state.billing);
@@ -47,6 +47,11 @@ const OrderCompleteBody = () => {
            const grandT = count + order.shipping
 
            return { subtotal: count, grandtotal: grandT}
+    }
+
+    const continueShopping = () => {
+           dispatch(clearOrderInformation());
+           navigate("/shop")
     }
   return (
     <div className="order-completion-body">
@@ -143,7 +148,7 @@ const OrderCompleteBody = () => {
                                     </div>
 
                                     <div className="continue-shopping">
-                                                <button onClick={() => navigate("/")} className="proceed-btn">Continue Shopping</button>
+                                                <button onClick={continueShopping} className="proceed-btn">Continue Shopping</button>
                                     </div>
                         </div>
              </div>

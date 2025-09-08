@@ -6,13 +6,17 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { addVariationToCartList, removeVariationFromCartList, resetVariationQuantityList, addProductToShoppingCartFromQuickView } from "../../../redux/slices/public/cartSlice";
+import { crosscheckProductQuantity } from "../../../lib/products";
 
 const ProductInfoBox = ({ product }) => {
     const [selected, setSelected ] = useState([]);
     const [ basketOpen, setBasketOpen ] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [ cartValue, setCartValue ] = useState(1);
+    const [ cartValue, setCartValue ] = useState(product.quantity ? product.quantity : 1);
+    const [ stockError, setStockError ] = useState("")
+
+    console.log(product)
      
     const handleSelected = (item) => {
              setBasketOpen(true)
@@ -43,13 +47,21 @@ const ProductInfoBox = ({ product }) => {
     }, [setSelected, product, dispatch])
     
 
-    const increamentCartValue = () => setCartValue(prev => prev + 1);
+    const increamentCartValue = () => {
+         const inventory_no = product && product.product_inventory.product_stock_quantity;
+         if(!crosscheckProductQuantity(inventory_no, cartValue)){
+               setStockError(`Sorry. We do not have more than ${inventory_no} item(s) of this product.`)
+         }else{
+              setCartValue(prev => prev + 1);
+         }
+    }
     const decreamentCartValue = () => {
             if(cartValue === 1){
                   setCartValue(1)
             }else{
                  setCartValue(prev => prev - 1)
             }
+            setStockError("")
     }
 
       //Add product to shopping cart
@@ -110,20 +122,23 @@ const ProductInfoBox = ({ product }) => {
                   </div> 
                   :
                   <div className="product-quick-cart-options">
-                               <div className="cart-number-adjustments">
-                                     <div className="adjust minus" onClick={decreamentCartValue}>
-                                                   <span><RxMinus /></span>
+                              <div className="product-quick-cart-flex-items">
+                                    <div className="cart-number-adjustments">
+                                          <div className="adjust minus" onClick={decreamentCartValue}>
+                                                      <span><RxMinus /></span>
                                           </div>
                                           <div className="adjust-showcase">
-                                                  <h3>{cartValue}</h3>
+                                                <h3>{cartValue}</h3>
                                           </div>
                                           <div className="adjust plus" onClick={increamentCartValue}>
-                                                     <span><RxPlus /></span>
+                                                <span><RxPlus /></span>
                                           </div>
+                                    </div>
+                                    <div className="add-to-cart-btn" onClick={() => addProductToCart(product)}>
+                                                <h4>Add to Cart</h4>
+                                    </div>
                               </div>
-                              <div className="add-to-cart-btn" onClick={() => addProductToCart(product)}>
-                                          <h4>Add to Cart</h4>
-                              </div>
+                              <p className="product-stock-error">{stockError}</p>
                   </div>
              }
 

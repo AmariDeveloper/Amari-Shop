@@ -4,7 +4,7 @@ import { shipping } from "../../../data/shipping"
 import { useDispatch, useSelector } from "react-redux"
 import { useForm } from "react-hook-form"
 import { useEffect } from "react"
-import { persistOrderId, saveBillingInformation } from "../../../redux/slices/public/billingSlice"
+import { clearOrderInformation, persistOrderId, saveBillingInformation } from "../../../redux/slices/public/billingSlice"
 import { setShippingFee } from "../../../redux/slices/public/cartSlice"
 import { generateUID } from "../../../utils/extensions"
 
@@ -67,6 +67,12 @@ const CheckoutBody = () => {
          const area = shipping.find(item => item.subcounty === val);
          dispatch(setShippingFee({ location: area.subcounty, cost: area.shipping_cost}))
     }
+
+    useEffect(() => {
+                if(shopping_cart && shopping_cart.length === 0){
+                      dispatch(clearOrderInformation());
+                }
+    }, [dispatch, shopping_cart])
   return (
     <div className="single-product-body">
               <div className="inner-row-2">
@@ -129,7 +135,6 @@ const CheckoutBody = () => {
                                                                                                                        <option key={item.id}>{item.subcounty}</option>
                                                                                                                 )}
                                                                                                      </select>
-
                                                                                           </div>
                                                                                           <div className="form-row">
                                                                                                      <label htmlFor="street">Street address *</label>

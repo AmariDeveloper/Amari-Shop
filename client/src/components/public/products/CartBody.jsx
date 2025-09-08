@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Link, useNavigate } from "react-router-dom"
 import { GoChevronRight } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +9,8 @@ import emptyCart from "../../../assets/abandoned-cart.png"
 import { shipping } from "../../../data/shipping";
 import { useEffect, useState } from "react";
 import { RxMinus, RxPlus  } from "react-icons/rx";
-import { clearOrderId } from "../../../redux/slices/public/billingSlice";
+import { clearOrderId, clearOrderInformation, saveOrderInformation } from "../../../redux/slices/public/billingSlice";
+import { crosscheckProductQuantity } from "../../../lib/products";
 
 const CartBody = () => {
     const { shopping_cart, shipping_fee } = useSelector(state => state.cart);
@@ -29,13 +31,9 @@ const CartBody = () => {
     useEffect(() => {
            if(shopping_cart && shopping_cart.length === 0){
                   dispatch(clearOrderId());
+                  dispatch(clearOrderInformation());
            }
     }, [dispatch, shopping_cart])
-
-    const removeVariation = (data, id) => {
-            const payload = { data: data, id: id }
-            dispatch(removeVariationFromShoppingCart(payload))
-    }
 
     const calculateSubtotal = () => {
             const count = shopping_cart.reduce((total, current) => {
@@ -51,25 +49,32 @@ const CartBody = () => {
          setCartError("")
     }
 
+    //save order details
+    const saveOrderDetails = () => {
+        const basketOrder = shopping_cart.map(product => {
+                const order_details = {
+                        title: product.product_title,
+                        id: product._id,
+                        price: product.product_pricing.product_regular_price*product.quantity,
+                        total_quantity: product.quantity,
+                        variations: product.variations,
+                        main_image: product.product_imagery.product_main_image,
+                }
+                return order_details;
+        })
+        dispatch(saveOrderInformation(basketOrder))
+    }
+    
     const proceedToCheckout = () => {
             if(Object.keys(shippingResult).length > 0){
                 dispatch(setShippingFee(shippingResult))
+                saveOrderDetails();
                 navigate("/checkout")
             }else{
                 setCartError("Please select shipping area to proceed.")
             }
     }
 
-    const incrementQuantity = (data) => {
-          dispatch(incrementSimpleProductQuantity(data))
-    }
-    const decrementQuantity = (data) => {
-         dispatch(decrementSimpleProductQuantity(data))
-    }
-
-    const removeProductFromCart = (data) => {
-          dispatch(removeSimpleProductFromShoppingCart(data))
-    }
   return (
     <div className="single-product-body">
               <div className="inner-row-2">
@@ -94,57 +99,8 @@ const CartBody = () => {
                                                                                           <h2>Product Subtotal</h2>
                                                                                </div>
                                                                                {  shopping_cart.map(product => 
-                                                                            <div className="cart-moja" key={product._id}>
-                                                                                       <div className="cart-moja-row">
-                                                                                                 <div className="thumbnail">
-                                                                                                           <img src={product.product_imagery.product_main_image} alt="" />
-                                                                                                 </div>
-                                                                                                 <div className="product-name">
-                                                                                                           <h4 onClick={() => navigate(`/product/${product.product_slug}`)}>{product.product_title}</h4>
-                                                                                                 </div>
-                                                                                                 <div className="price">
-                                                                                                             <span className="ksh">ksh.</span>
-                                                                                                             <h4>{product.product_pricing.product_regular_price.toLocaleString()}</h4>
-                                                                                                 </div>
-                                                                                                 <div className="quantity">
-                                                                                                           <figure>{product.quantity}</figure>
-                                                                                                 </div>
-                                                                                                 <div className="subtotal">
-                                                                                                           <span className="ksh">ksh.</span>
-                                                                                                           <h4>{(product.quantity * product.product_pricing.product_regular_price).toLocaleString()}</h4>
-                                                                                                 </div>
-                                                                                       </div>
-                                                                                       <div className="variations-row">
-                                                                                                    <div className="empty-div"></div>
-                                                                                                    <div className="variation-type">
-                                                                                                                {product.product_variations.length > 0 && <h4>Variation: { product.product_variations.product_variation_name}</h4> }
-                                                                                                    </div>
-                                                                                                    <div className="chosen-variations">                                                 
-                                                                                                                { product.product_variations.length > 0 && <h4>Chosen Variations:</h4>}
-                                                                                                                { product.product_variations.length > 0 ?  
-                                                                                                                       <>
-                                                                                                                           { product.variations.map(item => 
-                                                                                                                                  <div className="variation-column" key={item.id}>
-                                                                                                                                              <SelectedProductBox  data={item} product_id={product._id} key={item.id}/>
-                                                                                                                                              <span onClick={() => removeVariation(item, product._id)} className="delete"><AiOutlineDelete /></span>
-                                                                                                                                  </div>
-                                                                                                                              )}
-                                                                                                                       </>
-                                                                                                                          :
-                                                                                                                        <div className="adjust-column">
-                                                                                                                                   <div className="quantity-ranger">
-                                                                                                                                             <span onClick={() => decrementQuantity(product)}><RxMinus /></span>
-                                                                                                                                             <figure>{product.quantity}</figure>
-                                                                                                                                             <span onClick={() => incrementQuantity(product)}><RxPlus /></span>
-                                                                                                                                   </div>
-                                                                                                                                   <span className="delete" onClick={() => removeProductFromCart(product)}><AiOutlineDelete /></span>
-                                                                                                                        </div>
-                                                                                                                }
-                                                                                                    </div>
-                                                                                                     <div className="empty-div"></div>
-                                                                                       </div>
-                                                                          </div>
-                                                                         )
+                                                                                       <CartMoja key={product._id} product={product} />
+                                                                                 )
                                                                      }
                                                           </div>
                                                      </div>
@@ -210,3 +166,90 @@ const CartBody = () => {
 }
 
 export default CartBody
+
+
+const CartMoja = ({ product}) => {
+   const [ stockError, setStockError ] = useState("")
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
+
+   const removeVariation = (data, id) => {
+            const payload = { data: data, id: id }
+            dispatch(removeVariationFromShoppingCart(payload))
+    }
+
+    const incrementQuantity = (data) => {
+          const inventory_no = data && data.product_inventory.product_stock_quantity;
+          const currentVal = data && data.quantity;
+          if(!crosscheckProductQuantity(inventory_no, currentVal)){
+                setStockError(`Sorry. We do not have more than ${inventory_no} item(s) of this product`)
+          }else{
+                dispatch(incrementSimpleProductQuantity(data))
+          }
+    }
+    const decrementQuantity = (data) => {
+         dispatch(decrementSimpleProductQuantity(data))
+         setStockError("")
+    }
+
+    const removeProductFromCart = (data) => {
+          dispatch(removeSimpleProductFromShoppingCart(data))
+    }
+
+   
+   return (
+        <div className="cart-moja" key={product._id}>
+                <div className="cart-moja-row">
+                                <div className="thumbnail">
+                                        <img src={product.product_imagery.product_main_image} alt="" />
+                                </div>
+                                <div className="product-name">
+                                        <h4 onClick={() => navigate(`/product/${product.product_slug}`)}>{product.product_title}</h4>
+                                </div>
+                                <div className="price">
+                                        <span className="ksh">ksh.</span>
+                                        <h4>{product.product_pricing.product_regular_price.toLocaleString()}</h4>
+                                </div>
+                                <div className="quantity">
+                                        <figure>{product.quantity}</figure>
+                                </div>
+                                <div className="subtotal">
+                                        <span className="ksh">ksh.</span>
+                                        <h4>{(product.quantity * product.product_pricing.product_regular_price).toLocaleString()}</h4>
+                                </div>
+                </div>
+                <div className="variations-row">
+                                <div className="empty-div"></div>
+                                <div className="variation-type">
+                                        {product.product_variations.length > 0 && <h4>Variation: { product.product_variations.product_variation_name}</h4> }
+                                </div>
+                                <div className="chosen-variations">                                                 
+                                        { product.product_variations.length > 0 && <h4>Chosen Variations:</h4>}
+                                        { product.product_variations.length > 0 ?  
+                                                <>
+                                                        { product.variations.map(item => 
+                                                                <div className="variation-column" key={item.id}>
+                                                                        <SelectedProductBox  data={item} product_id={product._id} key={item.id}/>
+                                                                        <span onClick={() => removeVariation(item, product._id)} className="delete"><AiOutlineDelete /></span>
+                                                                </div>
+                                                        )}
+                                                </>
+                                                        :
+                                                <div className="adjust-column">
+                                                                <div className="quantity-ranger-group">
+                                                                <div className="quantity-ranger">
+                                                                                <span onClick={() => decrementQuantity(product)}><RxMinus /></span>
+                                                                                <figure>{product.quantity}</figure>
+                                                                        <span onClick={() => incrementQuantity(product)}><RxPlus /></span>
+                                                                </div>
+                                                                        <p className="product-stock-error">{stockError}</p>
+                                                                </div>
+                                                                <span className="delete" onClick={() => removeProductFromCart(product)}><AiOutlineDelete /></span>
+                                                </div>
+                                        }
+                                </div>
+                                <div className="empty-div"></div>
+                </div>
+        </div>
+   )
+}

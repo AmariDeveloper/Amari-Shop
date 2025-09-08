@@ -70,7 +70,7 @@ export const clientActionSlice = apiSlice.injectEndpoints({
                 //Verify transaction
                 verifyTransaction: builder.mutation({
                         query: (payload) => ({
-                                 url: "v1/client/verify-transaction",
+                                 url: "v1/client/orders/confirmation",
                                  method: "POST",
                                  body: payload
                         })

@@ -19,12 +19,12 @@ const BillingConfirmationBody = () => {
          const count = shopping_cart.reduce((acc, curr) => acc+(curr.product_pricing.product_regular_price * curr.quantity), 0)
          return count
  }
+ //console.log(order)
 
 const [ HandlePayment] = useProcessPaymentsMutation();
 const [ createOrder, {isLoading} ] = useCreateNewOrderMutation();
 
 const PurchaseCompletion = async() => {
-        // setPayStatus(true)
         const basketOrder = shopping_cart.map(product => {
                 const order_details = {
                         title: product.product_title,
@@ -59,7 +59,6 @@ const PurchaseCompletion = async() => {
                                  window.location.href = `https://secure.3gdirectpay.com/payv3.php?ID=${paymentResult.message}`
                             }, 1000)
                        }
-
                        dispatch(saveOrderInformation(payload))
                 }
         } catch (error) {

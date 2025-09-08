@@ -5,17 +5,30 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeQuickViewModal } from "../../../../redux/slices/public/clientSlice";
 import { addProductToShoppingCartFromQuickView } from "../../../../redux/slices/public/cartSlice";
+import { crosscheckProductQuantity } from "../../../../lib/products";
+
 const QuickViewProductModal = () => {
-  const [ cartValue, setCartValue ] = useState(1);
   const { quick_view_modal } = useSelector(state => state.client);
+  const [ cartValue, setCartValue ] = useState(1);
+  const [ stockErr, setStockErr ] = useState("")
   const dispatch = useDispatch();
-  const increamentCartValue = () => setCartValue(prev => prev + 1);
+
+  const increamentCartValue = () => {
+        const inventory_no = quick_view_modal.data && quick_view_modal.data.product_inventory.product_stock_quantity;
+
+        if(!crosscheckProductQuantity(inventory_no, cartValue )){
+                setStockErr(`Sorry. We do not have more than ${inventory_no} item(s) of this product`)
+        }else{
+             setCartValue(prev => prev + 1)
+        }
+  };
   const decreamentCartValue = () => {
           if(cartValue === 1){
                 setCartValue(1)
           }else{
                setCartValue(prev => prev - 1)
           }
+          setStockErr("")
   }
   const closeQuickView = () => {
          dispatch(closeQuickViewModal());
@@ -30,7 +43,9 @@ const QuickViewProductModal = () => {
          setCartValue(1)
   }
 
-  const product = quick_view_modal.data ? quick_view_modal.data : null
+  const product = quick_view_modal.data ? quick_view_modal.data : null;
+
+
   return (
     <div className={ quick_view_modal.status ? "client-modal active" : "client-modal"}>
               <div className="client-modal-content">
@@ -76,6 +91,10 @@ const QuickViewProductModal = () => {
                                                  <div className="add-to-cart-btn" onClick={() => addProductToCart(product)}>
                                                              <h4>Add to Cart</h4>
                                                  </div>
+                                    </div>
+
+                                    <div className="product-stock-error">
+                                           <p>{stockErr}</p>
                                     </div>
 
                                     <div className="quick-product-extras">

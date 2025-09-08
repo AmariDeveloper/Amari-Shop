@@ -47,14 +47,17 @@ export const CreateAnOrder = asyncHandler(async(req, res) => {
                      const newOrder = await createOrder(order_payload);
 
                      if(newOrder){
-                           res.status(201).json({ message: "Order created successfully!", payment_payload: {
-                                 firstname: firstname,
-                                 lastname: lastname,
-                                 grandTotal: grandTotal,
-                                 orderDate: format(newOrder.orderDate, 'yyyy/MM/dd HH:mm:ss'), 
-                                 phone: phone,
-                                 email: email
-                           }})
+                           res.status(201).json({ 
+                                message: "Order created successfully!", 
+                                payment_payload: {
+                                   firstname: firstname,
+                                   lastname: lastname,
+                                   grandTotal: grandTotal,
+                                   orderDate: format(newOrder.orderDate, 'yyyy/MM/dd HH:mm:ss'), 
+                                   phone: phone,
+                                   email: email
+                              }
+                         })
                      }else{
                            res.status(500).json({ message: "Error while creating this order."})
                      }
@@ -86,12 +89,7 @@ export const CreateAnOrder = asyncHandler(async(req, res) => {
                      }
               }
        } catch (error) {
-              console.log(error);
+              //console.log(error);
               res.status(500).json({ message: "Internal server error"})
        }
-})
-
-
-export const ConfirmPurchase = asyncHandler(async(req, res) => {
-       
 })

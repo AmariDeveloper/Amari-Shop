@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
          details: localStorage.getItem("Billing Info") ? JSON.parse(localStorage.getItem("Billing Info")): {},
-         order: localStorage.getItem("Order Billing") ? JSON.parse(localStorage.getItem("Order Billing")) : [],
+         order: localStorage.getItem("Order Billing") ? JSON.parse(localStorage.getItem("Order Billing")) : {},
          orderId: localStorage.getItem("OrderId") ? JSON.parse(localStorage.getItem("OrderId")) : null
 }
 
@@ -25,9 +25,14 @@ const billingSlice = createSlice({
               },
              
               saveOrderInformation: (state, action) => {
-                      state.order = action.payload
+                      state.order = action.payload;
                       localStorage.setItem("Order Billing", JSON.stringify(action.payload))
               },
+
+              clearOrderInformation: (state) => {
+                     state.order = [];
+                     localStorage.removeItem("Order Billing")
+              }
        }
 })
 
@@ -35,7 +40,8 @@ export const {
        saveBillingInformation,
        saveOrderInformation,
        persistOrderId,
-       clearOrderId
+       clearOrderId,
+       clearOrderInformation
 } = billingSlice.actions
 
 export default billingSlice.reducer;

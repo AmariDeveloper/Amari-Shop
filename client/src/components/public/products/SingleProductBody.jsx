@@ -11,7 +11,7 @@ const SingleProductBody = () => {
   const isProductAlreadyInCart  = shopping_cart.find(item => item.product_slug === name);
   const product = isProductAlreadyInCart ? isProductAlreadyInCart :  all_published_products.find(item => item.product_slug === name);
 
-
+  console.log(product)
   return (
     <div className="single-product-body">
               <div className="inner-row-2">

@@ -1303,7 +1303,8 @@ header{
       font-weight: 340;
 }
 
-.product-quick-cart-options{
+.product-quick-cart-options,
+.product-quick-cart-flex-items{
       display: flex;
       gap: 10px;
       justify-content: space-between;
@@ -1701,6 +1702,12 @@ header{
 .basket-buttons a:nth-child(2){
       background: var(--main-color);
       color: white;
+}
+
+.product-stock-error{
+       font-size: 13px;
+       font-weight: 300;
+       color: red;
 }
 
 

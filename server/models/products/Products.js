@@ -8,10 +8,7 @@ const productsSchema = mongoose.Schema({
                 product_sku_code: { type: String},
                 product_stock_status: { type: String},
                 product_stock_quantity: { type: Number},
-                is_product_sold_individually: { type: Boolean}
-         },
-         product_imagery: {
-               product_main_image: { type: String },
+                is_product_sold_individually: { type: Boolean},
                product_gallery: [ { type: String }]
          },
          product_pricing: {
@@ -27,7 +24,8 @@ const productsSchema = mongoose.Schema({
          },
          product_brand: { type: String},
          product_tags: [{ name: String }],
-         reviews: { type: String}
+         reviews: { type: String},
+         reserved: { type: Number, default: 0 }
 }, { timestamps: true })
 
 const Product = mongoose.model("Product", productsSchema);
