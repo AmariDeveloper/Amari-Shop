@@ -48,14 +48,14 @@ export const VerifyPayment = asyncHandler(async(req, res) => {
                      amountPaid: result.API3G.TransactionFinalAmount._text,
                      settlementDate:result.API3G.TransactionSettlementDate._text
              }
+
+             const updatePayment = await confirmPurchase(payload);
            
              if(status !== "000" || !updatePayment){
                    res.status(501).json({ message: "Transaction verification failed."})
              }
 
              if(status === "000"){
-                    const updatePayment = await confirmPurchase(payload);
-
                      res.status(201).json({ 
                         message: "Payment Complete",
                         orderData: {

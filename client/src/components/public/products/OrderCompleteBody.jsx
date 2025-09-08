@@ -25,6 +25,7 @@ const OrderCompleteBody = () => {
    useEffect(() => {
          try {
               verifyPayment({...payload, orderId}).then(res => {
+                     //console.log(res)
                       if(res.data.message == "Payment complete"){
                               setStatus(false);
                               setResponseData({...res.data.orderData})
