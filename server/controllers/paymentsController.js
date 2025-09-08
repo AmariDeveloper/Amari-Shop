@@ -39,30 +39,40 @@ export const VerifyPayment = asyncHandler(async(req, res) => {
        try {
              const result = await verifyDPOTransaction(token);
              const status = result.API3G.Result._text;
-             const payload = {
-                     orderId: orderId,
-                     explanation: result.API3G.ResultExplanation._text,
-                     method: result.API3G.CustomerCreditType._text,
-                     transactionId: result.API3G.TransactionApproval._text,
-                     currency: result.API3G.TransactionFinalCurrency._text,
-                     amountPaid: result.API3G.TransactionFinalAmount._text,
-                     settlementDate:result.API3G.TransactionSettlementDate._text
-             }
-
-             const updatePayment = await confirmPurchase(payload);
-           
-             if(status !== "000" || !updatePayment){
-                   res.status(501).json({ message: "Transaction verification failed."})
-             }
 
              if(status === "000"){
-                     res.status(201).json({ 
+                  const payload = {
+                        orderId: orderId,
+                        explanation: result.API3G.ResultExplanation._text,
+                        method: result.API3G.CustomerCreditType._text,
+                        transactionId: result.API3G.TransactionApproval._text,
+                        currency: result.API3G.TransactionFinalCurrency._text,
+                        amountPaid: result.API3G.TransactionFinalAmount._text,
+                        settlementDate:result.API3G.TransactionSettlementDate._text
+                  }
+
+                 const updatePayment = await confirmPurchase(payload);
+
+                 if(!updatePayment){
+                      res.status(500).json({ message: "An error occured while verifying your order. Please contact us for assistance."})
+                 }
+
+                 if(updatePayment){
+                   res.status(201).json({ 
                         message: "Payment Complete",
                         orderData: {
                                settlementDate: updatePayment.paymentInfo.settlementDate,
                                method: updatePayment.paymentInfo.method
                         }
-                  })
+                    })
+                 }
+
+
+             }
+
+           
+             if(status !== "000" || !updatePayment){
+                   res.status(501).json({ message: "Transaction verification failed."})
              }
 
        } catch (error) {
