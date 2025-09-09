@@ -66,13 +66,8 @@ export const VerifyPayment = asyncHandler(async(req, res) => {
                         }
                     })
                  }
-
-
-             }
-
-           
-             if(status !== "000" || !updatePayment){
-                   res.status(501).json({ message: "Transaction verification failed."})
+             }else{
+                   res.status(500).json({ message: "Your payment could not be verified. Please contact us for assistance."})
              }
 
        } catch (error) {
