@@ -236,6 +236,7 @@ const submitEditForm = async(form_data) => {
                 tags: tags,
                 id: editProductModal.data && editProductModal.data._id
         }
+        console.log(form_data)
        //prepare data for upload
        formData.append("data", JSON.stringify(data));
        productImage.length > 0 && formData.append("mainImage", form_data["product-main-image"][0]);

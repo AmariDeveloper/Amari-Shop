@@ -9,10 +9,9 @@ import { clearOrderId, clearOrderInformation } from "../../../redux/slices/publi
 
 const OrderCompleteBody = () => {
     const { details, order, orderId } = useSelector(state => state.billing);
-    const [ status, setStatus ] = useState(true);
+    const [ status, setStatus ] = useState(false);
     const [ responseData, setResponseData ] = useState();
     const urlParams = new URLSearchParams(window.location.search);
-
     const transaction_token = urlParams.get("TransactionToken");
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -30,6 +29,12 @@ const OrderCompleteBody = () => {
                               setResponseData({...res.data.orderData})
                               dispatch(clearOrderId());
                               dispatch(clearShoppingCart());
+
+                             let url = new URL(location.href);
+                             const newParams = new URLSearchParams("payment-verified=true&order=complete");
+                             url.search = newParams.toString();
+   
+                            window.history.replaceState(null, null, url.toString())
                       }else{
                             navigate("/checkout/billing-confirmation")
                       }
