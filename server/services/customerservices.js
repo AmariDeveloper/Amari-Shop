@@ -122,8 +122,6 @@ export const harmonizeProductQuantity = async(orderId, explanation) => {
                               { "product_inventory.product_stock_quantity": item.quantity, "reserved": -item.quantity}
               })
         }
-
-        console.log(orderItem)
 }
 
 export const confirmPurchase = async(result) => {
