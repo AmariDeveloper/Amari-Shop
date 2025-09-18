@@ -9,7 +9,10 @@ const productsSchema = mongoose.Schema({
                 product_stock_status: { type: String},
                 product_stock_quantity: { type: Number},
                 is_product_sold_individually: { type: Boolean},
-               product_gallery: [ { type: String }]
+         },
+         product_imagery: {
+              product_main_image: { type: String },
+              product_gallery: [ { type: String }]
          },
          product_pricing: {
                 product_regular_price: { type: Number},

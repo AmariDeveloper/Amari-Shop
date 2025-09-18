@@ -83,13 +83,11 @@ export const CreateNewProduct = asyncHandler(async(req, res) => {
 export const EditProduct = asyncHandler(async(req, res) => {
         const productMainImage = req.files["mainImage"] && req.files['mainImage'][0];
         const otherProductImages = req.files["galleryImages"] && req.files["galleryImages"];
-
-        
         const { general, categories, variations, tags, id } = JSON.parse(req.body.data);
 
         const newImagesArray = JSON.parse(req.body.NewImagesArray);
         const sanitizedImages = newImagesArray.map(item => item.path);
-        
+
         const {
               product_title,
               product_short_description,
@@ -105,14 +103,13 @@ export const EditProduct = asyncHandler(async(req, res) => {
          } = general;
 
          const currentProduct = await Product.findById(id);
-       
          /* Upload images to cloudinary if uploaded */
          let main_image, other_image_urls = [];
         if(productMainImage){
                const cloudinary_main_image = await cloudinary.uploader.upload(productMainImage.path, { folder: "Product Main Images"});
                if(cloudinary_main_image) main_image = cloudinary_main_image.secure_url;
         }else{
-              main_image = currentProduct.product_imagery.product_main_image;
+              main_image = currentProduct && currentProduct.product_imagery.product_main_image;
         }
         
         if(otherProductImages && otherProductImages.length > 0){
@@ -159,7 +156,7 @@ export const EditProduct = asyncHandler(async(req, res) => {
        }, { new: true})
 
        if(editedProduct){
-              res.status(201).json({ message: "Product edit successfully."})
+              res.status(201).json({ message: "Product update successful."})
        }else{
               res.status(500).json({ message: "Internal server error while editing product!"})
        }

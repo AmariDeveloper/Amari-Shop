@@ -118,7 +118,7 @@ const EditProductModal = () => {
         //upload product main image
         const uploadProductMainImage = (e) =>{
             setProductImage([...e.target.files])
-     }
+        }
  
      //remove uploaded main image
      const removeProductMainImage = () => {
@@ -236,10 +236,12 @@ const submitEditForm = async(form_data) => {
                 tags: tags,
                 id: editProductModal.data && editProductModal.data._id
         }
-        console.log(form_data)
+        
        //prepare data for upload
        formData.append("data", JSON.stringify(data));
+       
        productImage.length > 0 && formData.append("mainImage", form_data["product-main-image"][0]);
+
        if(otherProductImages.length > 0){
                  formData.append("NewImagesArray", JSON.stringify(galleryImages))
                   for(let file of otherProductImages){
@@ -259,7 +261,7 @@ const submitEditForm = async(form_data) => {
                     clearEditFormRemnants();
               }
        }catch(error){
-            //console.log(error)
+            console.log(error)
             dispatch(setAppNotification({ status: true, message: error.data.message, type: "Error"}))
        }
       

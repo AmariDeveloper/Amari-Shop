@@ -67,7 +67,7 @@ export const CreateAnOrder = asyncHandler(async(req, res) => {
                             customerId: customer._id,
                             orderId: orderId,
                             orderDate: new Date(),
-                            orderStatus: "Pending Payment",
+                            orderStatus: "Pending",
                             products: sanitizedBasket,
                             phone: phone,
                             grandTotal: grandTotal,

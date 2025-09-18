@@ -25,16 +25,16 @@ const OrderCompleteBody = () => {
          try {
               verifyPayment({...payload, orderId}).then(res => {
                       if(res.data.message === "Payment Complete"){
+                            //Resolve the confirmation url
+                             let url = new URL(location.href);
+                             const newParams = new URLSearchParams("payment-verified=true&order=complete");
+                             url.search = newParams.toString();
+                             window.history.replaceState(null, null, url.toString());
+
                               setStatus(false);
                               setResponseData({...res.data.orderData})
                               dispatch(clearOrderId());
                               dispatch(clearShoppingCart());
-
-                             let url = new URL(location.href);
-                             const newParams = new URLSearchParams("payment-verified=true&order=complete");
-                             url.search = newParams.toString();
-   
-                            window.history.replaceState(null, null, url.toString())
                       }else{
                             navigate("/checkout/billing-confirmation")
                       }

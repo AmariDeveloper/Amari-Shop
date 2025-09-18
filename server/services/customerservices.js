@@ -139,7 +139,7 @@ export const confirmPurchase = async(result) => {
       await harmonizeProductQuantity(orderId, explanation);
 
       const updateOrder = await Order.findOneAndUpdate({ orderId: orderId }, {
-            orderStatus: "Ready for Processing",
+            orderStatus: "Confirmed",
             paymentInfo: {
                   method: method,
                   transactionId: transactionId,
